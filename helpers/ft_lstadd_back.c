@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:14:06 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/18 11:30:21 by aamraouy         ###   ########.fr       */
+/*   Created: 2024/11/03 10:58:19 by aamraouy          #+#    #+#             */
+/*   Updated: 2025/04/26 09:55:56 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+void	ft_lstadd_back(t_token **lst, t_token *new)
 {
-	size_t			src_len;
-	size_t			i;
+	t_token	*t;
 
-	src_len = ft_strlen(src);
-	i = 0;
-	if (dstsize <= 0)
-		return (src_len);
-	while (i < dstsize - 1 && src[i])
+	if (!lst || !new)
+		return ;
+	if (!*lst)
 	{
-		dst[i] = src[i];
-		i++;
+		*lst = new;
+		return ;
 	}
-	dst[i] = '\0';
-	return (src_len);
+	t = ft_lstlast(*lst);
+	t->next = new;
+	new->prev = t;
 }

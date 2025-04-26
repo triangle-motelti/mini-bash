@@ -3,57 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/22 14:33:54 by motelti           #+#    #+#             */
-/*   Updated: 2024/11/12 15:18:52 by motelti          ###   ########.fr       */
+/*   Created: 2024/10/25 11:20:00 by aamraouy          #+#    #+#             */
+/*   Updated: 2024/11/21 09:53:39 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	check(const char *s, int size, int sign)
+static int	overflow(int sign)
 {
-	while (*s == 48)
-	{
-		s++;
-		size--;
-	}
-	if (size > 19)
+	if (sign == 1)
+		return (-1);
+	else
 		return (0);
-	if (size < 19)
-		return (1);
-	if (ft_strncmp(s, "9223372036854775807", size) > 0 && sign)
-		return (0);
-	if (ft_strncmp(s, "9223372036854775808", size) > 0 && sign == -1)
-		return (0);
-	return (1);
 }
 
 int	ft_atoi(const char *str)
 {
-	const char	*s1;
-	long		r;
-	int			s;
+	unsigned long	result;
+	int				sign;
+	unsigned long	max;
 
-	r = 0;
-	s = 1;
-	while (*str && ((*str >= 9 && 13 >= *str) || *str == ' '))
+	result = 0;
+	sign = 1;
+	max = 9223372036854775807;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
 		str++;
-	if (*str == '-' || *str == '+')
+	if (*str == '+' || *str == '-')
 	{
 		if (*str++ == '-')
-			s *= -1;
+			sign = -1;
 	}
-	s1 = str;
-	while (*str >= '0' && '9' >= *str)
-		r = r * 10 + (*str++ - '0');
-	if (!check(s1, str - s1, s))
+	while (*str >= '0' && *str <= '9')
 	{
-		if (s == 1)
-			return (-1);
-		if (s == -1)
-			return (0);
+		if (result > (max - (*str - '0')) / 10)
+			return (overflow(sign));
+		result = result * 10 + (*str - '0');
+		str++;
 	}
-	return (r * s);
+	return (result * sign);
 }

@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   free_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:14:06 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/18 11:30:21 by aamraouy         ###   ########.fr       */
+/*   Created: 2025/04/22 09:40:27 by aamraouy          #+#    #+#             */
+/*   Updated: 2025/04/26 09:44:13 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+void    free_tokens(t_token *tokens)
 {
-	size_t			src_len;
-	size_t			i;
+	t_token	*node;
 
-	src_len = ft_strlen(src);
-	i = 0;
-	if (dstsize <= 0)
-		return (src_len);
-	while (i < dstsize - 1 && src[i])
+	while (tokens->next)
 	{
-		dst[i] = src[i];
-		i++;
+		node = tokens->next;
+		free(tokens->value);
+		free(tokens->next);
+		tokens = node;
 	}
-	dst[i] = '\0';
-	return (src_len);
+	free(tokens);
+}
+
+void    free_env(t_env *env)
+{
+	t_env	*next;
+
+	while (env->next_pt)
+	{
+		next = env->next_pt;
+		free(env->value);
+		free(env->next_pt);
+		env = next;
+	}
+	// free(tokens);
 }

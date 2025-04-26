@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 17:14:06 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/18 11:30:21 by aamraouy         ###   ########.fr       */
+/*   Created: 2024/11/01 22:28:33 by aamraouy          #+#    #+#             */
+/*   Updated: 2025/04/26 09:53:04 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+t_token	*ft_lstnew(void *content, int type)
 {
-	size_t			src_len;
-	size_t			i;
+	t_token	*aloc;
 
-	src_len = ft_strlen(src);
-	i = 0;
-	if (dstsize <= 0)
-		return (src_len);
-	while (i < dstsize - 1 && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (src_len);
+	aloc = (t_token *)malloc(sizeof(t_token));
+	if (!aloc)
+		return (NULL);
+	aloc->value = content;
+	aloc->prev = NULL;
+	aloc->flag = type;
+	aloc->next = NULL;
+	return (aloc);
 }
