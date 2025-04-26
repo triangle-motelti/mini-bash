@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:29:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/04/26 09:49:51 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/04/26 10:04:00 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void	keep_tracking(t_shell *mini, int j, int start, char *input)
 	}
 	word[k] = '\0';
 	add_token(mini, word, WORD);
-	free(word);
+	// free(word);
 }

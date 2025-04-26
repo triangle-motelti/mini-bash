@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/04/26 09:45:28 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/04/26 10:03:01 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int shell(t_shell *mini)
 		add_history(input);
 		if (!tokenizer(mini, input, 0))
 		{
-			free_tokens(mini->tokens);
+			// free_tokens(mini->tokens);
 			continue ;
 		}
 		while (mini->tokens)

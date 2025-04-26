@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:40:27 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/04/26 09:44:13 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/04/26 10:02:21 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    free_tokens(t_token *tokens)
 		free(tokens->next);
 		tokens = node;
 	}
-	free(tokens);
+	// free(tokens);
 }
 
 void    free_env(t_env *env)

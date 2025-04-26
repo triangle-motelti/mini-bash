@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:35:58 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/04/26 09:49:19 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/04/26 10:03:20 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ int	handle_quotes(t_shell *mini, char *input, int *i)
 	}
 	word = ft_substr(input, start ,(*i) - start);
 	add_token(mini, word, WORD);
-	free(word);
+	// free(word);
 	(*i)++;
 	return (1);
 }
@@ -117,7 +117,7 @@ void	sep_handling(t_shell *mini, char *input, int *i)
 	sep = ft_substr(input, *i, len);
 	type = set_separator(input, *i);
 	add_token(mini, sep, type);
-	free(sep);
+	// free(sep);
 	(*i) += len;
 }
 
