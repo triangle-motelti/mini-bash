@@ -3,32 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 15:26:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/21 10:03:21 by aamraouy         ###   ########.fr       */
+/*   Created: 2024/10/23 11:51:38 by motelti           #+#    #+#             */
+/*   Updated: 2024/11/04 21:37:44 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memmove(void *dst, const void *src, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*dest;
-	char	*sr;
+	unsigned char		*d;
+	const unsigned char	*s;
 
-	dest = (char *)dst;
-	sr = (char *)src;
-	if (!dst && !src)
+	d = (unsigned char *) dst;
+	s = (const unsigned char *) src;
+	if (src == NULL && dst == NULL)
 		return (NULL);
-	if (dest <= sr)
-		return (ft_memcpy(dst, src, n));
+	if (d == s)
+		return (dst);
+	if (d < s)
+	{
+		while (len--)
+			*d++ = *s++;
+	}
 	else
 	{
-		dest += n;
-		sr += n;
-		while (n--)
-			*(--dest) = *(--sr);
+		d += len;
+		s += len;
+		while (len--)
+			*(--d) = *(--s);
 	}
 	return (dst);
 }

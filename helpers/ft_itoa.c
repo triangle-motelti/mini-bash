@@ -3,60 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/26 15:44:40 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/21 09:57:52 by aamraouy         ###   ########.fr       */
+/*   Created: 2024/10/27 16:01:51 by motelti           #+#    #+#             */
+/*   Updated: 2024/11/07 01:43:16 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	count_digit(int n)
+static int	ln(int nb)
 {
-	int	count;
+	int	i;
 
-	count = 0;
-	if (n <= 0)
-		count = 1;
-	while (n)
+	i = 0;
+	if (nb <= 0)
+		i++;
+	while (nb)
 	{
-		n = n / 10;
-		count++;
+		nb /= 10;
+		i++;
 	}
-	return (count);
+	return (i);
 }
 
-static char	*zero_case(char *res)
+static char	*fill(char *tmp, long nbr)
 {
-	res[0] = '0';
-	res[1] = '\0';
-	return (res);
+	int	i;
+	int	len;
+
+	len = ln(nbr);
+	if (nbr == 0)
+		tmp[0] = '0';
+	else if (nbr < 0)
+	{
+		nbr *= -1;
+		tmp[0] = '-';
+	}
+	i = len - 1;
+	while (nbr > 0)
+	{
+		tmp[i] = (nbr % 10) + '0';
+		nbr /= 10;
+		i--;
+	}
+	return (tmp);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*result;
-	int		i;
-	long	nbr;
+	int		l;
+	char	*arr;
+	long	nb;
 
-	i = count_digit(n);
-	nbr = (long)n;
-	result = (char *)malloc(i + 1);
-	if (!result)
+	l = ln(n);
+	nb = n;
+	arr = malloc((l + 1) * sizeof(char));
+	if (!arr)
 		return (NULL);
-	if (n == 0)
-		return (zero_case(result));
-	if (nbr < 0)
-	{
-		nbr = -nbr;
-		result[0] = '-';
-	}
-	result[i] = '\0';
-	while (nbr)
-	{
-		result[--i] = (nbr % 10) + '0';
-		nbr /= 10;
-	}
-	return (result);
+	arr[l] = '\0';
+	return (fill(arr, nb));
 }

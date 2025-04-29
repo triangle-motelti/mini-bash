@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/25 14:30:07 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/18 11:55:08 by aamraouy         ###   ########.fr       */
+/*   Created: 2024/10/25 12:21:16 by motelti           #+#    #+#             */
+/*   Updated: 2024/11/07 23:53:37 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,26 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*pt;
+	char	*str;
 	size_t	i;
-	size_t	src_length;
+	size_t	size;
 
 	if (!s)
 		return (NULL);
-	src_length = ft_strlen(s);
-	if (start >= src_length)
+	size = ft_strlen(s);
+	if (!(*s) || len == 0 || (start) > (unsigned int)(size - 1))
 		return (ft_strdup(""));
-	if (len > src_length - start)
-		i = src_length - start;
+	if (len <= (size - start))
+		str = ft_calloc(len + 1, sizeof(char));
 	else
-		i = len;
-	pt = (char *)malloc(i + 1);
-	if (!pt)
+		str = ft_calloc(sizeof(char), (size - start) + 1);
+	if (!str)
 		return (NULL);
-	ft_strlcpy(pt, s + start, i + 1);
-	return (pt);
+	i = 0;
+	while ((i < len) && s[start + i])
+	{
+		str[i] = s[start + i];
+		i++;
+	}
+	return (str);
 }
