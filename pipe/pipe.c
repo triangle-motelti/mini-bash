@@ -5,96 +5,121 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 14:32:07 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/27 22:44:13 by motelti          ###   ########.fr       */
+/*   Created: 2025/05/02 14:18:53 by motelti           #+#    #+#             */
+/*   Updated: 2025/05/02 15:01:53 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
 
-static void	execute_command(t_shell *mini, char *cmd)
+static int	count_cmds(t_command *cmd)
 {
-	char	**args;
-	char	**envp;
-	char	*path;
+	int i = 0;
 
-	args = parse_input(mini, cmd);
-	if (!args || !args[0])
-		exit(1);
-	if (is_builtin(args[0]))
+	while (cmd)
 	{
-		exec_builtin(mini, args);
-		exit(mini->exit_status);
+		i++;
+		cmd = cmd->next;
 	}
-	envp = copy_env_list(mini, mini->env);
-	path = path_cmd(args[0], envp);
-	if (!path)
-	{
-		path_check(mini, envp, args);
-		exit(127);
-	}
-	execve(path, args, envp);
-	free(path);
-	free_split(envp);
-	exit(126);
+	return (i);
 }
 
-static void	child_executor(t_shell *mini, char *cmd, t_pipe_info *info)
+static void	init_pipeline_info(t_pipeline_info *info, int count)
 {
-	setup_redirections(info);
-	execute_command(mini, cmd);
+	info->count = count;
 }
 
-static void	parent_executor(t_pipe_info *info)
+static int	open_pipes(t_pipeline_info *info)
 {
-	if (info->is_first == 0 && info->prev_fd >= 0)
-		close(info->prev_fd);
-	if (info->is_last == 0)
-	{
-		close(info->cur_fd[1]);
-		info->prev_fd = info->cur_fd[0];
-	}
-	else
-		info->prev_fd = -1;
-}
+	int i;
 
-void	create_child(t_shell *mini, char **commands, int i, t_pipe_info *info)
-{
-	pid_t	pid;
-
-	info->is_first = (i == 0);
-	info->is_last = (commands[i + 1] == NULL);
-	if (!info->is_last)
-	{
-		if (pipe(info->cur_fd) < 0)
-		{
-			perror("minishell: pipe");
-			exit(1);
-		}
-	}
-	pid = fork();
-	if (pid < 0)
-	{
-		perror("minishell: fork");
-		exit(1);
-	}
-	if (pid == 0)
-		child_executor(mini, commands[i], info);
-	parent_executor(info);
-}
-
-void	execute_pipeline(t_shell *mini, char **commands)
-{
-	int			i;
-	t_pipe_info	info;
-
-	initialize_pipe_info(&info);
 	i = 0;
-	while (commands[i])
+	while (i < info->count - 1)
 	{
-		create_child(mini, commands, i, &info);
+		if (pipe(info->pipes[i]) < 0)
+		{
+			perror("pipe");
+			return (1);
+		}
 		i++;
 	}
-	while (wait(NULL) > 0)
-		;
+	return (0);
+}
+
+static void	close_pipes(t_pipeline_info *info)
+{
+	int i = 0;
+
+	while (i < info->count - 1)
+	{
+		close(info->pipes[i][0]);
+		close(info->pipes[i][1]);
+		i++;
+	}
+}
+
+static void	exec_pipeline_child(t_shell *shell, t_command *cmd, t_pipeline_info *info, int idx)
+{
+	if (idx > 0)
+		dup2(info->pipes[idx - 1][0], STDIN_FILENO);
+	if (idx < info->count - 1)
+		dup2(info->pipes[idx][1], STDOUT_FILENO);
+	close_pipes(info);
+	exec_child(shell, cmd);
+}
+
+static int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
+{
+	int         i;
+	t_command   *cur;
+
+	cur = cmds;
+	i = 0;
+	while (i < info->count && cur)
+	{
+		info->pids[i] = fork();
+		if (info->pids[i] < 0)
+			perror("fork");
+		else if (info->pids[i] == 0)
+			exec_pipeline_child(shell, cur, info, i);
+		cur = cur->next;
+		i++;
+	}
+	return (i);
+}
+
+static void	wait_pipeline(t_shell *shell, t_pipeline_info *info)
+{
+	int i;
+	int status;
+
+	i = 0;
+	while (i < info->count)
+	{
+		waitpid(info->pids[i], &status, 0);
+		if (i == info->count - 1)
+		{
+			if (WIFEXITED(status))
+				shell->exit_status = WEXITSTATUS(status);
+			// else if (WIFSIGNALED(status))
+			// 	shell->exit_status = 128 + WTERMSIG(status);
+		}
+		i++;
+	}
+}
+
+void	execute_pipeline(t_shell *shell, t_command *cmds)
+{
+	t_pipeline_info info;
+	int             count;
+
+	count = count_cmds(cmds);
+	if (count < 1)
+		return ;
+	init_pipeline_info(&info, count);
+	if (open_pipes(&info))
+		return ;
+	fork_pipeline(shell, cmds, &info);
+	close_pipes(&info);
+	wait_pipeline(shell, &info);
 }

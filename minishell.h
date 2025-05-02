@@ -5,24 +5,25 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 13:41:55 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/27 22:37:49 by motelti          ###   ########.fr       */
+/*   Created: 2025/04/17 20:05:26 by aamraouy          #+#    #+#             */
+/*   Updated: 2025/05/02 15:18:46 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
-# define MINISHELL_H
+#define MINISHELL_H
 
-# include <signal.h>
-# include <fcntl.h>
-# include <sys/wait.h>
-# include <errno.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include <stdio.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <unistd.h>
+#include <ctype.h>
+#include <fcntl.h>
+#include <readline/readline.h>
+#include <sys/wait.h>
 
 typedef struct	s_env
 {
@@ -31,30 +32,85 @@ typedef struct	s_env
 	struct s_env	*next_pt;
 } t_env;
 
+typedef enum e_bool
+{
+	FALSE,
+	TRUE
+}	t_bool;
+
+typedef struct	s_token
+{
+	char			*value;
+	t_bool			var_exist;
+	int				flag;
+	int				status;
+	struct s_token	*prev;
+	struct s_token	*next;
+}	t_token;
+
+
+typedef enum e_status
+{
+	DEFAULT,
+	// QUOTE,
+	SQUOTE,
+	DQUOTE
+}	t_status;
+
+typedef enum e_type
+{
+	SPACES,
+	PIPE,
+	HEREDOC,
+	WORD,
+	TRUNC,
+	VAR,
+	INPUT,
+	APPEND,
+	END
+} e_type;
+
+typedef struct	s_redir
+{
+	e_type			flag;
+	char			*file;
+	struct s_redir	*next;
+} t_redir;
+
+// typedef struct s_commands
+// {
+// 	char	*command;
+// 	int		flag;
+// 	struct s_commands	*next;
+// 	struct s_commands	*prev;
+// }	t_commands;
+
+typedef struct s_command
+{
+	char				**args;
+	t_redir				*redirs;
+	struct s_command	*next;
+	struct s_commands	*prev;
+} t_command;
+
+
 typedef struct	s_minishell 
 {
-	t_env	*env;
-	char	*line;
-	int		exit_status;
-	int		pipe_in;
-	int		pipe_out;
+	t_command	*cmds;
+	t_env		*env;
+	t_token		*tokens;
+	int			exit_status;
 }	t_shell;
 
-typedef struct	s_pipe_info
-{
-	int	is_first;
-	int	is_last;
-	int	prev_fd;
-	int	cur_fd[2];
-}	t_pipe_info;
-
-# include "helpers/libft.h"
-# include "parser/parser.h"
-# include "envp/envp.h"
-# include "pipe/pipe.h"
-# include "mainshell/main.h"
-# include "excution/excution.h"
-# include "builtins/builtins.h"
-
+#include "helpers/libft.h"
+#include "free_mem/free_m.h"
+#include "parsing_am/parser.h"
+#include "envirement/envirement.h"
+#include "exec/execution.h"
+#include "builtins/builtins.h"
+#include "pipe/pipe.h"
+#include "expander/expander.h"
+#include "command_build/cmds.h"
+#include "main/main.h"
 
 #endif

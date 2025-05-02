@@ -6,7 +6,7 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/04/29 14:07:47 by motelti          ###   ########.fr        #
+#    Updated: 2025/05/02 15:23:32 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,22 +19,27 @@ NAME	= minishell
 HEADER = minishell.h
 
 LIBFT_SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
-	ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_isnumber.c \
-	ft_memchr.c ft_memcmp.c ft_memcpy.c ft_strtok.c ft_strcmp.c \
-	ft_memmove.c ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_strjoin_sep.c \
-	ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strndup.c \
-	ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c \
-	ft_strlen.c ft_strmapi.c ft_striteri.c ft_strncmp.c \
-	ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c \
+	ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_strcat.c ft_strcmp.c \
+	ft_memset.c ft_putchar_fd.c ft_putendl_fd.c ft_memcpy.c  \
+	ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strcpy.c \
+	ft_strdup.c ft_strjoin.c ft_strlcpy.c ft_isnumber.c \
+	ft_strlen.c ft_strncmp.c ft_strndup.c \
+	ft_substr.c ft_lstnew.c  quotes.c  ft_strjoin_sep.c \
+	ft_lstlast.c ft_lstadd_back.c ft_lstclear.c check_stuff.c ft_lstsize.c
 
+EXPENDER_SRC = expander.c env_copy.c 
 
-PARSER_SRC = parsing.c parse_utils.c 
+PARSER_SRC = parser.c free_stuff.c token_utils.c tokenizer.c
 
-ENVP_SRC = envp_build.c
+ENVP_SRC = envirement.c
 
-EXEC_SRC = path.c exec.c exec_builtins.c exec_cmd.c
+FREE_MEM_SRC = free_memory.c
 
-PIPE_SRC = pipe.c pipe_utils.c helpers.c
+BUILD_CMD_SRC =  build_cmd.c
+
+EXEC_SRC = redirections.c exec_single_cmd.c exec_builtins.c path.c 
+
+PIPE_SRC = pipe.c
 
 BUILTINS_SRC = cd.c echo.c exit.c pwd.c export.c env.c builtin.c  export_utils.c \
 			unset.c
@@ -42,12 +47,15 @@ BUILTINS_SRC = cd.c echo.c exit.c pwd.c export.c env.c builtin.c  export_utils.c
 MAINSHELL_SRC = main.c
 
 SRC		= $(addprefix ./helpers/, $(LIBFT_SRC)) \
-		$(addprefix ./parser/, $(PARSER_SRC)) \
-		$(addprefix ./envp/, $(ENVP_SRC)) \
+		$(addprefix ./expander/, $(EXPENDER_SRC)) \
+		$(addprefix ./free_mem/, $(FREE_MEM_SRC)) \
+		$(addprefix ./exec/, $(EXEC_SRC)) \
+		$(addprefix ./envirement/, $(ENVP_SRC)) \
 		$(addprefix ./pipe/, $(PIPE_SRC)) \
-		$(addprefix ./excution/, $(EXEC_SRC)) \
 		$(addprefix ./builtins/, $(BUILTINS_SRC)) \
-		$(addprefix ./mainshell/, $(MAINSHELL_SRC))
+		$(addprefix ./parsing_am/, $(PARSER_SRC)) \
+		$(addprefix ./command_build/, $(BUILD_CMD_SRC)) \
+		$(addprefix ./main/, $(MAINSHELL_SRC))
 
 OBJ		= $(SRC:.c=.o)
 
