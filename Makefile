@@ -6,7 +6,7 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/02 15:23:32 by motelti          ###   ########.fr        #
+#    Updated: 2025/05/05 20:50:31 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,11 @@ ENVP_SRC = envirement.c
 
 FREE_MEM_SRC = free_memory.c
 
-BUILD_CMD_SRC =  build_cmd.c
+BUILD_CMD_SRC =  build_cmd.c cmd_utils.c 
 
-EXEC_SRC = redirections.c exec_single_cmd.c exec_builtins.c path.c 
+EXEC_SRC = redirections.c exec_single_cmd.c exec_builtins.c path.c exe_sngl_cmd_utlis.c redir_utils.c
 
-PIPE_SRC = pipe.c
+PIPE_SRC = pipe.c pipe_utils.c
 
 BUILTINS_SRC = cd.c echo.c exit.c pwd.c export.c env.c builtin.c  export_utils.c \
 			unset.c

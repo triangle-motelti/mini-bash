@@ -6,57 +6,11 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:18:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/02 15:01:53 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/03 19:03:05 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
-
-static int	count_cmds(t_command *cmd)
-{
-	int i = 0;
-
-	while (cmd)
-	{
-		i++;
-		cmd = cmd->next;
-	}
-	return (i);
-}
-
-static void	init_pipeline_info(t_pipeline_info *info, int count)
-{
-	info->count = count;
-}
-
-static int	open_pipes(t_pipeline_info *info)
-{
-	int i;
-
-	i = 0;
-	while (i < info->count - 1)
-	{
-		if (pipe(info->pipes[i]) < 0)
-		{
-			perror("pipe");
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
-
-static void	close_pipes(t_pipeline_info *info)
-{
-	int i = 0;
-
-	while (i < info->count - 1)
-	{
-		close(info->pipes[i][0]);
-		close(info->pipes[i][1]);
-		i++;
-	}
-}
 
 static void	exec_pipeline_child(t_shell *shell, t_command *cmd, t_pipeline_info *info, int idx)
 {
@@ -70,8 +24,8 @@ static void	exec_pipeline_child(t_shell *shell, t_command *cmd, t_pipeline_info 
 
 static int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
 {
-	int         i;
-	t_command   *cur;
+	int			i;
+	t_command	*cur;
 
 	cur = cmds;
 	i = 0;
@@ -90,8 +44,8 @@ static int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
 
 static void	wait_pipeline(t_shell *shell, t_pipeline_info *info)
 {
-	int i;
-	int status;
+	int	i;
+	int	status;
 
 	i = 0;
 	while (i < info->count)
@@ -110,8 +64,8 @@ static void	wait_pipeline(t_shell *shell, t_pipeline_info *info)
 
 void	execute_pipeline(t_shell *shell, t_command *cmds)
 {
-	t_pipeline_info info;
-	int             count;
+	t_pipeline_info	info;
+	int				count;
 
 	count = count_cmds(cmds);
 	if (count < 1)

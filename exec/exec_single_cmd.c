@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:00:06 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/02 15:03:26 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:42:56 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ static void	exec_builtin_parent(t_shell *shell, char **args)
 
 void	exec_child(t_shell *shell, t_command *cmd)
 {
-	char    **envp;
-	char    *path;
+	char	**envp;
+	char	*path;
 
 	setup_redirections(cmd->redirs);
 	if (cmd->args && cmd->args[0] && is_builtin(cmd->args[0]))
@@ -43,26 +43,21 @@ void	exec_child(t_shell *shell, t_command *cmd)
 		path = path_cmd(cmd->args[0], envp);
 		if (!path)
 		{
-			write(STDERR_FILENO, "minishell: ", 10);
-			write(STDERR_FILENO, cmd->args[0], strlen(cmd->args[0]));
-			write(STDERR_FILENO, ": command not found\n", 21);
+			path_check(shell, envp, &cmd->args[0]);
 			free_args(envp);
 			exit(127);
 		}
-		execve(path, cmd->args, envp);
-		perror("execve");
-		free(path);
-		free_args(envp);
-		exit(126);
+		path_execv(cmd, envp, path);
 	}
 	exit(0);
 }
 
 void	execute_single_command(t_shell *shell, t_command *cmd)
 {
-	pid_t  pid;
-	int    status;
+	pid_t	pid;
+	int		status;
 
+	
 	if (is_simple_builtin(shell, cmd))
 	{
 		exec_builtin_parent(shell, cmd->args);

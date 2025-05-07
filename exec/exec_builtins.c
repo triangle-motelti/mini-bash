@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:44:01 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/02 13:58:40 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/03 18:53:32 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 
 void	exec_builtin(t_shell *shell, char **args)
 {
-	int ac = 0, exit_ac = 1;
+	int	ac;
+	int	exit_ac;
+
+	ac = 0;
+	exit_ac = 1;
 	while (args[ac])
 		ac++;
 	while (args[exit_ac])

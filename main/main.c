@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/02 14:45:33 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/04 10:25:21 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,53 +27,23 @@ t_bool	parsing_and_expanding(t_shell *mini)
 	return (TRUE);
 }
 
-void execute_commands(t_shell *shell, t_command *cmds)
+void	execute_commands(t_shell *shell, t_command *cmds)
 {
-	int cmd_count = 0;
-	t_command *tmp = cmds;
+	int			cmd_count;
+	t_command	*tmp;
+
+	cmd_count = 0;
+	tmp = cmds;
 	while (tmp)
 	{
 		cmd_count++;
 		tmp = tmp->next;
 	}
-
 	if (cmd_count == 1)
 		execute_single_command(shell, cmds);
 	else
 		execute_pipeline(shell, cmds);
 }
-
-// int	shell(t_shell *mini)
-// {
-// 	char *input;
-
-// 	input = NULL;
-// 	while (1)
-// 	{
-// 		input = readline("minishell> ");
-// 		if (!input)
-// 		{
-// 			perror("read: ");
-// 			continue ;
-// 		}
-// 		add_history(input);
-// 		if (!tokenizer(mini, input, 0))
-// 		{
-// 			clear_tokens(&mini->tokens);
-// 			continue ;
-// 		}
-// 		if (!parsing_and_expanding(mini))
-// 			continue ;
-// 		int i = 0;
-// 		while (mini->tokens)
-// 		{
-// 			printf("cmds are : %s\n", mini->tokens->value);
-// 			mini->tokens = mini->tokens->next;
-// 		}
-// 		clear_tokens(&mini->tokens);
-// 	}
-// 	return (1);
-// }
 
 int	shell(t_shell *mini)
 {
@@ -103,27 +73,12 @@ int	shell(t_shell *mini)
 	return (1);
 }
 
-// int	main(int ac, char **av, char **env)
-// {
-// 	t_shell	minishell;
-
-// 	(void) av;
-// 	memset(&minishell, 0, sizeof(t_shell));
-// 	copy_env(&minishell, env, -1);//done using linked list
-// 	if (!shell(&minishell))
-// 	{
-// 		printf("error in shell()\n");
-		
-// 	}
-// }
-
 int main(int ac, char **av, char **envp)
 {
     (void)ac;
     (void)av;
     t_shell minishell;
     memset(&minishell, 0, sizeof(t_shell));
-    // copy_env(&minishell, envp);
 	minishell.env = build_env_list(&minishell, envp);
     if (!minishell.env)
     {
