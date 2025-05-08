@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expander.h                                         :+:      :+:    :+:   */
+/*   get_env_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/08 18:53:14 by aamraouy         ###   ########.fr       */
+/*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
+/*   Updated: 2025/05/08 18:53:06 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPANDER_H
-#define EXPANDER_H
-#include "../minishell.h"
+#include "expander.h"
 
-t_bool	expander(t_shell *mini);
-// void	copy_env(t_shell *mini, char **env, int i);
-char	*get_env_value(char *value, t_shell *mini);
+char	*get_env_value(char *value, t_shell *mini)
+{
+	t_env	*tmp_env;
 
-t_env	*build_env_list(t_shell *shell, char **envp);
-
-
-#endif
+	tmp_env = mini->env;
+	while (tmp_env)
+	{
+		if (ft_strcmp(value, tmp_env->key) == 0)
+			return (tmp_env->value);
+		tmp_env = tmp_env->next_pt;
+	}
+	// free(value);
+	return (NULL);
+}
