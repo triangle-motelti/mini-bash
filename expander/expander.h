@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/08 18:53:14 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/09 10:24:06 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_bool	expander(t_shell *mini);
 char	*get_env_value(char *value, t_shell *mini);
 
 t_env	*build_env_list(t_shell *shell, char **envp);
+t_bool	is_limiter_expanders(char *value, int i);
 
 
 #endif

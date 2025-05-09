@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/08 18:58:49 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/09 10:24:34 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,21 @@ char	*handle_dollar(char *new, int *j, char *value, int *i, t_shell *mini)
 	char	*extracted_value;
 	char	*rep_value;
 	int		k;
+	int		len;
+	char	*res;
 
 	start = (*i)++;
 	k = 0;
 	extracted_value = malloc(ft_strlen(value) + 1);
-	while (value[*i] && !is_separator(value, *i) && !is_wspace(value[*i]))// i need to use ft_realloc;
+	// is_limiter_expanders(value, *i);
+	while (is_limiter_expanders(value, *i))// i need to use ft_realloc;
 		extracted_value[k++] = value[(*i)++];
 	extracted_value[k] = '\0';
 	rep_value = get_env_value(extracted_value, mini);// here rep_value will point to the string i think i need to calculate its length ,
 	// free(extracted_value);
 	if (!rep_value)
 		return (new);
-	int len = ft_strlen(rep_value);
-	char	*res;
+	len = ft_strlen(rep_value);
 	k = 0;
 	res = ft_realloc(new, *j + 1, *j + len + 1);
 	new = res;
