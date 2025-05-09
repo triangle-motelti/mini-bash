@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:05:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/02 15:18:46 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/09 07:49:28 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct	s_redir
 {
 	e_type			flag;
 	char			*file;
+	int				heredoc_fd;
 	struct s_redir	*next;
 } t_redir;
 
@@ -106,6 +107,7 @@ typedef struct	s_minishell
 #include "free_mem/free_m.h"
 #include "parsing_am/parser.h"
 #include "envirement/envirement.h"
+#include "redirections/redirection.h"
 #include "exec/execution.h"
 #include "builtins/builtins.h"
 #include "pipe/pipe.h"

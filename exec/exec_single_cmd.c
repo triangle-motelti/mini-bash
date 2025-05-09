@@ -57,9 +57,10 @@ void	execute_single_command(t_shell *shell, t_command *cmd)
 	pid_t	pid;
 	int		status;
 
-	
+	preprocess_heredocs(shell, cmd);
 	if (is_simple_builtin(shell, cmd))
 	{
+		setup_redirections(cmd->redirs);
 		exec_builtin_parent(shell, cmd->args);
 		return ;
 	}

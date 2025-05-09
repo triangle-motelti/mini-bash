@@ -19,7 +19,10 @@ static void	exec_pipeline_child(t_shell *shell, t_command *cmd, t_pipeline_info 
 	if (idx < info->count - 1)
 		dup2(info->pipes[idx][1], STDOUT_FILENO);
 	close_pipes(info);
-	exec_child(shell, cmd);
+	// exec_child(shell, cmd);
+	setup_redirections(cmd->redirs);
+    if (cmd->args[0])
+        exec_child(shell, cmd);
 }
 
 static int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
@@ -70,6 +73,7 @@ void	execute_pipeline(t_shell *shell, t_command *cmds)
 	count = count_cmds(cmds);
 	if (count < 1)
 		return ;
+	preprocess_heredocs(shell, cmds);
 	init_pipeline_info(&info, count);
 	if (open_pipes(&info))
 		return ;

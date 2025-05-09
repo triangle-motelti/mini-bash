@@ -14,8 +14,9 @@
 
 int	count_cmds(t_command *cmd)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (cmd)
 	{
 		i++;

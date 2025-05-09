@@ -108,7 +108,6 @@ t_bool	expander(t_shell *mini)
 			free(token->value);
 			token->value = new_value;
 		}
-		printf("token's value is : %s\n", token->value);
 		token = token->next;
 	}
 	return (TRUE);

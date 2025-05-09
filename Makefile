@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
+#    By: kali <kali@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/08 18:54:01 by aamraouy         ###   ########.fr        #
+#    Updated: 2025/05/09 07:51:16 by kali             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,11 @@ ENVP_SRC = envirement.c
 
 FREE_MEM_SRC = free_memory.c
 
+REDIREC_SRC = redirections.c redir_utils.c herdoc.c
+
 BUILD_CMD_SRC =  build_cmd.c cmd_utils.c 
 
-EXEC_SRC = redirections.c exec_single_cmd.c exec_builtins.c path.c exe_sngl_cmd_utlis.c redir_utils.c
+EXEC_SRC = exec_single_cmd.c exec_builtins.c path.c exe_sngl_cmd_utlis.c 
 
 PIPE_SRC = pipe.c pipe_utils.c
 
@@ -52,6 +54,7 @@ SRC		= $(addprefix ./helpers/, $(LIBFT_SRC)) \
 		$(addprefix ./free_mem/, $(FREE_MEM_SRC)) \
 		$(addprefix ./exec/, $(EXEC_SRC)) \
 		$(addprefix ./envirement/, $(ENVP_SRC)) \
+		$(addprefix ./redirections/, $(REDIREC_SRC)) \
 		$(addprefix ./pipe/, $(PIPE_SRC)) \
 		$(addprefix ./builtins/, $(BUILTINS_SRC)) \
 		$(addprefix ./parsing_am/, $(PARSER_SRC)) \

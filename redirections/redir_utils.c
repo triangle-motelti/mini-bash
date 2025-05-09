@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/06 11:14:26 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/09 07:46:28 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "redirection.h"
 
 static char	*read_heredoc_line(const char *delimiter)
 {
