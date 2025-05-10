@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 07:46:06 by kali              #+#    #+#             */
-/*   Updated: 2025/05/09 09:07:53 by kali             ###   ########.fr       */
+/*   Updated: 2025/05/10 17:56:16 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,12 @@ static void	heredoc_check(int pipe_fd[2], t_redir *redir, char *input)
 				exit(1);
 			}
 			input = collect_heredoc_input(redir->file);
-			if (!input) {
+			if (!input)
+			{
 				close(pipe_fd[0]);
 				close(pipe_fd[1]);
 				redir->heredoc_fd = -1;
-				continue;
+				return ;
 			}
 			ft_putstr_fd(input, pipe_fd[1]);
 			close(pipe_fd[1]);

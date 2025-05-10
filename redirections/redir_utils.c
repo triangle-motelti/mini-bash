@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/09 07:46:28 by kali             ###   ########.fr       */
+/*   Updated: 2025/05/10 18:41:42 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ char	*collect_heredoc_input(const char *delimiter)
 	buf = NULL;
 	buf_size = 0;
 	line = read_heredoc_line(delimiter);
+	if (!line)
+		return (NULL);
 	while (line  != NULL)
 	{
 		buf = append_line(buf, &buf_size, line);

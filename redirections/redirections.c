@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:45:38 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/09 07:45:11 by kali             ###   ########.fr       */
+/*   Updated: 2025/05/10 18:40:52 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 static void	heredoc_flag(t_redir *redirs)
 {
 	if (redirs->heredoc_fd == -1)
-	{
-		ft_putstr_fd("minishell: heredoc failed\n", STDERR_FILENO);
 		exit(1);
-	}
 	dup2(redirs->heredoc_fd, STDIN_FILENO);
 	close(redirs->heredoc_fd);
 }
