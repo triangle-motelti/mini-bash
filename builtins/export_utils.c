@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:40:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/27 22:37:59 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/10 20:52:05 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,28 @@ void	sort(char **env_arr, char *tmp, int *i, int *s)
 
 void	export_ac(t_shell *shell, char **arr, int i)
 {
+	char	*eq;
+	size_t	key_len;
+	
 	arr = copy_env_list(shell, shell->env);
 	if (!arr)
 		return ;
 	sort_env(arr);
 	while (arr[i])
 	{
-		printf("declare -x %s\n", arr[i]);
+		eq = ft_strchr(arr[i], '=');
+		if (eq)
+		{
+			key_len = eq - arr[i];
+			printf("declare -x %.*s=\"%s\"\n", (int)key_len, arr[i], eq + 1);
+		}
+		else
+			printf("declare -x %s\n", arr[i]);
 		free(arr[i]);
 		i++;
+		// printf("declare -x %s\n", arr[i]);
+		// free(arr[i]);
+		// i++;
 	}
 	free(arr);
 	shell->exit_status = 0;
