@@ -78,7 +78,8 @@ typedef struct	s_redir
 {
 	e_type			flag;
 	char			*file;
-	int				heredoc_fd;
+	int			heredoc_fd;
+	t_bool			expand_var;
 	struct s_redir	*next;
 } t_redir;
 

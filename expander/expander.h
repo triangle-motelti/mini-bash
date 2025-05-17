@@ -32,4 +32,6 @@ void	rm_quotes(t_token *token);
 void	append_str(char **new, char *token, int start, int i, int *j);
 
 
+char    *expand_each_token(char *token, int i, int j, t_shell *mini);
+
 #endif

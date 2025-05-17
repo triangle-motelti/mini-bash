@@ -125,7 +125,7 @@ t_bool	expander(t_shell *mini)
 			new_value = expand_each_token(token->value, 0, 0, mini);
 		else
 			new_value = ft_strdup(token->value);
-		printf("value in expander is %s\n", new_value);
+	//	printf("value in expander is %s\n", new_value);
 		if (token->quote == QUOTE)
 			rm_quotes(token);
 		if (new_value && ft_strcmp(new_value, token->value) != 0)

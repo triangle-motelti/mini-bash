@@ -12,6 +12,27 @@
 
 #include "redirection.h"
 
+void	add_redir_to_command(t_command *cmd, t_redir *redir)
+{
+    t_redir *current;
+
+    if (!cmd || !redir)
+        return;
+
+    if (!cmd->redirs)
+    {
+        cmd->redirs = redir;
+    }
+    else
+    {
+        current = cmd->redirs;
+        while (current->next)
+            current = current->next;
+        current->next = redir;
+    }
+    redir->next = NULL;
+}
+
 static char	*read_heredoc_line(const char *delimiter)
 {
 	char	*line;

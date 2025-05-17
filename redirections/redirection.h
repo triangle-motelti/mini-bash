@@ -19,4 +19,6 @@ char	*collect_heredoc_input(const char *delimiter);
 void	preprocess_heredocs(t_shell *shell, t_command *cmds);
 void	setup_redirections(t_redir *redirs);
 
+void	add_redir_to_command(t_command *cmd, t_redir *redir);
+
 #endif
