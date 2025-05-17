@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 12:41:58 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:21:10 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,13 @@ t_bool	parsing_and_expanding(t_shell *mini)
 		return (FALSE);
 	}
 	// rm_quotes(mini->tokens);
-//	t_token *tmp;
-//	tmp = mini->tokens;
-//	while (tmp)
-//	{
-//		printf("tmp value is : %s and ambiguous is%d\n", tmp->value, tmp->ambiguous);
-//		tmp = tmp->next;
-//	}
+	t_token *tmp;
+	tmp = mini->tokens;
+	while (tmp)
+	{
+		printf("tmp value is : %s and ambiguous is%d\n", tmp->value, tmp->ambiguous);
+		tmp = tmp->next;
+	}
 	return (TRUE);
 }
 

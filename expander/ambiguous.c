@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambiguous.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 11:55:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 18:04:59 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/17 19:47:56 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,25 @@
 
 void	ambiguous_case(t_token *tokens, t_shell *mini)
 {
-	t_env	*tmp_env;
-	int		i;
-
-	tmp_env = mini->env;
-	i = 0;
-	while (tmp_env)
-	{		
-		if (ft_strchr(tokens->value, ' ') != NULL)
-		{
-			i = ft_strrchr_advance(tokens->value, tmp_env->value);
-			if (i != -1)
-				tokens->ambiguous = 1;
-		}
-		tmp_env = tmp_env->next_pt;
+	char	**split;
+	int		count;
+	(void)mini;
+	if (!tokens->value)
+	{
+		tokens->ambiguous = 1;
+		return ;
+	}
+	if (tokens->quote == NQUOTE)
+	{
+		split = ft_split(tokens->value, ' ');
+		if (!split)
+			return ;
+		count = 0;
+		while (split[count])
+			count++;
+		if (count != 1)
+			tokens->ambiguous = 1;
+		free_args(split);
 	}
 }
 
@@ -54,7 +59,7 @@ int	check_environements(char *value, t_shell *mini)
 					str = ft_substr(value, start, i - start);
 					if (ft_strcmp(str, env->value) == 0)
 					{
-						printf("--------------envir is : %s, substracted value is %s, value is :%s\n", env->value, str, value);
+						// printf("--------------envir is : %s, substracted value is %s, value is :%s\n", env->value, str, value);
 						free(str);
 						return (0);
 					}
