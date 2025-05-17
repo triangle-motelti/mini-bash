@@ -6,11 +6,35 @@
 /*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/17 17:43:12 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/17 21:09:16 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
+
+void	check_ambiguous_redirect(t_shell *mini)
+{
+	t_token	*token;
+	t_token	*next;
+
+	token = mini->tokens;
+	while (token)
+	{
+		if (token->flag == TRUNC || token->flag == APPEND || token->flag == INPUT)
+		{
+			next = token->next;
+			if (next && next->ambiguous == 1)
+			{
+				ft_putstr_fd("minishell: ", STDERR_FILENO);
+				ft_putstr_fd(next->value, STDERR_FILENO);
+				ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
+				mini->exit_status = 1;
+			}
+		}
+		token = token->next;
+	}
+	return ;
+}
 
 static char	*read_heredoc_line(const char *delimiter)
 {
