@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 13:02:37 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:06:46 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ char	*handle_dquote(char *new, int *j, char *value, int *i, t_shell *mini)
 char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 {
 	char	*new;
-	int		capacity;
+	// int		capacity;
 	int		start;
 
-	capacity = ft_strlen(token);
+	// capacity = ft_strlen(token);
 	new = NULL;
 	while (token[i])
 	{
@@ -100,10 +100,18 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 			new = handle_dquote(new, &j, token, &i, mini);
 		else if (token[i] == '$')
 		{
-			if (!token[i + 1])
+			// if (!token[i + 1])
+			// 	append_character(&new, &j, token[i++]);
+			// if ((token[i]) && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
+			// 	return (NULL);
+			if (!token[i + 1] || !is_limiter_expanders(token, i + 1))
 				append_character(&new, &j, token[i++]);
-			if ((token[i]) && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
-				return (NULL);
+			else
+			{
+				new = handle_dollar(new, &j, token, &i, mini);
+				if (!new)
+					return (NULL);
+			}
 		}
 		else
 			append_character(&new, &j, token[i++]);

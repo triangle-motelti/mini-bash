@@ -6,7 +6,7 @@
 /*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:23 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 16:06:36 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/17 16:36:25 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	heredoc_check(t_shell *shell, int pipe_fd[2], t_redir *redir, char *
 						ft_putstr_fd(input, pipe_fd[1]);
 			}
 			else
-				ft_putstr_fd(input, pipe_fd[1]);
+			ft_putstr_fd(input, pipe_fd[1]);
 			free(input);
 			close(pipe_fd[1]);
 			redir->heredoc_fd = pipe_fd[0];

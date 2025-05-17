@@ -3,35 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/13 10:36:24 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/17 17:43:12 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
-
-void	add_redir_to_command(t_command *cmd, t_redir *redir)
-{
-    t_redir *current;
-
-    if (!cmd || !redir)
-        return;
-
-    if (!cmd->redirs)
-    {
-        cmd->redirs = redir;
-    }
-    else
-    {
-        current = cmd->redirs;
-        while (current->next)
-            current = current->next;
-        current->next = redir;
-    }
-    redir->next = NULL;
-}
 
 static char	*read_heredoc_line(const char *delimiter)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambiguous.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 11:55:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/16 22:00:54 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/17 18:04:59 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	check_environements(char *value, t_shell *mini)
 		start = ft_strrchr_advance(value, env->value);
 		if (start != -1)
 		{
-			printf("environement is %s\n", env->value);
+			// printf("environement is %s\n", env->value);
 			i = start;
 			while (value[i])
 			{
