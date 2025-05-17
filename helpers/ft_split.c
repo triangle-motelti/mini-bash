@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:39:56 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/21 09:45:16 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/16 17:46:41 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,9 +64,9 @@ char	**ft_split(char const *s, char c)
 	size_t		i;
 	size_t		j;
 
-	if (!s)
+	if (!s && !s[0])
 		return (NULL);
-	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));
+	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));//there is two allocations , the **  and the arrays inside it
 	if (!lst)
 		return (NULL);
 	i = 0;

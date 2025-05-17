@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:05:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/09 07:49:28 by kali             ###   ########.fr       */
+/*   Updated: 2025/05/16 21:08:24 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ typedef struct	s_token
 	char			*value;
 	t_bool			var_exist;
 	int				flag;
+	int				ambiguous;
+	int				quote;
 	int				status;
 	struct s_token	*prev;
 	struct s_token	*next;
@@ -65,6 +67,8 @@ typedef enum e_type
 	WORD,
 	TRUNC,
 	VAR,
+	QUOTE,
+	NQUOTE,
 	INPUT,
 	APPEND,
 	END

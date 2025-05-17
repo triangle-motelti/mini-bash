@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_stuff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:40:27 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/02 15:19:37 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/12 08:27:19 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	freeing_array(char **fr)
 	// 	i++;
 	// }
 	free(fr);
-	*fr = NULL;
+	// fr = NULL;
 }
 
 void    free_env(t_env *env)

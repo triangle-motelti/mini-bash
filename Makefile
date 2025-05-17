@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kali <kali@student.42.fr>                  +#+  +:+       +#+         #
+#    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/09 07:51:16 by kali             ###   ########.fr        #
+#    Updated: 2025/05/16 11:37:36 by aamraouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
-# CFLAGS	= -Wall -Werror -Wextra
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
 RM		= @rm -f
 
 
@@ -26,9 +26,9 @@ LIBFT_SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_strlen.c ft_strncmp.c ft_strndup.c \
 	ft_substr.c ft_lstnew.c  quotes.c  ft_strjoin_sep.c \
 	ft_lstlast.c ft_lstadd_back.c ft_lstclear.c check_stuff.c ft_lstsize.c \
-	ft_realloc.c
+	ft_realloc.c ft_strrchr.c
 
-EXPENDER_SRC = expander.c env_copy.c get_env_value.c
+EXPENDER_SRC = expander.c env_copy.c utils.c ambiguous.c more_utils.c
 
 PARSER_SRC = parser.c free_stuff.c token_utils.c tokenizer.c
 

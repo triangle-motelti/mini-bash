@@ -6,42 +6,44 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:51:41 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/17 15:49:10 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:10:40 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*join(char *alloc, const char *s1, const char *s2)
+static char	*join(char *alloc, char *s1, char *s2)
 {
 	size_t	i;
 	size_t	j;
+	size_t	len1;
+	size_t	len2;
 
 	i = 0;
 	j = 0;
-	while (i < ft_strlen(s1))
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	while (i < len1)
 	{
 		alloc[i] = s1[i];
 		i++;
 	}
-	while (j < ft_strlen(s2))
+	while (j < len2)
 	{
 		alloc[i + j] = s2[j];
 		j++;
 	}
 	alloc[i + j] = '\0';
+	// free(s2);
+	// free(s1);
 	return (alloc);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*pt;
-	int		space;
-	int		i;
-	int		ind;
+	size_t		space;
 
-	i = 0;
-	ind = 0;
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)

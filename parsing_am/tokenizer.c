@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:35:58 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/04/29 18:40:10 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/17 10:24:12 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	add_token(t_shell *mini, char *sep, int type)
 {
-	t_token	*new;//this tlist needs to be t_token
+	t_token	*new;
 
 	if (!sep)
 		return ;
@@ -40,7 +40,7 @@ int	handle_word(t_shell *mini, char *input, int i)
 				track++;
 			if (input[track] != '\'')
 			{
-				printf("syntax error: unclosed quotes\n");
+				printf("mini: unexpected EOF while looking for matching `''\n");
 				return (0);
 			}
 			track++;
@@ -52,7 +52,7 @@ int	handle_word(t_shell *mini, char *input, int i)
 				track++;
 			if (input[track] != '"')
 			{
-				printf("syntax error: unclosed quotes\n");
+				printf("mini: unexpected EOF while looking for matching `\"'\n");
 				return (0);
 			}
 			track++;
@@ -88,76 +88,29 @@ int	handle_quotes(t_shell *mini, char *input, int *i)
 {
 	char	quote;
 	int		start;
-	int		n_quotes;
-	char	*word;
-	int	j;
 
-	// quote = input[*i];
-	// n_quotes = 1;
-	// (*i)++;//skip quote
 	start = (*i);
-	// while(input[*i])
-	// {
-	// 	if (is_wspace(input[*i]) && is_separator(input, *i))
-	// 		break ;
-	// 	if (input[*i] == quote && n_quotes == 1)
-	// 	{
-	// 		(*i)++;
-	// 		n_quotes++;
-	// 		continue;
-	// 	}
-	// 	else if (n_quotes == 2)
-	// 	{
-	// 		if ((quote = input[*i]) == '"' || (quote = input[*i]) == '\'')
-	// 		{
-	// 			n_quotes = 1;
-	// 			continue ;
-	// 		}
-	// 		(*i)++;//try to handle the case of unclosed quote
-	// 	}
-	// 	else if (n_quotes != 2)
-	// 	{
-	// 		printf("lexer : syntax error, unclosed quote\n");
-	// 		return (0);
-	// 	}
-	// 	else
-	// 		(*i)++;
-	// }	
 	while (input[*i])
 	{
 		if (input[*i] == '\'' || input[*i] == '"')
 		{
 			quote = input[*i];
 			(*i)++;
-			while(input[*i] && input[*i] != quote)
+			while (input[*i] && input[*i] != quote)
 				(*i)++;
 			if (input[*i] != quote)
 			{
-				printf("lexer error : missing closing quote hunt\n");
+				printf("missing closing quote `%c'\n", quote);
 				return (0);
 			}
 			(*i)++;
 		}
-		// printf("i value is : %d ---> char is %c\n", (*i), quote);
 		else if (!is_wspace(input[*i]) && !is_separator(input, *i))
-			(*i)++;//{}
-		// if (input[*i] == '\'' || input[*i] == '"')//&& !is_wspace(input[*i]) && !is_separator(input, *i)
-		// {
-		// 	printf("never\n");
-		// 	quote = input[*i];
-		// 	(*i)++;
-		// 	continue;
-		// }
+			(*i)++;
 		else
 			break;
 	}
-	
 	keep_tracking(mini, *i, start, input);
-	// word = ft_substr(input, start ,(*i) - start);
-	// (*i)++;
-	// printf("%s\n", word);
-	// add_token(mini, word, WORD);
-	// (*i) = j;
 	return (1);
 }
 
@@ -178,8 +131,6 @@ void	sep_handling(t_shell *mini, char *input, int *i)
 t_bool	tokenizer(t_shell *mini, char *input, int i)
 {
 	int		len;
-	int		count = 0;
-	char	quote;
 	int		sep;
 
 	len = ft_strlen(input);

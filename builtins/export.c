@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:29:45 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/27 22:42:16 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/12 08:24:57 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	ft_export(t_shell *mini, int ac, char **av)
 	int		status;
 	int		i;
 
+	env_arr = NULL;
 	i = 0;
 	if (ac == 1)
 		export_ac(mini, env_arr, i);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   envirement.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:38:41 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/04 10:21:02 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/12 08:22:49 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	**copy_env_list(t_shell *shell, t_env *env)
 	char	**arr;
 	int		i;
 
+	(void)shell;
 	n = env_count(env);
 	arr = malloc((n + 1) * sizeof(char *));
 	i = 0;

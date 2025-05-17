@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/09 07:46:06 by kali              #+#    #+#             */
-/*   Updated: 2025/05/10 17:56:16 by motelti          ###   ########.fr       */
+/*   Created: 2025/05/16 12:28:23 by aamraouy          #+#    #+#             */
+/*   Updated: 2025/05/16 12:28:25 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	preprocess_heredocs(t_shell *shell, t_command *cmds)
 	int			pipe_fd[2];
 	char		*input;
 
+	(void)shell;
 	cmd = cmds;
+	input = NULL;
+	redir = NULL;
 	while (cmd)
 	{
 		redir = cmd->redirs;

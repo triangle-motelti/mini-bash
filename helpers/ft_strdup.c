@@ -6,13 +6,13 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 12:27:17 by aamraouy          #+#    #+#             */
-/*   Updated: 2024/11/11 13:07:18 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:35:24 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*mem;
 	int		i;

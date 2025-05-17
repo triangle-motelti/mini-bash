@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:44:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/20 20:34:22 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/12 08:24:26 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	pwd(int ac)
 {
 	char	*cwd;
 
+	(void)ac;
 	// if (ac > 1)
 	// {
 	// 	ft_putstr_fd("pwd: too many arguments\n", STDERR_FILENO);

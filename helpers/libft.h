@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 17:37:03 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/08 18:55:15 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/16 09:33:23 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ t_token	*ft_lstnew(void *content, int type);
 t_token	*ft_lstlast(t_token *lst);
 void	ft_lstadd_back(t_token **lst, t_token *new);
 
+int ft_strrchr_advance(char *s, char *str_to_find);
 
 char	quotes_syntax(char *input);
 int	ft_lstsize(t_token *lst);
@@ -45,13 +46,14 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *s1);
-char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strdup(char *s1);
+char	*ft_strjoin(char *s1, char *s2);
+char	*ft_strrchr(const char *s, int c);
+// int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
-char	*ft_strndup(const char *s, size_t n);
+char	*ft_strndup(char *s, size_t n);
 char	*ft_strcpy(char *dest, char *src);
 char	*ft_strcat(char *dest, char *src);
 int		ft_strcmp(const char *a, const char *b);

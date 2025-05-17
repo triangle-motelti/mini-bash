@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_sngl_cmd_utlis.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 17:13:23 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/03 17:13:56 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/12 08:22:24 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	path_check(t_shell *shell, char **envp, char **args)
 {
 	t_env	*path_env;
 
+	(void)envp;
 	path_env = find_env_node(shell->env, "PATH");
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(args[0], STDERR_FILENO);

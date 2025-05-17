@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/04 10:25:21 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/17 12:41:58 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ t_bool	parsing_and_expanding(t_shell *mini)
 	{
 		clear_tokens(&mini->tokens);
 		return (FALSE);
+	}
+	// rm_quotes(mini->tokens);
+	t_token *tmp;
+	tmp = mini->tokens;
+	while (tmp)
+	{
+		printf("tmp value is : %s and ambiguous is%d\n", tmp->value, tmp->ambiguous);
+		tmp = tmp->next;
 	}
 	return (TRUE);
 }
@@ -48,6 +56,7 @@ void	execute_commands(t_shell *shell, t_command *cmds)
 int	shell(t_shell *mini)
 {
 	char	*input;
+	t_command	*cmds;
 	
 	while (1)
 	{
@@ -57,17 +66,15 @@ int	shell(t_shell *mini)
 		add_history(input);
 		if (!tokenizer(mini, input, 0) || !parsing_and_expanding(mini))
 		{
-			free_tokens(mini->tokens);
-			mini->tokens = NULL;
 			free(input);
+			clear_tokens(&mini->tokens);
 			continue ;
 		}
-		t_command *cmds = build_commands(mini->tokens);
+		cmds = build_commands(mini->tokens);
 		if (cmds)
 			execute_commands(mini, cmds);
 		free_commands(cmds);
-		free_tokens(mini->tokens);
-		mini->tokens = NULL;
+		clear_tokens(&mini->tokens);
 		free(input);
 	}
 	return (1);

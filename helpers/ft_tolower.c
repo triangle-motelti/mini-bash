@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 17:35:52 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/13 10:38:45 by aamraouy         ###   ########.fr       */
+/*   Created: 2024/10/23 17:16:30 by aamraouy          #+#    #+#             */
+/*   Updated: 2024/11/16 14:25:40 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_strcmp(const char *a, const char *b)
+int	ft_tolower(int c)
 {
-	while (*a && *a == *b)
-	{
-		a++;
-		b++;
-	}
-	return (((unsigned char)*a) - ((unsigned char)*b));
+	if (c <= 90 && c >= 65)
+		c += 32;
+	else
+		return (c);
+	return (c);
 }

@@ -1,23 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcmp.c                                        :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 17:35:52 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/13 10:38:45 by aamraouy         ###   ########.fr       */
+/*   Created: 2024/10/23 17:19:59 by aamraouy          #+#    #+#             */
+/*   Updated: 2024/11/10 20:49:35 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_strcmp(const char *a, const char *b)
+int	ft_toupper(int c)
 {
-	while (*a && *a == *b)
-	{
-		a++;
-		b++;
-	}
-	return (((unsigned char)*a) - ((unsigned char)*b));
+	if (c >= 97 && c <= 122)
+		c = c - 32;
+	return (c);
 }

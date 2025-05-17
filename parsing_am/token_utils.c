@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:29:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/04/29 15:24:03 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/17 11:15:42 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	is_separator(char *input, int i)
 
 int	is_wspace(char input)
 {
-	if (input >= 9 && input <= 13 | input == 32)
+	if ((input >= 9 && input <= 13 )| (input == 32))
 		return (1);
 	return (0);
 }
@@ -36,7 +36,7 @@ void	keep_tracking(t_shell *mini, int j, int start, char *input)
 	int		i;
 	int		k;
 
-	word = malloc((j - start) + 1);
+	word = malloc(j - start + 1);
 	if (!word)
 		return ;
 	i = start;
@@ -44,7 +44,8 @@ void	keep_tracking(t_shell *mini, int j, int start, char *input)
 	while (i < j)
 	{
 		c = input[i];
-			word[k++] = c;
+		word[k] = c;
+		k++;
 		i++;
 	}
 	word[k] = '\0';
