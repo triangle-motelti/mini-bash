@@ -6,11 +6,25 @@
 /*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 21:08:36 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/18 14:56:10 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void	free_env_list(t_env *env)
+{
+	t_env	*tmp;
+
+	while (env)
+	{
+		tmp = env;
+		env = env->next_pt;
+		free(tmp->key);
+		free(tmp->value);
+		free(tmp);
+	}
+}
 
 t_bool	parsing_and_expanding(t_shell *mini)
 {
@@ -94,6 +108,6 @@ int main(int ac, char **av, char **envp)
         return (1);
     }
     if (!shell(&minishell))
-        return (1);
-    return (0);
+        return (free_env_list(minishell.env), 1);
+    return (free_env_list(minishell.env), 0);
 }
