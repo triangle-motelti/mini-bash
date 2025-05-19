@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 12:23:04 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 13:00:01 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*handle_dollar(char *new, int *j, char *value, int *i, t_shell *mini)
 		free(extracted_value);
 		if (!new)
 		{
-			free(value);
+			// free(value); // why freeing here is because when the value isn't expanded  it get replaced by null which means the first one get lost
 			return (NULL);
 		}
 		return (new);
@@ -127,8 +127,8 @@ t_bool	expander(t_shell *mini)
 			new_value = expand_each_token(token->value, 0, 0, mini);
 		else
 			new_value = ft_strdup(token->value);
-		// printf("value in expander is %s\n", new_value);
-		if (token->quote == QUOTE)
+		printf("value in expander is %s\n", new_value);
+		if (token->quote == QUOTE && new_value)
 			rm_quotes(token);
 		if (new_value && ft_strcmp(new_value, token->value) != 0)
 		{
@@ -141,6 +141,7 @@ t_bool	expander(t_shell *mini)
 		{
 			if (!new_value)
 			{
+				free(token->value);
 				token->value = ft_strdup("");
 				token->ambiguous = 1;
 				token = token->next;
