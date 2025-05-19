@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 10:00:07 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:23:04 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ char	*handle_dollar(char *new, int *j, char *value, int *i, t_shell *mini)
 	{
 		free(extracted_value);
 		if (!new)
+		{
+			free(value);
 			return (NULL);
+		}
 		return (new);
 	}
 	len = ft_strlen(rep_value);
@@ -139,6 +142,7 @@ t_bool	expander(t_shell *mini)
 			if (!new_value)
 			{
 				token->value = ft_strdup("");
+				token->ambiguous = 1;
 				token = token->next;
 				continue ;
 			}

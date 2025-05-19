@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:29:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 11:22:18 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 12:09:09 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ void	add_token(t_shell *mini, char *sep, int type)
 	t_token	*new;
 
 	if (!sep)
-	{
-		free(sep);
 		return ;
-	}
 	new = ft_lstnew(sep, type);
 	if (!new)
 	{
