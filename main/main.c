@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/18 14:56:10 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/19 11:34:58 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ int	shell(t_shell *mini)
 		if (!input)
 			return (ft_putstr_fd("exit\n", STDERR_FILENO), 0);
 		add_history(input);
-		if (!tokenizer(mini, input, 0) || !parsing_and_expanding(mini))
+		if (!tokenizer(mini, input, 0, ft_strlen(input)) || !parsing_and_expanding(mini))
 		{
 			free(input);
+			// free_tokens(mini->tokens);
 			clear_tokens(&mini->tokens);
 			continue ;
 		}
@@ -101,6 +102,8 @@ int main(int ac, char **av, char **envp)
     (void)av;
     t_shell minishell;
     memset(&minishell, 0, sizeof(t_shell));
+	minishell.shel_pid = getpid();
+	// printf("pid is :%d\n", minishell.shel_pid);
 	minishell.env = build_env_list(&minishell, envp);
     if (!minishell.env)
     {

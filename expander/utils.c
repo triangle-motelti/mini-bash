@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/16 19:26:56 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 09:56:06 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ char	*get_env_value(char *value, t_shell *mini)
 		state = ft_itoa(mini->exit_status);
 		return (state);
 	}
-	if ((pid_manager = check_dollar(value, mini->env)) != NULL)
-		return (ft_strdup(pid_manager));
+	if ((pid_manager = check_dollar(value, mini)) != NULL)
+		return (pid_manager);
 	while (tmp_env)
 	{
 		if (ft_strcmp(value, tmp_env->key) == 0)
@@ -39,11 +39,11 @@ char	*get_env_value(char *value, t_shell *mini)
 
 t_bool	is_limiter_expanders(char *value, int i)
 {
-	if (i >= 2)
-	{
-		if ((value[i - 2] == '$') && (value[i - 1] == '$') && (i < 3 || value[i - 3] != '$'))
-			return (FALSE);
-	}
+	// if (i >= 2)
+	// {
+	// 	if ((value[i - 2] == '$') && (value[i - 1] == '$') && (i < 3 || value[i - 3] != '$'))
+	// 		return (FALSE);
+	// }
 	if (i >= 1 && value[i] == '?' && value[i - 1] == '$')
 		return (TRUE);
 	if (i >= 1 && value[i - 1] == '?')
@@ -72,9 +72,8 @@ void	split_in_case(t_token *token, t_shell *mini)
 		free(split);
 		return ;
 	}
-	printf("split 1 is : %s\n" , split[1]);
 	free(token->value);
-	token->value = ft_strdup(split[0]);
+	token->value = split[0];
 	i = 1;
 	while (split[i])
 	{

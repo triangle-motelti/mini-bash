@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 18:06:46 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/19 10:00:07 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*handle_dollar(char *new, int *j, char *value, int *i, t_shell *mini)
 	rep_value = NULL;
 	extracted_value = malloc(ft_strlen(value) + 1);
 	(*i)++;
-	if (value[*i] == '$')//store all the dolar signs and count them in get_env_value() 
+	if (value[*i] == '$')
 		extracted_value[k++] = value[(*i)++];
 	while (is_limiter_expanders(value, *i))
 		extracted_value[k++] = value[(*i)++];
@@ -58,12 +58,11 @@ char	*handle_dquote(char *new, int *j, char *value, int *i, t_shell *mini)
 	char	quote;
 	
 	quote = value[*i];
-	// append_character(&new, j, value[*i]);// here j signifies where we are in new[]
 	(*i)++;
 	while (value[*i] && value[(*i)] != quote)
 	{
 		if (value[*i] == '$')
-			new = handle_dollar(new, j, value, i, mini);//           HERE when it expands the size must be checked to reallocate again    //
+			new = handle_dollar(new, j, value, i, mini);
 		else
 			append_character(&new, j, value[(*i)++]);
 	}
@@ -79,10 +78,10 @@ char	*handle_dquote(char *new, int *j, char *value, int *i, t_shell *mini)
 char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 {
 	char	*new;
-	// int		capacity;
+	int		capacity;
 	int		start;
 
-	// capacity = ft_strlen(token);
+	capacity = ft_strlen(token);
 	new = NULL;
 	while (token[i])
 	{
@@ -100,18 +99,10 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 			new = handle_dquote(new, &j, token, &i, mini);
 		else if (token[i] == '$')
 		{
-			// if (!token[i + 1])
-			// 	append_character(&new, &j, token[i++]);
-			// if ((token[i]) && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
-			// 	return (NULL);
-			if (!token[i + 1] || !is_limiter_expanders(token, i + 1))
+			if (!token[i + 1])
 				append_character(&new, &j, token[i++]);
-			else
-			{
-				new = handle_dollar(new, &j, token, &i, mini);
-				if (!new)
-					return (NULL);
-			}
+			if ((token[i]) && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
+				return (NULL);
 		}
 		else
 			append_character(&new, &j, token[i++]);
@@ -133,7 +124,7 @@ t_bool	expander(t_shell *mini)
 			new_value = expand_each_token(token->value, 0, 0, mini);
 		else
 			new_value = ft_strdup(token->value);
-	//	printf("value in expander is %s\n", new_value);
+		// printf("value in expander is %s\n", new_value);
 		if (token->quote == QUOTE)
 			rm_quotes(token);
 		if (new_value && ft_strcmp(new_value, token->value) != 0)

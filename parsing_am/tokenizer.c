@@ -6,23 +6,12 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:35:58 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 10:24:12 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:18:29 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	add_token(t_shell *mini, char *sep, int type)
-{
-	t_token	*new;
-
-	if (!sep)
-		return ;
-	new = ft_lstnew(sep, type);
-	if (!new)
-		return ;
-	ft_lstadd_back(&mini->tokens, new);
-}
 int	handle_word(t_shell *mini, char *input, int i)
 {
 	int start;
@@ -35,27 +24,31 @@ int	handle_word(t_shell *mini, char *input, int i)
 	{
 		if (quote == '\'')
 		{
-			track++;
-			while (input[track] && input[track] != '\'')
-				track++;
-			if (input[track] != '\'')
-			{
-				printf("mini: unexpected EOF while looking for matching `''\n");
+			// track++;
+			// while (input[track] && input[track] != '\'')
+			// 	track++;
+			// if (input[track] != '\'')
+			// {
+			// 	printf("mini: unexpected EOF while looking for matching `''\n");
+			// 	return (0);
+			// }
+			// track++;
+			if (!more_quote_handling(input, &track, 1))
 				return (0);
-			}
-			track++;
 		}
 		else if(quote == '"')
 		{
-			track++;
-			while (input[track] && input[track] != '"')
-				track++;
-			if (input[track] != '"')
-			{
-				printf("mini: unexpected EOF while looking for matching `\"'\n");
+			// track++;
+			// while (input[track] && input[track] != '"')
+			// 	track++;
+			// if (input[track] != '"')
+			// {
+			// 	printf("mini: unexpected EOF while looking for matching `\"'\n");
+			// 	return (0);
+			// }
+			// track++;
+			if (!more_quote_handling(input, &track, 2))
 				return (0);
-			}
-			track++;
 		}
 		else
 			track++;
@@ -128,12 +121,10 @@ void	sep_handling(t_shell *mini, char *input, int *i)
 	(*i) += len;
 }
 
-t_bool	tokenizer(t_shell *mini, char *input, int i)
+t_bool	tokenizer(t_shell *mini, char *input, int i, int len)
 {
-	int		len;
 	int		sep;
 
-	len = ft_strlen(input);
 	while (i < len)
 	{
 		if (is_wspace(input[i]))

@@ -6,12 +6,12 @@
 #    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/16 11:37:36 by aamraouy         ###   ########.fr        #
+#    Updated: 2025/05/19 10:39:19 by aamraouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra #-fsanitize=address
 RM		= @rm -f
 
 
@@ -30,7 +30,7 @@ LIBFT_SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 
 EXPENDER_SRC = expander.c env_copy.c utils.c ambiguous.c more_utils.c
 
-PARSER_SRC = parser.c free_stuff.c token_utils.c tokenizer.c
+PARSER_SRC = parser.c  token_utils.c tokenizer.c
 
 ENVP_SRC = envirement.c
 

@@ -6,22 +6,20 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/15 09:39:24 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 09:49:53 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-char	*check_dollar(char *value, t_env *env)
+char	*check_dollar(char *value, t_shell *mini)
 {
-	t_env	*tmp;
+	char	*str;
 
-	tmp = env;
-	while (tmp)
+	if ((ft_strcmp(value, "$") == 0) && mini->shel_pid)
 	{
-		if ((ft_strcmp(value, "$") == 0) && (ft_strcmp(tmp->key, "MANAGERPID") == 0))
-			return (tmp->value);
-		tmp = tmp->next_pt;
+		str = ft_itoa(mini->shel_pid);
+		return (str);
 	}
 	return (NULL);
 }

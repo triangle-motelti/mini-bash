@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:40:27 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/12 08:27:19 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 10:27:31 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@
 // 	// free(tokens);
 // }
 
-void	free_cmds(t_command *cmds)
-{
-	t_command	*cmd;
+// void	free_cmds(t_command *cmds)
+// {
+// 	t_command	*cmd;
 
-	while (cmds)
-	{
-		cmd = cmds->next;
-		// free_tokens(cmds->tokens);
-		free(cmds);
-		cmds = cmd;
-	}
-}
+// 	while (cmds)
+// 	{
+// 		cmd = cmds->next;
+// 		// free_tokens(cmds->tokens);
+// 		free(cmds);
+// 		cmds = cmd;
+// 	}
+// }
 
 void	freeing_array(char **fr)
 {

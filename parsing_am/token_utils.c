@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:29:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/17 11:15:42 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 11:22:18 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,70 @@ int	is_wspace(char input)
 void	keep_tracking(t_shell *mini, int j, int start, char *input)
 {
 	char	*word;
-	char	c;
-	int		i;
-	int		k;
+	// char	c;
+	// int		i;
+	// int		k;
 
-	word = malloc(j - start + 1);
-	if (!word)
-		return ;
-	i = start;
-	k = 0;
-	while (i < j)
-	{
-		c = input[i];
-		word[k] = c;
-		k++;
-		i++;
-	}
-	word[k] = '\0';
+	// word = malloc(j - start + 1);
+	// if (!word)
+	// 	return ;
+	// i = start;
+	// k = 0;
+	// while (i < j)
+	// {
+	// 	// c = input[i];
+	// 	word[k] = input[i];
+	// 	k++;
+	// 	i++;
+	// }
+	// word[k] = '\0';
+	word = ft_substr(input, start, j - start);
 	add_token(mini, word, WORD);
+}
+
+void	add_token(t_shell *mini, char *sep, int type)
+{
+	t_token	*new;
+
+	if (!sep)
+	{
+		free(sep);
+		return ;
+	}
+	new = ft_lstnew(sep, type);
+	if (!new)
+	{
+		free(sep);
+		return ;
+	}
+	ft_lstadd_back(&mini->tokens, new);
+}
+
+int	more_quote_handling(char *input, int *track, int sing_or_doub)
+{
+	if (sing_or_doub == 1)
+	{
+		(*track)++;
+		while (input[(*track)] && input[(*track)] != '\'')
+			(*track)++;
+		if (input[(*track)] != '\'')
+		{
+			printf("mini: unexpected EOF while looking for matching `''\n");
+			return (0);
+		}
+		(*track)++;
+	}
+	else if (sing_or_doub == 2)
+	{
+		(*track)++;
+		while (input[(*track)] && input[(*track)] != '"')
+			(*track)++;
+		if (input[(*track)] != '"')
+		{
+			printf("mini: unexpected EOF while looking for matching `\"'\n");
+			return (0);
+		}
+		(*track)++;
+	}
+	return (1);
 }

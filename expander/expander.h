@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/16 21:37:47 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 09:31:30 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 int	check_environements(char *value, t_shell *mini);
 
-char	*check_dollar(char *value, t_env *env);
+char	*check_dollar(char *value, t_shell *mini);
 
 t_bool	expander(t_shell *mini);
 // void	copy_env(t_shell *mini, char **env, int i);
