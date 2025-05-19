@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:46:13 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/16 19:42:16 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 14:00:29 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,45 +73,27 @@ static	char	*search_in_env_path(char *cmd, char **env_path)
 	return (NULL);
 }
 
-// char	*path_cmd(char *cmd, char *const *envp)
-// {
-// 	char	**env_path;
-// 	char	*cmd_path;
+char	*path_cmd(char *cmd, char *const *envp)
+{
+	char	*cmd_path;
+	char	**env_path;
 
-// 	if (ft_strchr(cmd, '/'))
-// 	{
-// 		if (access(cmd, X_OK) == 0)
-// 			return (ft_strdup(cmd));
-// 		return (NULL);
-// 	}
-// 	env_path = find_path(envp);
-// 	if (env_path)
-// 		return (search_in_env_path(cmd, env_path));
-// 	else
-// 	{
-// 		cmd_path = ft_strjoin("./", cmd);
-// 		if (access(cmd_path, X_OK) == 0)
-// 			return (cmd_path);
-// 		free(cmd_path);
-// 	}
-// 	return (NULL);
-// }
-
-char *path_cmd(char *cmd, char *const *envp) {
-    char **env_path = find_path(envp);
-    char *cmd_path;
-    if (ft_strchr(cmd, '/')) {
-        if (access(cmd, X_OK) == 0)
-            return ft_strdup(cmd);
-        return NULL;
-    }
-    if (env_path) {
-        cmd_path = search_in_env_path(cmd, env_path); // Frees env_path internally
-        return cmd_path;
-    }
-    cmd_path = ft_strjoin("./", cmd);
-    if (access(cmd_path, X_OK) == 0)
-        return cmd_path;
-    free(cmd_path); // Free on failure
-    return NULL;
+	if (ft_strchr(cmd, '/'))
+	{
+		if (access(cmd, X_OK) == 0)
+			return (ft_strdup(cmd));
+		return (NULL);
+	}
+	env_path = find_path(envp);
+	if (env_path)
+	{
+		cmd_path = search_in_env_path(cmd, env_path);
+		if (cmd_path)
+			return (cmd_path);
+	}
+	cmd_path = ft_strjoin("./", cmd);
+	if (access(cmd_path, X_OK) == 0)
+		return (cmd_path);
+	free(cmd_path);
+	return (NULL);
 }
