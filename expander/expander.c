@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 13:00:01 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/19 22:54:05 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ t_bool	expander(t_shell *mini)
 			new_value = expand_each_token(token->value, 0, 0, mini);
 		else
 			new_value = ft_strdup(token->value);
-		printf("value in expander is %s\n", new_value);
+		// printf("value in expander is %s\n", new_value);
 		if (token->quote == QUOTE && new_value)
 			rm_quotes(token);
 		if (new_value && ft_strcmp(new_value, token->value) != 0)

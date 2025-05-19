@@ -6,7 +6,7 @@
 /*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/17 21:09:16 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/19 22:39:51 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,24 @@ void	check_ambiguous_redirect(t_shell *mini)
 		if (token->flag == TRUNC || token->flag == APPEND || token->flag == INPUT)
 		{
 			next = token->next;
-			if (next && next->ambiguous == 1)
-			{
-				ft_putstr_fd("minishell: ", STDERR_FILENO);
-				ft_putstr_fd(next->value, STDERR_FILENO);
-				ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
-				mini->exit_status = 1;
-			}
+		// 	if (next && next->ambiguous == 1)
+		// 	{
+		// 		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		// 		ft_putstr_fd(next->valuebex, STDERR_FILENO);
+		// 		ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
+		// 		mini->exit_status = 1;
+		// 	}
+            if (next && next->ambiguous == 1)
+            {
+                ft_putstr_fd("minishell: ", STDERR_FILENO);
+                if (next->valuebex)
+                    ft_putstr_fd(next->valuebex, STDERR_FILENO);
+                else
+                    ft_putstr_fd("(null)", STDERR_FILENO);
+                ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
+                mini->exit_status = 1;
+                break;
+            }
 		}
 		token = token->next;
 	}
