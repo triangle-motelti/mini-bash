@@ -6,7 +6,7 @@
 /*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 17:13:23 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/18 14:01:46 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/20 18:02:23 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,27 +82,34 @@ void	path_execv(t_command *cmd, char **envp, char *path)
 // 	return ;
 // }
 
+
+
 void	path_check(t_shell *shell, char **envp, char **args)
 {
 	struct stat	st;
-
+	
 	(void)shell;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(args[0], STDERR_FILENO);
-	if (ft_strchr(args[0], '/') && stat(args[0], &st) == 0)
+	if (ft_strchr(args[0], '/'))
 	{
-		if (S_ISDIR(st.st_mode))
+		if (stat(args[0], &st) == 0)
 		{
-			ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
-			free_args(envp);
-			exit(126);
+			if (S_ISDIR(st.st_mode))
+			{
+				ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
+				free_args(envp);
+				exit(126);
+			}
 		}
 		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		free_args(envp);
-		exit(126);
+		exit(127);
 	}
-	ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
-	// ft_putstr_fd(": command not found\n", STDERR_FILENO);
-	free_args(envp);
-	exit(127);
+	else
+	{
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		free_args(envp);
+		exit(127);
+	}
 }
