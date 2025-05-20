@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:29:45 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/12 08:24:57 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/20 16:05:17 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ int	parse_and_add_variable(t_shell *mini, char *arg)
 	}
 	found = find_env_node(mini->env, key);
 	if (found)
+	{
 		ret = update_env_node(found, value);
+		free(key);
+	}
 	else
 		ret = append_env_node(mini, key, value);
 	return (free(value), ret);
