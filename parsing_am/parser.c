@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:34:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 15:58:53 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/20 11:01:20 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,19 +54,6 @@ t_bool	check_redirections(t_token *tokens)
 	return (TRUE);
 }
 
-// void	check_dollar(t_shell *mini)
-// {
-// 	t_token	*tmp;
-
-// 	tmp = mini->tokens;
-// 	//if found replace the type of node to VAR
-// 	// while (condition)
-// 	// {
-		
-// 	// }
-	
-// }
-
 t_bool	parser(t_shell *mini)
 {
 	t_token	*tmp;
@@ -90,9 +77,7 @@ t_bool	parser(t_shell *mini)
 	}
 	if (!mini->tokens)
 		return (FALSE);
-	if (!check_pipe(mini->tokens))
-		return (FALSE);
-	if (!check_redirections(mini->tokens))
+	if (!check_pipe(mini->tokens) || !check_redirections(mini->tokens))
 		return (FALSE);
 	return (TRUE);
 }

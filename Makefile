@@ -6,12 +6,12 @@
 #    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/19 11:50:48 by aamraouy         ###   ########.fr        #
+#    Updated: 2025/05/20 11:04:04 by aamraouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
 RM		= @rm -f
 
 

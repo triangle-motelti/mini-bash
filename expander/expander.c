@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 22:54:05 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/20 12:17:16 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,23 @@ char	*handle_dollar(char *new, int *j, char *value, int *i, t_shell *mini)
 	rep_value = NULL;
 	extracted_value = malloc(ft_strlen(value) + 1);
 	(*i)++;
-	if (value[*i] == '$')
+	while (value[*i])
+	{
+		if (is_limiter_expanders(value, *i) == FALSE)
+		{
+			if (*i >= 1 && value[*i] == '$' && value[*i - 1] == '$')
+				extracted_value[k++] = value[(*i)++];
+			break ;
+		}
 		extracted_value[k++] = value[(*i)++];
-	while (is_limiter_expanders(value, *i))
-		extracted_value[k++] = value[(*i)++];
+	}
 	extracted_value[k] = '\0';
 	rep_value = get_env_value(extracted_value, mini);
 	if (!rep_value)
 	{
 		free(extracted_value);
 		if (!new)
-		{
-			// free(value); // why freeing here is because when the value isn't expanded  it get replaced by null which means the first one get lost
 			return (NULL);
-		}
 		return (new);
 	}
 	len = ft_strlen(rep_value);
@@ -65,16 +68,17 @@ char	*handle_dquote(char *new, int *j, char *value, int *i, t_shell *mini)
 	while (value[*i] && value[(*i)] != quote)
 	{
 		if (value[*i] == '$')
-			new = handle_dollar(new, j, value, i, mini);
+		{
+			if (value[(*i) + 1] == quote || is_wspace(value[(*i) + 1]) || is_separator(value ,(*i) + 1))
+				append_character(&new, j, value[(*i)++]);
+			else
+				new = handle_dollar(new, j, value, i, mini);
+		}
 		else
 			append_character(&new, j, value[(*i)++]);
 	}
 	if (value[*i] == '"')
-	{
-		// printf("added\n");
-		// append_character(&new, j, value[*i]);
 		(*i)++;
-	}
 	return (new);
 }
 
@@ -82,7 +86,7 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 {
 	char	*new;
 	int		capacity;
-	int		start;
+	// int		start;
 
 	capacity = ft_strlen(token);
 	new = NULL;
@@ -90,13 +94,14 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 	{
 		if (token[i] == '\'')
 		{
-			i++;
-			start = i;
-			while (token[i] && token[i] != '\'')
-				i++;
-			append_str(&new, token, start, i, &j);
-			if (token[i])
-				i++;
+			single_quote(token, &i, &new, &j);
+			// i++;
+			// start = i;
+			// while (token[i] && token[i] != '\'')
+			// 	i++;
+			// append_str(&new, token, start, i, &j);
+			// if (token[i])
+			// 	i++;
 		}
 		else if (token[i] == '"')
 			new = handle_dquote(new, &j, token, &i, mini);

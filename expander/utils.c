@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 09:56:06 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/20 12:17:24 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,8 @@ char	*get_env_value(char *value, t_shell *mini)
 
 t_bool	is_limiter_expanders(char *value, int i)
 {
-	// if (i >= 2)
-	// {
-	// 	if ((value[i - 2] == '$') && (value[i - 1] == '$') && (i < 3 || value[i - 3] != '$'))
-	// 		return (FALSE);
-	// }
+	if (value[i] == '$')
+		return (FALSE);
 	if (i >= 1 && value[i] == '?' && value[i - 1] == '$')
 		return (TRUE);
 	if (i >= 1 && value[i - 1] == '?')

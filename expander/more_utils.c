@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 09:49:53 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/20 11:05:25 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,17 @@ char	*check_dollar(char *value, t_shell *mini)
 		return (str);
 	}
 	return (NULL);
+}
+
+void	single_quote(char *token, int *i, char **new, int *j)
+{
+	int	start;
+
+	(*i)++;
+	start = *i;
+	while (token[*i] && token[*i] != '\'')
+		(*i)++;
+	append_str(new, token, start, *i, j);
+	if (token[*i])
+		(*i)++;
 }

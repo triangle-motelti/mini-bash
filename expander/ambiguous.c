@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 11:55:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 12:22:49 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/20 10:59:16 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	check_environements(char *value, t_shell *mini)
 		start = ft_strrchr_advance(value, env->value);
 		if (start != -1)
 		{
-			// printf("environement is %s\n", env->value);
 			i = start;
 			while (value[i])
 			{
@@ -59,7 +58,6 @@ int	check_environements(char *value, t_shell *mini)
 					str = ft_substr(value, start, i - start);
 					if (ft_strcmp(str, env->value) == 0)
 					{
-						// printf("--------------envir is : %s, substracted value is %s, value is :%s\n", env->value, str, value);
 						free(str);
 						return (0);
 					}
