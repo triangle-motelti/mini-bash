@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/20 12:17:16 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/21 11:55:29 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,11 @@ char	*handle_dquote(char *new, int *j, char *value, int *i, t_shell *mini)
 	{
 		if (value[*i] == '$')
 		{
-			if (value[(*i) + 1] == quote || is_wspace(value[(*i) + 1]) || is_separator(value ,(*i) + 1))
+			if (value[(*i) + 1] == quote || is_wspace(value[(*i) + 1])
+				|| is_separator(value ,(*i) + 1)
+				|| (value[(*i) + 1] != '$' && value[(*i) + 1] != '?'
+				&& ft_isalnum(value[(*i) + 1]) == 0
+				&& value[(*i) + 1] != '_'))
 				append_character(&new, j, value[(*i)++]);
 			else
 				new = handle_dollar(new, j, value, i, mini);
@@ -86,30 +90,22 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 {
 	char	*new;
 	int		capacity;
-	// int		start;
 
 	capacity = ft_strlen(token);
 	new = NULL;
 	while (token[i])
 	{
 		if (token[i] == '\'')
-		{
 			single_quote(token, &i, &new, &j);
-			// i++;
-			// start = i;
-			// while (token[i] && token[i] != '\'')
-			// 	i++;
-			// append_str(&new, token, start, i, &j);
-			// if (token[i])
-			// 	i++;
-		}
 		else if (token[i] == '"')
 			new = handle_dquote(new, &j, token, &i, mini);
 		else if (token[i] == '$')
 		{
-			if (!token[i + 1])
+			if (!token[i + 1] || (token[i + 1] != '$' && token[i + 1] != '?'
+				&& ft_isalnum(token[i + 1]) == 0
+				&& token[i + 1] != '_'))
 				append_character(&new, &j, token[i++]);
-			if ((token[i]) && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
+			else if ((token[i]) && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
 				return (NULL);
 		}
 		else
