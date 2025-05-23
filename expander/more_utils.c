@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/20 11:05:25 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:55:03 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,61 @@ void	single_quote(char *token, int *i, char **new, int *j)
 	append_str(new, token, start, *i, j);
 	if (token[*i])
 		(*i)++;
+}
+
+void	fill_splited(char **splited, t_token *token)
+{
+	int	i;
+	t_token	*new;
+
+	i = 1;
+	while (splited[i])
+	{
+		new = ft_lstnew(splited[i], WORD);
+		if (!new)
+			return ;
+		new->next = token->next;
+		if (token->next)
+			token->next->prev = new;
+		token->next = new;
+		new->prev = token;
+		token = new;
+		i++;
+	}
+}
+
+void	invalid_or_not_expanded(char *newvalue, t_token *token)
+{
+	if (!newvalue)
+	{
+		free(token->value);
+		token->value = ft_strdup("");
+		token->ambiguous = 1;
+	}
+	else
+	{
+		free(token->value);
+		token->value = newvalue;
+	}
+}
+
+char	*check_for_limiters(char *value, int *i)
+{
+	char	*extracted_value;
+	int		k;
+
+	k = 0;
+	extracted_value = malloc(ft_strlen(value) + 1);
+	while (value[*i])
+	{
+		if (is_limiter_expanders(value, *i) == FALSE)
+		{
+			if (*i >= 1 && value[*i] == '$' && value[*i - 1] == '$')
+				extracted_value[k++] = value[(*i)++];
+			break ;
+		}
+		extracted_value[k++] = value[(*i)++];
+	}
+	extracted_value[k] = '\0';
+	return (extracted_value);
 }

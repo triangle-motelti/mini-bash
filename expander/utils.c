@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/20 12:17:24 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:54:37 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	split_in_case(t_token *token, t_shell *mini)
 {
 	char	**split;
 	int		pt;
-	int		i;
-	t_token	*new;
+	// int		i;
+	// t_token	*new;
 
-	pt = check_environements(token->value, mini);
+	pt = check_environements(token->value, mini, token);
 	if (pt == 0)
 		return ;
 	split = ft_split(token->value, token->value[pt]);
@@ -71,20 +71,21 @@ void	split_in_case(t_token *token, t_shell *mini)
 	}
 	free(token->value);
 	token->value = split[0];
-	i = 1;
-	while (split[i])
-	{
-		new = ft_lstnew(split[i], WORD);
-		if (!new)
-			return ;
-		new->next = token->next;
-		if (token->next)
-			token->next->prev = new;
-		token->next = new;
-		new->prev = token;
-		token = new;
-		i++;
-	}
+	// i = 1;
+	fill_splited(split, token);
+	// while (split[i])
+	// {
+	// 	new = ft_lstnew(split[i], WORD);
+	// 	if (!new)
+	// 		return ;
+	// 	new->next = token->next;
+	// 	if (token->next)
+	// 		token->next->prev = new;
+	// 	token->next = new;
+	// 	new->prev = token;
+	// 	token = new;
+	// 	i++;
+	// }
 	free(split);
 }
 
@@ -124,8 +125,6 @@ void	rm_quotes(t_token *token)
 	new_str[j] = '\0';
 	free(tmp_token->value);
 	tmp_token->value = new_str;
-	// new_str = NULL;
-	// free(new_str);
 }
 
 void	append_str(char **new, char *token, int start, int i, int *j)

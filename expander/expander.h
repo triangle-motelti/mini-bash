@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/20 11:05:42 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/23 12:56:34 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,17 @@
 #define EXPANDER_H
 #include "../minishell.h"
 
-int	check_environements(char *value, t_shell *mini);
+int	    check_environements(char *value, t_shell *mini, t_token *token);
 
 char	*check_dollar(char *value, t_shell *mini);
 
 t_bool	expander(t_shell *mini);
 // void	copy_env(t_shell *mini, char **env, int i);
 void	ambiguous_case(t_token *tokens, t_shell *mini);
+void	fill_splited(char **splited, t_token *token);
+char	*check_for_limiters(char *value, int *i);
+
+void	invalid_or_not_expanded(char *newvalue, t_token *token);
 
 void	single_quote(char *token, int *i, char **new, int *j);
 
