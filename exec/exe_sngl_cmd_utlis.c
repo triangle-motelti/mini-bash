@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exe_sngl_cmd_utlis.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 17:13:23 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/20 18:02:23 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/23 17:25:33 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,16 @@ void	path_check(t_shell *shell, char **envp, char **args)
 				free_args(envp);
 				exit(126);
 			}
+			if (access(args[0], X_OK) != 0)
+			{
+				ft_putstr_fd(": ", STDERR_FILENO);
+				ft_putstr_fd(strerror(errno), STDERR_FILENO);
+				ft_putstr_fd("\n", STDERR_FILENO);
+				free_args(envp);
+				exit(126);
+			}
 		}
-		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		ft_putstr_fd(": Noo such file or directory\n", STDERR_FILENO);
 		free_args(envp);
 		exit(127);
 	}
