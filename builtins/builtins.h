@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:48:11 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/29 14:42:17 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/23 18:18:30 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 int		is_builtin(char *cmd);
 
 void	echo(int ac, char **av);
-int		cd(int ac, char **args);
+// int		cd(int ac, char **args);
+int     cd(t_shell *shell, int ac, char **args);
 void	pwd(int ac);
 void	ft_exit(int ac, char **args);
 void	ft_env(t_shell *mini, int ac, char **av);

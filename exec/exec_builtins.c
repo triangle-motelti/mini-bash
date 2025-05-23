@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:44:01 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/03 18:53:32 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/23 18:19:32 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	exec_builtins(char **args, int ac, int exit_ac, t_shell *mini)
 	else if (ft_strncmp(args[0], "cd", 2) == 0)
 	{
 		if (args[1])
-			cd(ac, args);
+			cd(mini, ac, args);
 	}
 	else if (ft_strncmp(args[0], "echo", 4) == 0)
 		echo(ac, args);
