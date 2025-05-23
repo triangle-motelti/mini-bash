@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 22:54:44 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/23 12:21:55 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,13 @@ t_bool	parsing_and_expanding(t_shell *mini)
 	if (!parser(mini))
 	{
 		clear_tokens(&mini->tokens);
+		mini->exit_status = 1;
 		return (FALSE);
 	}
 	if (!expander(mini))
 	{
 		clear_tokens(&mini->tokens);
+		mini->exit_status = 1;
 		return (FALSE);
 	}
 	// rm_quotes(mini->tokens);
@@ -77,18 +79,17 @@ int	shell(t_shell *mini)
 	{
 		input = readline("minishell> ");
 		if (!input)
-			return (ft_putstr_fd("exit\n", STDERR_FILENO), 0);
+			return (ft_putstr_fd("exit\n", STDERR_FILENO), mini->exit_status);
 		add_history(input);
-		mini->exit_status = 0;
 		if (!tokenizer(mini, input, 0, ft_strlen(input)) || !parsing_and_expanding(mini))
 		{
 			free(input);
 			clear_tokens(&mini->tokens);
 			continue ;
 		}
-		check_ambiguous_redirect(mini);
-		if (mini->exit_status == 1)
+		if (check_ambiguous_redirect(mini))
 		{
+			mini->exit_status = 1;
 			free(input);
 			clear_tokens(&mini->tokens);
 			continue ;
@@ -100,7 +101,7 @@ int	shell(t_shell *mini)
 		clear_tokens(&mini->tokens);
 		free(input);
 	}
-	return (1);
+	return (mini->exit_status);
 }
 
 int main(int ac, char **av, char **envp)
@@ -110,6 +111,7 @@ int main(int ac, char **av, char **envp)
 	t_shell minishell;
 	memset(&minishell, 0, sizeof(t_shell));
 	minishell.shel_pid = getpid();
+	minishell.exit_status = 0;
 	// printf("pid is :%d\n", minishell.shel_pid);
 	minishell.env = build_env_list(&minishell, envp);
 	if (!minishell.env)
@@ -118,6 +120,6 @@ int main(int ac, char **av, char **envp)
 		return (1);
 	}
 	if (!shell(&minishell))
-		return (free_env_list(minishell.env), 1);
-	return (free_env_list(minishell.env), 0);
+		return (free_env_list(minishell.env), minishell.exit_status);
+	return (free_env_list(minishell.env), minishell.exit_status);
 }
