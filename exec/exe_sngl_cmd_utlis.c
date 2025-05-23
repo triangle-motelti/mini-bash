@@ -41,6 +41,8 @@ void	path_execv(t_command *cmd, char **envp, char *path)
 {
 	int	result;
 
+	if (ft_strcmp(cmd->args[0], "") == 0)
+		return ;
 	result = validate_path(path, cmd->args[0]);
 	if (result != 0)
 	{
