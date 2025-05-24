@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:29:45 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/20 16:05:17 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/24 12:20:10 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	extract_key_value(char *arg, char **key, char **value)
 	return (0);
 }
 
-static int	append_env_node(t_shell *mini, char *key, char *value)
+int	append_env_node(t_shell *mini, char *key, char *value)
 {
 	t_env	*new;
 	t_env	*cur;

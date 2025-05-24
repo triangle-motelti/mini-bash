@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:48:11 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/23 18:18:30 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/24 12:20:41 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ int		update_env_node(t_env *node, char *value);
 void	sort_env(char **env_arr);
 
 void	unset(t_shell *mini, int ac, char **args);
+
+int		append_env_node(t_shell *mini, char *key, char *value);
 
 #endif

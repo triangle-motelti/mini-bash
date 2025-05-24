@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/23 12:21:55 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/24 17:57:47 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,44 @@ int	shell(t_shell *mini)
 	return (mini->exit_status);
 }
 
+void	empty_env(t_shell *minishell)
+{
+	char	*pwd;
+	char	*pwd_key;
+	char	*shlvl_key;
+	char	*shlvl_value;
+	char	*path_key;
+	char	*path_value;
+
+	if (!find_env_node(minishell->env, "PWD"))
+	{
+		pwd = getcwd(NULL, 0);
+		if (pwd)
+		{
+			pwd_key = ft_strdup("PWD");
+			if (pwd_key)
+				append_env_node(minishell, pwd_key, pwd);
+			free(pwd);
+		}
+	}
+	if (!find_env_node(minishell->env, "SHLVL"))
+	{
+		shlvl_key = ft_strdup("SHLVL");
+		shlvl_value = ft_strdup("1");
+		if (shlvl_key && shlvl_value)
+			append_env_node(minishell, shlvl_key, shlvl_value);
+		free(shlvl_value);
+	}
+	if (!find_env_node(minishell->env, "PATH"))
+	{
+		path_key = ft_strdup("PATH");
+		path_value = ft_strdup("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+		if (path_key && path_value)
+			append_env_node(minishell, path_key, path_value);
+		free(path_value);
+	}
+}
+
 int main(int ac, char **av, char **envp)
 {
 	(void)ac;
@@ -114,11 +152,9 @@ int main(int ac, char **av, char **envp)
 	minishell.exit_status = 0;
 	// printf("pid is :%d\n", minishell.shel_pid);
 	minishell.env = build_env_list(&minishell, envp);
-	if (!minishell.env)
-	{
-		ft_putstr_fd( "Failed to initialize environment\n", STDERR_FILENO);
-		return (1);
-	}
+	 if (!minishell.env)
+		empty_env(&minishell);
+	//init_env();
 	if (!shell(&minishell))
 		return (free_env_list(minishell.env), minishell.exit_status);
 	return (free_env_list(minishell.env), minishell.exit_status);
