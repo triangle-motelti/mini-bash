@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:40:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/12 08:25:51 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/24 18:21:29 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,15 @@ void	export_ac(t_shell *shell, char **arr, int i)
 		if (eq)
 		{
 			key_len = eq - arr[i];
-			printf("declare -x %.*s=\"%s\"\n", (int)key_len, arr[i], eq + 1);
+			if (*(eq + 1) == '\0')
+                printf("declare -x %.*s\n", (int)key_len, arr[i]);
+            else
+                printf("declare -x %.*s=\"%s\"\n", (int)key_len, arr[i], eq + 1);
 		}
 		else
 			printf("declare -x %s\n", arr[i]);
 		free(arr[i]);
 		i++;
-		// printf("declare -x %s\n", arr[i]);
-		// free(arr[i]);
-		// i++;
 	}
 	free(arr);
 	shell->exit_status = 0;
