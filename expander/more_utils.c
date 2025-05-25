@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/23 12:55:03 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:33:09 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-char	*check_dollar(char *value, t_shell *mini)
-{
-	char	*str;
+// char	*check_dollar(char *value, t_shell *mini)
+// {
+// 	char	*str;
 
-	if ((ft_strcmp(value, "$") == 0) && mini->shel_pid)
-	{
-		str = ft_itoa(mini->shel_pid);
-		return (str);
-	}
-	return (NULL);
-}
+// 	if ((ft_strcmp(value, "$") == 0) && mini->shel_pid)
+// 	{
+// 		str = ft_itoa(mini->shel_pid);
+// 		return (str);
+// 	}
+// 	return (NULL);
+// }
 
 void	single_quote(char *token, int *i, char **new, int *j)
 {

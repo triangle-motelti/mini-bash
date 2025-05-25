@@ -6,13 +6,13 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:29:45 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/24 12:20:10 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:03:01 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static int	is_valid_key(const char *key)
+int	is_valid_key(const char *key)
 {
 	int	i;
 
@@ -30,28 +30,15 @@ static int	is_valid_key(const char *key)
 	return (1);
 }
 
-static int	extract_key_value(char *arg, char **key, char **value)
+static int	extract_key_value(char *arg, char **key, char **value, int *is_append)
 {
 	char	*eq;
 
 	eq = ft_strchr(arg, '=');
 	if (eq)
-	{
-		*key = ft_strndup(arg, eq - arg);
-		if (!*key)
-			return (1);
-		*value = ft_strdup(eq + 1);
-		if (!*value)
-			return (free(*key), 1);
-	}
+		return handle_with_equal_sign(arg, eq, key, value, is_append);
 	else
-	{
-		*key = ft_strdup(arg);
-		if (!*key)
-			return (1);
-		*value = NULL;
-	}
-	return (0);
+		return handle_without_equal_sign(arg, key, value, is_append);
 }
 
 int	append_env_node(t_shell *mini, char *key, char *value)
@@ -82,31 +69,28 @@ int	append_env_node(t_shell *mini, char *key, char *value)
 	return (0);
 }
 
+static int	update_or_append_env(t_shell *mini, char *key, char *value, int is_append)
+{
+	t_env	*found;
+
+	found = find_env_node(mini->env, key);
+	if (is_append)
+		return handle_append_case(mini, found, key, value);
+	else
+		return handle_non_append_case(mini, found, key, value);
+}
+
 int	parse_and_add_variable(t_shell *mini, char *arg)
 {
 	char	*key;
 	char	*value;
-	t_env	*found;
-	int		ret;
+	int		is_append;
 
-	if (extract_key_value(arg, &key, &value))
+	if (extract_key_value(arg, &key, &value, &is_append))
 		return (1);
-	if (!is_valid_key(key))
-	{
-		ft_putstr_fd("minishell: export: `", 2);
-		ft_putstr_fd(arg, 2);
-		ft_putstr_fd("': not a valid identifier\n", 2);
-		return (free(key), free(value), 1);
-	}
-	found = find_env_node(mini->env, key);
-	if (found)
-	{
-		ret = update_env_node(found, value);
-		free(key);
-	}
-	else
-		ret = append_env_node(mini, key, value);
-	return (free(value), ret);
+	if (validate_export_key(arg, key, value, is_append))
+		return (1);
+	return (update_or_append_env(mini, key, value, is_append));
 }
 
 void	ft_export(t_shell *mini, int ac, char **av)

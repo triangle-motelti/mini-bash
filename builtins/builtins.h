@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:48:11 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/24 12:20:41 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/25 17:03:16 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,13 @@ void	sort_env(char **env_arr);
 void	unset(t_shell *mini, int ac, char **args);
 
 int		append_env_node(t_shell *mini, char *key, char *value);
+
+int		is_valid_key(const char *key);
+
+int		handle_with_equal_sign(char *arg, char *eq, char **key, char **value, int *is_append);
+int		handle_without_equal_sign(char *arg, char **key, char **value, int *is_append);
+int		validate_export_key(char *arg, char *key, char *value, int is_append);
+int		handle_append_case(t_shell *mini, t_env *found, char *key, char *value);
+int		handle_non_append_case(t_shell *mini, t_env *found, char *key, char *value);
 
 #endif

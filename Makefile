@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
+#    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/24 18:04:13 by motelti          ###   ########.fr        #
+#    Updated: 2025/05/25 17:02:00 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,7 @@ EXEC_SRC = exec_single_cmd.c exec_builtins.c path.c exe_sngl_cmd_utlis.c
 PIPE_SRC = pipe.c pipe_utils.c
 
 BUILTINS_SRC = cd.c echo.c exit.c pwd.c export.c env.c builtin.c  export_utils.c \
-			unset.c
+			unset.c export_helpers.c
 
 MAINSHELL_SRC = main.c
 

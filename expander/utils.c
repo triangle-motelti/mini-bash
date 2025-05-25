@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/23 12:54:37 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/25 16:33:46 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_env_value(char *value, t_shell *mini)
 {
 	t_env	*tmp_env;
 	char	*state;
-	char	*pid_manager;
+	// char	*pid_manager;
 
 	if (!value || !value[0])
 		return (NULL);
@@ -26,8 +26,8 @@ char	*get_env_value(char *value, t_shell *mini)
 		state = ft_itoa(mini->exit_status);
 		return (state);
 	}
-	if ((pid_manager = check_dollar(value, mini)) != NULL)
-		return (pid_manager);
+	// if ((pid_manager = check_dollar(value, mini)) != NULL)
+	// 	return (pid_manager);
 	while (tmp_env)
 	{
 		if (ft_strcmp(value, tmp_env->key) == 0)
