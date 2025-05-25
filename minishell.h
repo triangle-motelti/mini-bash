@@ -6,7 +6,7 @@
 /*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:05:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/24 18:04:32 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/25 14:09:06 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ typedef struct	s_redir
 
 typedef struct s_command
 {
-	char				**args;
-	t_redir				*redirs;
+	char			**args;
+	t_redir			*redirs;
 	struct s_command	*next;
 	struct s_commands	*prev;
 } t_command;
@@ -108,8 +108,7 @@ typedef struct	s_minishell
 	t_command	*cmds;
 	t_env		*env;
 	t_token		*tokens;
-	pid_t		shel_pid;
-	int			exit_status;
+	int		exit_status;
 }	t_shell;
 
 #include "helpers/libft.h"

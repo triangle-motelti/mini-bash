@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/24 17:57:47 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/25 14:05:19 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,10 @@ int main(int ac, char **av, char **envp)
 	(void)av;
 	t_shell minishell;
 	memset(&minishell, 0, sizeof(t_shell));
-	minishell.shel_pid = getpid();
 	minishell.exit_status = 0;
-	// printf("pid is :%d\n", minishell.shel_pid);
 	minishell.env = build_env_list(&minishell, envp);
 	 if (!minishell.env)
 		empty_env(&minishell);
-	//init_env();
 	if (!shell(&minishell))
 		return (free_env_list(minishell.env), minishell.exit_status);
 	return (free_env_list(minishell.env), minishell.exit_status);
