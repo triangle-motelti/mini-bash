@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/25 16:33:46 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/25 23:07:45 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ char	*get_env_value(char *value, t_shell *mini)
 {
 	t_env	*tmp_env;
 	char	*state;
-	// char	*pid_manager;
 
 	if (!value || !value[0])
 		return (NULL);
@@ -26,8 +25,6 @@ char	*get_env_value(char *value, t_shell *mini)
 		state = ft_itoa(mini->exit_status);
 		return (state);
 	}
-	// if ((pid_manager = check_dollar(value, mini)) != NULL)
-	// 	return (pid_manager);
 	while (tmp_env)
 	{
 		if (ft_strcmp(value, tmp_env->key) == 0)
@@ -39,8 +36,8 @@ char	*get_env_value(char *value, t_shell *mini)
 
 t_bool	is_limiter_expanders(char *value, int i)
 {
-	if (value[i] == '$')
-		return (FALSE);
+	// if (value[i] == '$')
+	// 	return (TRUE);
 	if (i >= 1 && value[i] == '?' && value[i - 1] == '$')
 		return (TRUE);
 	if (i >= 1 && value[i - 1] == '?')
@@ -56,36 +53,24 @@ t_bool	is_limiter_expanders(char *value, int i)
 void	split_in_case(t_token *token, t_shell *mini)
 {
 	char	**split;
-	int		pt;
-	// int		i;
-	// t_token	*new;
 
-	pt = check_environements(token->value, mini, token);
-	if (pt == 0)
+	(void)mini;
+	// printf("the value is %s\n", ft_strchr(token->value, ' '));
+	if ((token->quote == QUOTE) || (ft_strchr(token->value, ' ') == NULL))
 		return ;
-	split = ft_split(token->value, token->value[pt]);
+	split = NULL;
+	if (token->quote == NQUOTE && (ft_strchr(token->value, ' ') != NULL))
+		split = ft_split(token->value, ' ');
 	if (!split || !split[1])
 	{
+		free(split[0]);
 		free(split);
 		return ;
 	}
+		// printf("split 0 is %s\n", split[0]);// the leak is occuring from export a=" ls" or a="la "
 	free(token->value);
 	token->value = split[0];
-	// i = 1;
 	fill_splited(split, token);
-	// while (split[i])
-	// {
-	// 	new = ft_lstnew(split[i], WORD);
-	// 	if (!new)
-	// 		return ;
-	// 	new->next = token->next;
-	// 	if (token->next)
-	// 		token->next->prev = new;
-	// 	token->next = new;
-	// 	new->prev = token;
-	// 	token = new;
-	// 	i++;
-	// }
 	free(split);
 }
 

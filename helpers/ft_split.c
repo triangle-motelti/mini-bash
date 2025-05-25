@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 18:39:56 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/16 17:46:41 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/25 23:40:06 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,42 @@
 
 static size_t	ft_countword(char const *s, char c)
 {
-	size_t	words;
 	size_t	i;
+	size_t	words;
+	int		index;
 
-	words = 0;
 	i = 0;
+	words = 0;
+	index = 0;
 	while (s[i])
 	{
-		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0'))
+		if (s[i] != c && index == 0)
+		{
+			index = 1;
 			words++;
+		}
+		else if (s[i] == c)
+			index = 0;
 		i++;
 	}
 	return (words);
 }
+// static size_t	ft_countword(char const *s, char c)
+// {
+// 	size_t	words;
+// 	size_t	i;
+
+// 	words = 0;
+// 	i = 0;
+// 	while (s[i])
+// 	{
+// 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0')
+// 			|| s[i] == c && (s[i + 1] != c ))
+// 			words++;
+// 		i++;
+// 	}
+// 	return (words);
+// }
 
 static char	*fill_with_words(char const *s, char c)
 {
@@ -66,7 +89,7 @@ char	**ft_split(char const *s, char c)
 
 	if (!s && !s[0])
 		return (NULL);
-	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));//there is two allocations , the **  and the arrays inside it
+	lst = (char **)malloc((ft_countword(s, c) + 1) * sizeof(char *));
 	if (!lst)
 		return (NULL);
 	i = 0;

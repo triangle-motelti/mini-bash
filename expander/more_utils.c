@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/25 16:33:09 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/25 19:16:44 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,15 @@
 
 // char	*check_dollar(char *value, t_shell *mini)
 // {
-// 	char	*str;
+// 	char	str[2];
+// 	char	*ds;
 
-// 	if ((ft_strcmp(value, "$") == 0) && mini->shel_pid)
+// 	(void)mini;
+// 	if ((ft_strcmp(value, "$") == 0))
 // 	{
-// 		str = ft_itoa(mini->shel_pid);
-// 		return (str);
+// 		// str = ft_itoa(mini->shel_pid);
+// 		ds = ft_strcpy(str, "$");
+// 		return (ds);
 // 	}
 // 	return (NULL);
 // }
@@ -73,23 +76,23 @@ void	invalid_or_not_expanded(char *newvalue, t_token *token)
 	}
 }
 
-char	*check_for_limiters(char *value, int *i)
-{
-	char	*extracted_value;
-	int		k;
+// char	*check_for_limiters(char *value, int *i)
+// {
+// 	char	*extracted_value;
+// 	int		k;
 
-	k = 0;
-	extracted_value = malloc(ft_strlen(value) + 1);
-	while (value[*i])
-	{
-		if (is_limiter_expanders(value, *i) == FALSE)
-		{
-			if (*i >= 1 && value[*i] == '$' && value[*i - 1] == '$')
-				extracted_value[k++] = value[(*i)++];
-			break ;
-		}
-		extracted_value[k++] = value[(*i)++];
-	}
-	extracted_value[k] = '\0';
-	return (extracted_value);
-}
+// 	k = 0;
+// 	extracted_value = malloc(ft_strlen(value) + 1);
+// 	while (value[*i])
+// 	{
+// 		if (is_limiter_expanders(value, *i) == FALSE)
+// 		{
+// 			if (*i >= 1 && value[*i] == '$' && value[*i - 1] == '$')
+// 				extracted_value[k++] = value[(*i)++];
+// 			break ;
+// 		}
+// 		extracted_value[k++] = value[(*i)++];
+// 	}
+// 	extracted_value[k] = '\0';
+// 	return (extracted_value);
+// }

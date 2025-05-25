@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/23 12:55:45 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/25 23:38:38 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,14 @@ char	*handle_dollar(char *new, int *j, char *value, int *i, t_shell *mini)
 	int		k;
 	int		len;
 
-	// k = 0;
+	k = 0;
 	rep_value = NULL;
-	// extracted_value = malloc(ft_strlen(value) + 1);
+	extracted_value = malloc(ft_strlen(value) + 1);
 	(*i)++;
-	extracted_value = check_for_limiters(value, i);
-	// while (value[*i])
-	// {
-	// 	if (is_limiter_expanders(value, *i) == FALSE)
-	// 	{
-	// 		if (*i >= 1 && value[*i] == '$' && value[*i - 1] == '$')
-	// 			extracted_value[k++] = value[(*i)++];
-	// 		break ;
-	// 	}
-	// 	extracted_value[k++] = value[(*i)++];
-	// }
-	// extracted_value[k] = '\0';
+	// extracted_value = check_for_limiters(value, i);
+	while (is_limiter_expanders(value, *i) != FALSE)
+		extracted_value[k++] = value[(*i)++];
+	extracted_value[k] = '\0';
 	rep_value = get_env_value(extracted_value, mini);
 	if (!rep_value)
 	{
@@ -72,7 +64,7 @@ char	*handle_dquote(char *new, int *j, char *value, int *i, t_shell *mini)
 		{
 			if (value[(*i) + 1] == quote || is_wspace(value[(*i) + 1])
 				|| is_separator(value ,(*i) + 1)
-				|| (value[(*i) + 1] != '$' && value[(*i) + 1] != '?'
+				|| (value[(*i) + 1] == '$' && value[(*i) + 1] != '?'
 				&& ft_isalnum(value[(*i) + 1]) == 0
 				&& value[(*i) + 1] != '_'))
 				append_character(&new, j, value[(*i)++]);
@@ -102,7 +94,7 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 			new = handle_dquote(new, &j, token, &i, mini);
 		else if (token[i] == '$')
 		{
-			if (!token[i + 1] || (token[i + 1] != '$' && token[i + 1] != '?'
+			if (!token[i + 1] || (token[i + 1] == '$' && token[i + 1] != '?'
 				&& ft_isalnum(token[i + 1]) == 0
 				&& token[i + 1] != '_'))
 				append_character(&new, &j, token[i++]);
@@ -131,7 +123,6 @@ t_bool	expander(t_shell *mini)
 			new_value = ft_strdup(token->value);
 		if (token->quote == QUOTE && new_value)
 			rm_quotes(token);
-		// printf("new value is :%s\n", new_value);
 		if (new_value && ft_strcmp(new_value, token->value) != 0)
 		{
 			free(token->value);
@@ -140,19 +131,7 @@ t_bool	expander(t_shell *mini)
 			split_in_case(token, mini);
 		}
 		else
-		{
 			invalid_or_not_expanded(new_value, token);
-			// if (!new_value)
-			// {
-			// 	free(token->value);
-			// 	token->value = ft_strdup("");
-			// 	token->ambiguous = 1;
-			// 	token = token->next;
-			// 	continue ;
-			// }
-			// free(token->value);
-			// token->value = new_value;
-		}
 		token = token->next;
 	}
 	return (TRUE);
