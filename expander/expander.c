@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 14:33:11 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/26 17:12:24 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,14 +62,11 @@ char	*handle_dquote(char *new, char *value, t_shell *mini)
 	{
 		if (value[mini->i] == '$')
 		{
-			if ((value[mini->i + 1] == quote || is_wspace(value[mini->i + 1])
-				|| is_separator(value ,mini->i + 1)
-				|| value[mini->i + 1] == '$')
-				&& ft_isalnum(value[mini->i + 1]) == 0
-				&& value[mini->i + 1] != '_' && value[mini->i + 1] != '?')
-				append_character(&new, &(mini->j), value[(mini->i)++]);
-			else
+			if (value[(mini->i) + 1] == '_' || value[(mini->i) + 1] == '?'
+				|| ft_isalnum(value[(mini->i) + 1]))
 				new = handle_dollar(new, value, mini);
+			else
+				append_character(&new, &(mini->j), value[(mini->i)++]);	
 		}
 		else
 			append_character(&new, &(mini->j), value[(mini->i)++]);
@@ -128,11 +125,14 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 			new = handle_dquote(new, token, mini);
 		else if (token[mini->i] == '$')
 		{
-			if (!token[(mini->i) + 1] || (token[(mini->i) + 1] == '$'
-			|| ((token[(mini->i) + 1] != '?') && !ft_isalnum(token[(mini->i) + 1]) && token[mini->i + 1] != '_')))
+			if (token[(mini->i) + 1] == '\'' || token[(mini->i) + 1] == '"')
+			{
+				(mini->i)++;
+				continue ;
+			}
+			else if (token[(mini->i) + 1] != '_' && !ft_isalnum(token[(mini->i) + 1]) && token[(mini->i) + 1] != '?')
 				append_character(&new, &(mini->j), token[(mini->i)++]);
-			else if ((token[mini->i])
-				&& !(new = handle_dollar(new, token, mini)) && mini->i == capacity)
+			else if ((token[mini->i]) && !(new = handle_dollar(new, token, mini)) && mini->i == capacity)
 				return (NULL);
 		}
 		else
