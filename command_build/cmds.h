@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:01:55 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/03 11:21:24 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/26 12:41:21 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int			add_arg(char ***args, int *count, char *value);
 int			handl_word(t_token *tok, char ***args, int *count);
 int			init_build(t_token *tokens, t_build_info *info);
 t_command	*finish_build(t_build_info *info);
-t_command	*build_commands(t_token *tokens);
+// t_command	*build_commands(t_token *tokens);
+t_command *build_commands(t_token *tokens, t_shell *shell);
 
 #endif

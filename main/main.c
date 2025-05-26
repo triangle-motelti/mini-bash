@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/25 14:05:19 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/26 12:40:38 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int	shell(t_shell *mini)
 			clear_tokens(&mini->tokens);
 			continue ;
 		}
-		cmds = build_commands(mini->tokens);
+		cmds = build_commands(mini->tokens, mini);
 		if (cmds)
 			execute_commands(mini, cmds);
 		free_commands(cmds);

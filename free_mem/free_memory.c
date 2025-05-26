@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:26:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/19 21:58:49 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/26 12:34:13 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,22 +50,6 @@ void	free_commands(t_command *cmds)
 		cmds = next;
 	}
 }
-
-// void	free_tokens(t_token *tokens)
-// {
-// 	t_token	*tmp;
-// 	t_token	*current;
-
-// 	current = tokens;
-// 	while (current)
-// 	{
-// 		tmp = current;
-// 		current = current->next;
-// 		free(tmp->value);
-// 		free(tmp);
-// 	}
-// 	tokens = NULL;
-// }
 
 void	free_tokens(t_token *tokens)
 {
