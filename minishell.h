@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:05:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/25 14:09:06 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/26 11:56:25 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,12 @@ typedef struct	s_redir
 	struct s_redir	*next;
 } t_redir;
 
+// typedef struct s_each_token
+// {
+// 	int	*i;
+// 	int	*j;
+// }	each_token;
+
 // typedef struct s_commands
 // {
 // 	char	*command;
@@ -108,7 +114,9 @@ typedef struct	s_minishell
 	t_command	*cmds;
 	t_env		*env;
 	t_token		*tokens;
-	int		exit_status;
+	int			i;
+	int			j;
+	int			exit_status;
 }	t_shell;
 
 #include "helpers/libft.h"

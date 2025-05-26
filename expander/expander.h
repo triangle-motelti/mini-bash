@@ -6,37 +6,29 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/23 12:56:34 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/26 12:24:40 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXPANDER_H
-#define EXPANDER_H
-#include "../minishell.h"
+# define EXPANDER_H
+# include "../minishell.h"
 
-int	    check_environements(char *value, t_shell *mini, t_token *token);
-
-char	*check_dollar(char *value, t_shell *mini);
-
+// int	    check_environements(char *value, t_shell *mini, t_token *token);
+// char	*check_dollar(char *value, t_shell *mini);
 t_bool	expander(t_shell *mini);
 // void	copy_env(t_shell *mini, char **env, int i);
 void	ambiguous_case(t_token *tokens, t_shell *mini);
 void	fill_splited(char **splited, t_token *token);
-char	*check_for_limiters(char *value, int *i);
-
+// char	*check_for_limiters(char *value, int *i);
 void	invalid_or_not_expanded(char *newvalue, t_token *token);
-
-void	single_quote(char *token, int *i, char **new, int *j);
-
+void	single_quote(char *token, char **new, t_shell *mini);
 char	*get_env_value(char *value, t_shell *mini);
-
 t_env	*build_env_list(t_shell *shell, char **envp);
 void	split_in_case(t_token *token, t_shell *mini);
 t_bool	is_limiter_expanders(char *value, int i);
 void	rm_quotes(t_token *token);
-void	append_str(char **new, char *token, int start, int i, int *j);
-
-
-char    *expand_each_token(char *token, int i, int j, t_shell *mini);
+void	append_str(char **new, char *token, int start, t_shell *mini);
+char	*expand_each_token(char *token, int i, int j, t_shell *mini);
 
 #endif

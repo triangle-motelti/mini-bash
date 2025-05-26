@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/25 19:16:44 by kali             ###   ########.fr       */
+/*   Updated: 2025/05/26 12:18:48 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,17 @@
 // 	return (NULL);
 // }
 
-void	single_quote(char *token, int *i, char **new, int *j)
+void	single_quote(char *token, char **new, t_shell *mini)
 {
 	int	start;
 
-	(*i)++;
-	start = *i;
-	while (token[*i] && token[*i] != '\'')
-		(*i)++;
-	append_str(new, token, start, *i, j);
-	if (token[*i])
-		(*i)++;
+	(mini->i)++;
+	start = mini->i;
+	while (token[mini->i] && token[mini->i] != '\'')
+		(mini->i)++;
+	append_str(new, token, start, mini);
+	if (token[mini->i])
+		(mini->i)++;
 }
 
 void	fill_splited(char **splited, t_token *token)

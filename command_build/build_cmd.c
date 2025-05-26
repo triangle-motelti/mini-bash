@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:09:18 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/26 12:46:00 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/26 14:35:36 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	handle_redirection(t_command *cmd, t_redir **last, t_token **tok_ptr, t_shel
 	flag = tok->flag;
 	next_tok = tok->next;
 	if (!next_tok || next_tok->flag != WORD)
-		return (shell->exit_status = 0, 1);
+		return (printf("syntax error near unexpected toke\n"), shell->exit_status = 0, 1);
 	delimiter = extract_delimiter(next_tok, &expand_vars);
 	if (!delimiter)
 		return (1);

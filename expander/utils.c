@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/25 23:07:45 by kali             ###   ########.fr       */
+/*   Updated: 2025/05/26 12:20:12 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,13 +112,13 @@ void	rm_quotes(t_token *token)
 	tmp_token->value = new_str;
 }
 
-void	append_str(char **new, char *token, int start, int i, int *j)
+void	append_str(char **new, char *token, int start, t_shell *mini)
 {
-	(*new) = ft_realloc(*new, *j + 1, ((*j) + i - start) + 1);
-	while (start < i)
+	(*new) = ft_realloc(*new, mini->j + 1, (mini->j + mini->i - start) + 1);
+	while (start < mini->i)
 	{
-		(*new)[*j] = token[start];
+		(*new)[mini->j] = token[start];
 		start++;
-		(*j)++;
+		(mini->j)++;
 	}
 }
