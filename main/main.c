@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 14:39:06 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:42:21 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	free_env_list(t_env *env)
 
 t_bool	parsing_and_expanding(t_shell *mini)
 {
-	// t_token *tmp;
-
 	if (!parser(mini))
 	{
 		clear_tokens(&mini->tokens);
@@ -42,13 +40,6 @@ t_bool	parsing_and_expanding(t_shell *mini)
 		mini->exit_status = 1;
 		return (FALSE);
 	}
-	// rm_quotes(mini->tokens);
-	// tmp = mini->tokens;
-	// while (tmp)
-	// {
-	// 	printf("tmp value is : %s and ambiguous is%d\n", tmp->value, tmp->ambiguous);
-	// 	tmp = tmp->next;
-	// }
 	return (TRUE);
 }
 
@@ -75,11 +66,17 @@ int	shell(t_shell *mini)
 	char		*input;
 	t_command	*cmds;
 
+	setup_signals();
 	while (1)
 	{
 		input = readline("minishell> ");
 		if (!input)
 			return (ft_putstr_fd("exit\n", STDERR_FILENO), mini->exit_status);
+		if (g_received_signal == SIGINT)
+		{
+			free(input);
+			continue;
+		}
 		add_history(input);
 		if (!tokenizer(mini, input, 0, ft_strlen(input)) || !parsing_and_expanding(mini))
 		{
@@ -97,6 +94,12 @@ int	shell(t_shell *mini)
 		cmds = build_commands(mini->tokens, mini);
 		if (cmds)
 			execute_commands(mini, cmds);
+		if (g_received_signal)
+		{
+			g_received_signal = 0;
+			rl_on_new_line();
+			rl_redisplay();
+		}
 		free_commands(cmds);
 		clear_tokens(&mini->tokens);
 		free(input);

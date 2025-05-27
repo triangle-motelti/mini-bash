@@ -6,7 +6,7 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/25 17:02:00 by motelti          ###   ########.fr        #
+#    Updated: 2025/05/27 10:44:14 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ PARSER_SRC = parser.c  token_utils.c tokenizer.c
 
 ENVP_SRC = envirement.c
 
+SIG_SRC = signal.c
+
 FREE_MEM_SRC = free_memory.c
 
 REDIREC_SRC = redirections.c redir_utils.c herdoc.c
@@ -54,6 +56,7 @@ SRC		= $(addprefix ./helpers/, $(LIBFT_SRC)) \
 		$(addprefix ./free_mem/, $(FREE_MEM_SRC)) \
 		$(addprefix ./exec/, $(EXEC_SRC)) \
 		$(addprefix ./envirement/, $(ENVP_SRC)) \
+		$(addprefix ./signals/, $(SIG_SRC)) \
 		$(addprefix ./redirections/, $(REDIREC_SRC)) \
 		$(addprefix ./pipe/, $(PIPE_SRC)) \
 		$(addprefix ./builtins/, $(BUILTINS_SRC)) \

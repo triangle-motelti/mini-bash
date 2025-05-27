@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:05:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 11:56:25 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/27 10:40:26 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 #include <errno.h>
 #include <ctype.h>
 #include <fcntl.h>
+#include <signal.h>
 #include <readline/readline.h>
 #include <sys/wait.h>
 
@@ -125,6 +126,7 @@ typedef struct	s_minishell
 #include "envirement/envirement.h"
 #include "redirections/redirection.h"
 #include "exec/execution.h"
+#include "signals/signal.h"
 #include "builtins/builtins.h"
 #include "pipe/pipe.h"
 #include "expander/expander.h"
