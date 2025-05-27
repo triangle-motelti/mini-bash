@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:00:06 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/27 10:43:10 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/27 21:48:42 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	execute_single_command(t_shell *shell, t_command *cmd)
 				write(STDOUT_FILENO, "\n", 1);
 			else if (sig == SIGQUIT)
 				write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-			shell->exit_status = 130;
+			shell->exit_status = WTERMSIG(status);
 		}
 	}
 }
