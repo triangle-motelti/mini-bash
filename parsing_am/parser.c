@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:34:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/20 11:01:20 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:13:30 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,10 @@ t_bool	check_redirections(t_token *tokens)
 	tmp = tokens;
 	while (tmp)
 	{
-		if ((tmp->flag == HEREDOC && !tmp->next) || (tmp->flag == TRUNC && !tmp->next) 
-			|| (tmp->flag == INPUT && !tmp->next) || (tmp->flag == APPEND && !tmp->next))
+		if ((tmp->flag == HEREDOC && !tmp->next)
+			|| (tmp->flag == TRUNC && !tmp->next)
+			|| (tmp->flag == INPUT && !tmp->next)
+			|| (tmp->flag == APPEND && !tmp->next))
 		{
 			printf("bash: syntax error near unexpected token `newline'\n");
 			return (FALSE);

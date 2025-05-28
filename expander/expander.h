@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 12:24:40 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:41:03 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 # define EXPANDER_H
 # include "../minishell.h"
 
+char	*norm_for_dollar_hand(char *value, t_shell *mini);
 // int	    check_environements(char *value, t_shell *mini, t_token *token);
 // char	*check_dollar(char *value, t_shell *mini);
+void	append_character(char **new, int *i, char c);
+char	*handle_dollar(char *new, char *value, t_shell *mini);
+t_bool	dollar_expansion(char *token, t_shell *mini, char **new, int cap);
 t_bool	expander(t_shell *mini);
 // void	copy_env(t_shell *mini, char **env, int i);
 void	ambiguous_case(t_token *tokens, t_shell *mini);

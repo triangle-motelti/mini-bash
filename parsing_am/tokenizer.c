@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:35:58 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 10:18:29 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:12:54 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,23 @@
 
 int	handle_word(t_shell *mini, char *input, int i)
 {
-	int start;
-	int	track;
+	int		start;
+	int		track;
 	char	quote;
 
 	track = i;
 	start = i;
-	while ((quote = input[track]) != '\0' && !is_wspace(input[track]) && !is_separator(input, track))
+	while (input[track] != '\0' && !is_wspace(input[track])
+		&& !is_separator(input, track))
 	{
+		quote = input[track];
 		if (quote == '\'')
 		{
-			// track++;
-			// while (input[track] && input[track] != '\'')
-			// 	track++;
-			// if (input[track] != '\'')
-			// {
-			// 	printf("mini: unexpected EOF while looking for matching `''\n");
-			// 	return (0);
-			// }
-			// track++;
 			if (!more_quote_handling(input, &track, 1))
 				return (0);
 		}
-		else if(quote == '"')
+		else if (quote == '"')
 		{
-			// track++;
-			// while (input[track] && input[track] != '"')
-			// 	track++;
-			// if (input[track] != '"')
-			// {
-			// 	printf("mini: unexpected EOF while looking for matching `\"'\n");
-			// 	return (0);
-			// }
-			// track++;
 			if (!more_quote_handling(input, &track, 2))
 				return (0);
 		}
@@ -77,10 +61,9 @@ int	set_separator(char *c, int i)
 		return (0);
 }
 
-int	handle_quotes(t_shell *mini, char *input, int *i)
+int	handle_quotes(t_shell *mini, char *input, int *i, int start)
 {
 	char	quote;
-	int		start;
 
 	start = (*i);
 	while (input[*i])
@@ -101,7 +84,7 @@ int	handle_quotes(t_shell *mini, char *input, int *i)
 		else if (!is_wspace(input[*i]) && !is_separator(input, *i))
 			(*i)++;
 		else
-			break;
+			break ;
 	}
 	keep_tracking(mini, *i, start, input);
 	return (1);
@@ -109,15 +92,14 @@ int	handle_quotes(t_shell *mini, char *input, int *i)
 
 void	sep_handling(t_shell *mini, char *input, int *i)
 {
-	int	len;
-	int	type;
+	int		len;
+	int		type;
 	char	*sep;
 
 	len = is_separator(input, *i);
 	sep = ft_substr(input, *i, len);
 	type = set_separator(input, *i);
 	add_token(mini, sep, type);
-	// free(sep);
 	(*i) += len;
 }
 
@@ -130,14 +112,14 @@ t_bool	tokenizer(t_shell *mini, char *input, int i, int len)
 		if (is_wspace(input[i]))
 		{
 			i++;
-			continue;
+			continue ;
 		}
 		sep = is_separator(input, i);
 		if (sep != 0)
 			sep_handling(mini, input, &i);
 		else if (input[i] == '"' || input[i] == '\'')
 		{
-			if (!handle_quotes(mini, input, &i))
+			if (!handle_quotes(mini, input, &i, 0))
 				return (FALSE);
 		}
 		else

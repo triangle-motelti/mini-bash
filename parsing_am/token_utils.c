@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:29:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 12:09:09 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:06:37 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	is_separator(char *input, int i)
 {
-	if ((input[i] == '>' && input[i + 1] == '>')|| (input[i] == '<' && input[i + 1] == '<'))
+	if ((input[i] == '>' && input[i + 1] == '>')
+		|| (input[i] == '<' && input[i + 1] == '<'))
 		return (2);
 	else if (input[i] == '|' || input[i] == '>' || input[i] == '<')
 		return (1);
@@ -24,7 +25,7 @@ int	is_separator(char *input, int i)
 
 int	is_wspace(char input)
 {
-	if ((input >= 9 && input <= 13 )| (input == 32))
+	if ((input >= 9 && input <= 13) || (input == 32))
 		return (1);
 	return (0);
 }
@@ -32,23 +33,7 @@ int	is_wspace(char input)
 void	keep_tracking(t_shell *mini, int j, int start, char *input)
 {
 	char	*word;
-	// char	c;
-	// int		i;
-	// int		k;
 
-	// word = malloc(j - start + 1);
-	// if (!word)
-	// 	return ;
-	// i = start;
-	// k = 0;
-	// while (i < j)
-	// {
-	// 	// c = input[i];
-	// 	word[k] = input[i];
-	// 	k++;
-	// 	i++;
-	// }
-	// word[k] = '\0';
 	word = ft_substr(input, start, j - start);
 	add_token(mini, word, WORD);
 }

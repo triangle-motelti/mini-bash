@@ -6,26 +6,22 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 12:18:48 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 19:54:04 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-// char	*check_dollar(char *value, t_shell *mini)
-// {
-// 	char	str[2];
-// 	char	*ds;
-
-// 	(void)mini;
-// 	if ((ft_strcmp(value, "$") == 0))
-// 	{
-// 		// str = ft_itoa(mini->shel_pid);
-// 		ds = ft_strcpy(str, "$");
-// 		return (ds);
-// 	}
-// 	return (NULL);
-// }
+void	append_str(char **new, char *token, int start, t_shell *mini)
+{
+	(*new) = ft_realloc(*new, mini->j + 1, (mini->j + mini->i - start) + 1);
+	while (start < mini->i)
+	{
+		(*new)[mini->j] = token[start];
+		start++;
+		(mini->j)++;
+	}
+}
 
 void	single_quote(char *token, char **new, t_shell *mini)
 {
@@ -42,7 +38,7 @@ void	single_quote(char *token, char **new, t_shell *mini)
 
 void	fill_splited(char **splited, t_token *token)
 {
-	int	i;
+	int		i;
 	t_token	*new;
 
 	i = 1;
@@ -76,23 +72,16 @@ void	invalid_or_not_expanded(char *newvalue, t_token *token)
 	}
 }
 
-// char	*check_for_limiters(char *value, int *i)
-// {
-// 	char	*extracted_value;
-// 	int		k;
-
-// 	k = 0;
-// 	extracted_value = malloc(ft_strlen(value) + 1);
-// 	while (value[*i])
-// 	{
-// 		if (is_limiter_expanders(value, *i) == FALSE)
-// 		{
-// 			if (*i >= 1 && value[*i] == '$' && value[*i - 1] == '$')
-// 				extracted_value[k++] = value[(*i)++];
-// 			break ;
-// 		}
-// 		extracted_value[k++] = value[(*i)++];
-// 	}
-// 	extracted_value[k] = '\0';
-// 	return (extracted_value);
-// }
+t_bool	dollar_expansion(char *token, t_shell *mini, char **new, int cap)
+{
+	if (token[(mini->i) + 1] == '\'' || token[(mini->i) + 1] == '"')
+		(mini->i)++;
+	else if (token[(mini->i) + 1] != '_'
+		&& !ft_isalnum(token[(mini->i) + 1])
+		&& token[(mini->i) + 1] != '?')
+		append_character(new, &(mini->j), token[(mini->i)++]);
+	else if ((token[mini->i])
+		&& !(*new = handle_dollar(*new, token, mini)) && mini->i == cap)
+		return (FALSE);
+	return (TRUE);
+}

@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 12:20:12 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:03:57 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ char	*get_env_value(char *value, t_shell *mini)
 
 t_bool	is_limiter_expanders(char *value, int i)
 {
-	// if (value[i] == '$')
-	// 	return (TRUE);
 	if (i >= 1 && value[i] == '?' && value[i - 1] == '$')
 		return (TRUE);
 	if (i >= 1 && value[i - 1] == '?')
@@ -49,13 +47,11 @@ t_bool	is_limiter_expanders(char *value, int i)
 	return (FALSE);
 }
 
-
 void	split_in_case(t_token *token, t_shell *mini)
 {
 	char	**split;
 
 	(void)mini;
-	// printf("the value is %s\n", ft_strchr(token->value, ' '));
 	if ((token->quote == QUOTE) || (ft_strchr(token->value, ' ') == NULL))
 		return ;
 	split = NULL;
@@ -67,15 +63,19 @@ void	split_in_case(t_token *token, t_shell *mini)
 		free(split);
 		return ;
 	}
-		// printf("split 0 is %s\n", split[0]);// the leak is occuring from export a=" ls" or a="la "
 	free(token->value);
 	token->value = split[0];
 	fill_splited(split, token);
 	free(split);
 }
 
-void	pass_quote(char quote, char *value, char **new_str, int *j, int *i)
+void	pass_quote(t_token *tkn, char **new_str, int *j, int *i)
 {
+	char	*value;
+	char	quote;
+
+	value = tkn->value;
+	quote = tkn->value[*i];
 	(*i)++;
 	while (value[*i] && value[*i] != quote)
 	{
@@ -103,22 +103,11 @@ void	rm_quotes(t_token *token)
 	while (tmp_token->value[i])
 	{
 		if (tmp_token->value[i] == '\'' || tmp_token->value[i] == '"')
-			pass_quote(tmp_token->value[i], tmp_token->value, &new_str, &j, &i);
+			pass_quote(tmp_token, &new_str, &j, &i);
 		else
 			new_str[j++] = tmp_token->value[i++];
 	}
 	new_str[j] = '\0';
 	free(tmp_token->value);
 	tmp_token->value = new_str;
-}
-
-void	append_str(char **new, char *token, int start, t_shell *mini)
-{
-	(*new) = ft_realloc(*new, mini->j + 1, (mini->j + mini->i - start) + 1);
-	while (start < mini->i)
-	{
-		(*new)[mini->j] = token[start];
-		start++;
-		(mini->j)++;
-	}
 }

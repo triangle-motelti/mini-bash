@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 22:37:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/19 10:18:50 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:00:09 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		keep_tracking(t_shell *mini, int j, int start, char *input);
 int			is_wspace(char input);
 int			is_separator(char *c, int i);
 t_bool		tokenizer(t_shell *mini, char *input, int i, int len);
-int			handle_quotes(t_shell *mini, char *input, int *i);
+int			handle_quotes(t_shell *mini, char *input, int *i, int start);
 void		freeing_array(char **fr);
 void		add_token(t_shell *mini, char *sep, int type);
 void		free_tokens(t_token *tokens);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:06:25 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/01 21:08:07 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 20:14:19 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAIN_H
-#define MAIN_H
+# define MAIN_H
 
-#include "../minishell.h"
+# include "../minishell.h"
 
 int	main(int argc, char **v, char **env);
 

@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 17:12:24 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 18:54:38 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,9 @@ char	*handle_dollar(char *new, char *value, t_shell *mini)
 	int		k;
 	int		len;
 
-	k = 0;
 	rep_value = NULL;
-	extracted_value = malloc(ft_strlen(value) + 1);
 	(mini->i)++;
-	// extracted_value = check_for_limiters(value, i);
-	while (is_limiter_expanders(value, mini->i) != FALSE)
-		extracted_value[k++] = value[(mini->i)++];
-	extracted_value[k] = '\0';
+	extracted_value = norm_for_dollar_hand(value, mini);
 	rep_value = get_env_value(extracted_value, mini);
 	if (!rep_value)
 	{
@@ -55,7 +50,7 @@ char	*handle_dollar(char *new, char *value, t_shell *mini)
 char	*handle_dquote(char *new, char *value, t_shell *mini)
 {
 	char	quote;
-	
+
 	quote = value[mini->i];
 	(mini->i)++;
 	while (value[mini->i] && value[mini->i] != quote)
@@ -66,7 +61,7 @@ char	*handle_dquote(char *new, char *value, t_shell *mini)
 				|| ft_isalnum(value[(mini->i) + 1]))
 				new = handle_dollar(new, value, mini);
 			else
-				append_character(&new, &(mini->j), value[(mini->i)++]);	
+				append_character(&new, &(mini->j), value[(mini->i)++]);
 		}
 		else
 			append_character(&new, &(mini->j), value[(mini->i)++]);
@@ -98,7 +93,8 @@ char	*handle_dquote(char *new, char *value, t_shell *mini)
 // 				&& ft_isalnum(token[i + 1]) == 0
 // 				&& token[i + 1] != '_'))
 // 				append_character(&new, &j, token[i++]);
-// 			else if ((token[i]) && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
+// 			else if ((token[i])
+// && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
 // 				return (NULL);
 // 		}
 // 		else
@@ -125,14 +121,7 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 			new = handle_dquote(new, token, mini);
 		else if (token[mini->i] == '$')
 		{
-			if (token[(mini->i) + 1] == '\'' || token[(mini->i) + 1] == '"')
-			{
-				(mini->i)++;
-				continue ;
-			}
-			else if (token[(mini->i) + 1] != '_' && !ft_isalnum(token[(mini->i) + 1]) && token[(mini->i) + 1] != '?')
-				append_character(&new, &(mini->j), token[(mini->i)++]);
-			else if ((token[mini->i]) && !(new = handle_dollar(new, token, mini)) && mini->i == capacity)
+			if (!dollar_expansion(token, mini, &new, capacity))
 				return (NULL);
 		}
 		else

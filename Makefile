@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
+#    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/28 12:00:02 by motelti          ###   ########.fr        #
+#    Updated: 2025/05/28 18:41:23 by aamraouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIBFT_SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_lstlast.c ft_lstadd_back.c ft_lstclear.c check_stuff.c ft_lstsize.c \
 	ft_realloc.c ft_strrchr.c
 
-EXPENDER_SRC = expander.c env_copy.c utils.c ambiguous.c more_utils.c
+EXPENDER_SRC = expander.c env_copy.c utils.c ambiguous.c more_utils.c maximum_utils.c
 
 PARSER_SRC = parser.c  token_utils.c tokenizer.c
 

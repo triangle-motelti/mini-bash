@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fill_nodes.c                                       :+:      :+:    :+:   */
+/*   maximum_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/01 10:04:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/01 12:56:11 by aamraouy         ###   ########.fr       */
+/*   Created: 2025/05/28 18:34:50 by aamraouy          #+#    #+#             */
+/*   Updated: 2025/05/28 18:42:00 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parser.h"
+#include "expander.h"
 
-char	*fill_command(t_token *token)
+char	*norm_for_dollar_hand(char *value, t_shell *mini)
 {
-	t_token	*tmp;
+	int		k;
+	char	*extracted_val;
 
-	tmp = token;
-	if (tmp->flag == WORD && tmp->status == DEFAULT)// I NEED to set this in tokenization
-	{
-		//check the value if it contains whitespaces, 
-	}
-	
+	extracted_val = malloc(ft_strlen(value) + 1);
+	if (!extracted_val)
+		return (NULL);
+	k = 0;
+	while (is_limiter_expanders(value, mini->i) != FALSE)
+		extracted_val[k++] = value[(mini->i)++];
+	extracted_val[k] = '\0';
+	return (extracted_val);
 }
-
-// void	handle_files(t_commands *cmds, t_token *token)
-// {
-// 	if (token->flag = INPUT)
-// 		cmds->fd_in = 1;
-// 	else if (token->flag = TRUNC)
-// 		cmds->fd_out = 1;
-// }
