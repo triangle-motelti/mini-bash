@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 14:51:41 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/12 12:10:40 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:25:03 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,13 @@ static char	*join(char *alloc, char *s1, char *s2)
 		j++;
 	}
 	alloc[i + j] = '\0';
-	// free(s2);
-	// free(s1);
 	return (alloc);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*pt;
-	size_t		space;
+	size_t	space;
 
 	if (!s1 && !s2)
 		return (NULL);

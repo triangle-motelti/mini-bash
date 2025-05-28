@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/27 10:42:21 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 14:29:36 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ int	shell(t_shell *mini)
 		if (g_received_signal == SIGINT)
 		{
 			free(input);
-			continue;
+			continue ;
 		}
 		add_history(input);
-		if (!tokenizer(mini, input, 0, ft_strlen(input)) || !parsing_and_expanding(mini))
+		if (!tokenizer(mini, input, 0, ft_strlen(input))
+			|| !parsing_and_expanding(mini))
 		{
 			free(input);
 			clear_tokens(&mini->tokens);
@@ -145,15 +146,16 @@ void	empty_env(t_shell *minishell)
 	}
 }
 
-int main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
+	t_shell	minishell;
+
 	(void)ac;
 	(void)av;
-	t_shell minishell;
 	memset(&minishell, 0, sizeof(t_shell));
 	minishell.exit_status = 0;
 	minishell.env = build_env_list(&minishell, envp);
-	 if (!minishell.env)
+	if (!minishell.env)
 		empty_env(&minishell);
 	if (!shell(&minishell))
 		return (free_env_list(minishell.env), minishell.exit_status);

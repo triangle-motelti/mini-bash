@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 17:13:23 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/27 21:45:22 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 12:11:21 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,37 @@ void	path_execv(t_command *cmd, char **envp, char *path)
 	exit(126);
 }
 
+void	check_ifdir(char **args, char **envp, struct stat st)
+{
+	if (stat(args[0], &st) == 0)
+	{
+		if (S_ISDIR(st.st_mode))
+		{
+			ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
+			free_args(envp);
+			exit(126);
+		}
+		if (access(args[0], X_OK) != 0)
+		{
+			ft_putstr_fd(": ", STDERR_FILENO);
+			ft_putstr_fd(strerror(errno), STDERR_FILENO);
+			ft_putstr_fd("\n", STDERR_FILENO);
+			free_args(envp);
+			exit(126);
+		}
+	}
+}
+
 void	path_check(t_shell *shell, char **envp, char **args)
 {
 	struct stat	st;
-	
+
 	(void)shell;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(args[0], STDERR_FILENO);
 	if (ft_strchr(args[0], '/'))
 	{
-		if (stat(args[0], &st) == 0)
-		{
-			if (S_ISDIR(st.st_mode))
-			{
-				ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
-				free_args(envp);
-				exit(126);
-			}
-			if (access(args[0], X_OK) != 0)
-			{
-				ft_putstr_fd(": ", STDERR_FILENO);
-				ft_putstr_fd(strerror(errno), STDERR_FILENO);
-				ft_putstr_fd("\n", STDERR_FILENO);
-				free_args(envp);
-				exit(126);
-			}
-		}
+		check_ifdir(args, envp, st);
 		ft_putstr_fd(": Noo such file or directory\n", STDERR_FILENO);
 		free_args(envp);
 		exit(127);

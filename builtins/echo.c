@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:40:48 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/19 14:43:08 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:18:40 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	echo(int ac, char **av)
 		start = 2;
 	}
 	i = start;
-	while (i < ac) {
+	while (i < ac)
+	{
 		ft_putstr_fd(av[i], STDOUT_FILENO);
 		if (i < ac - 1)
 			ft_putstr_fd(" ", STDOUT_FILENO);

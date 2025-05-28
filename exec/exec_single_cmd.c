@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:00:06 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/27 21:48:42 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 12:08:37 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,39 +19,6 @@ static int	is_simple_builtin(t_shell *shell, t_command *cmd)
 		&& cmd->redirs == NULL)
 		return (1);
 	return (0);
-}
-
-static void	exec_builtin_parent(t_shell *shell, char **args)
-{
-	exec_builtin(shell, args);
-}
-
-void	exec_child(t_shell *shell, t_command *cmd)
-{
-	char	**envp;
-	char	*path;
-
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
-	setup_redirections(cmd->redirs);
-	if (cmd->args && cmd->args[0] && is_builtin(cmd->args[0]))
-	{
-		exec_builtin(shell, cmd->args);
-		exit(shell->exit_status);
-	}
-	if (cmd->args && cmd->args[0])
-	{
-		envp = copy_env_list(shell, shell->env);
-		path = path_cmd(cmd->args[0], envp);
-		if (!path)
-		{
-			path_check(shell, envp, &cmd->args[0]);
-			free_args(envp);
-			exit(127);
-		}
-		path_execv(cmd, envp, path);
-	}
-	exit(0);
 }
 
 void	execute_single_command(t_shell *shell, t_command *cmd)
@@ -70,7 +37,7 @@ void	execute_single_command(t_shell *shell, t_command *cmd)
 	if (is_simple_builtin(shell, cmd))
 	{
 		setup_redirections(cmd->redirs);
-		exec_builtin_parent(shell, cmd->args);
+		exec_builtin(shell, cmd->args);
 		sigaction(SIGINT, &sa_original, NULL);
 		return ;
 	}

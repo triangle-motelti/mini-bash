@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:40:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/24 18:21:29 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:17:08 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	export_ac(t_shell *shell, char **arr, int i)
 {
 	char	*eq;
 	size_t	key_len;
-	
+
 	arr = copy_env_list(shell, shell->env);
 	if (!arr)
 		return ;
@@ -64,9 +64,9 @@ void	export_ac(t_shell *shell, char **arr, int i)
 		{
 			key_len = eq - arr[i];
 			if (*(eq + 1) == '\0')
-                printf("declare -x %.*s\n", (int)key_len, arr[i]);
-            else
-                printf("declare -x %.*s=\"%s\"\n", (int)key_len, arr[i], eq + 1);
+				printf("declare -x %.*s\n", (int)key_len, arr[i]);
+			else
+				printf("declare -x %.*s=\"%s\"\n", (int)key_len, arr[i], eq + 1);
 		}
 		else
 			printf("declare -x %s\n", arr[i]);

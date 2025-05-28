@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 22:48:31 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/16 11:22:30 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:23:48 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_strndup(char *s, size_t n)
 {
 	char	*dup;
-	
+
 	dup = malloc(n + 1);
 	if (!dup)
 		return (NULL);
@@ -23,4 +23,3 @@ char	*ft_strndup(char *s, size_t n)
 	dup[n] = '\0';
 	return (dup);
 }
-

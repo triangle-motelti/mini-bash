@@ -6,27 +6,27 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:18:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/27 10:46:27 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 14:37:41 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
 
-static void	exec_pipeline_child(t_shell *shell, t_command *cmd, t_pipeline_info *info, int idx)
+void	exec_pipe(t_shell *shell, t_command *cmd, t_pipeline_info *info, int i)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	if (idx > 0)
-		dup2(info->pipes[idx - 1][0], STDIN_FILENO);
-	if (idx < info->count - 1)
-		dup2(info->pipes[idx][1], STDOUT_FILENO);
+	if (i > 0)
+		dup2(info->pipes[i - 1][0], STDIN_FILENO);
+	if (i < info->count - 1)
+		dup2(info->pipes[i][1], STDOUT_FILENO);
 	close_pipes(info);
 	setup_redirections(cmd->redirs);
-    if (cmd->args[0])
-        exec_child(shell, cmd);
+	if (cmd->args[0])
+		exec_child(shell, cmd);
 }
 
-static int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
+int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
 {
 	int			i;
 	t_command	*cur;
@@ -39,7 +39,7 @@ static int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
 		if (info->pids[i] < 0)
 			perror("fork");
 		else if (info->pids[i] == 0)
-			exec_pipeline_child(shell, cur, info, i);
+			exec_pipe(shell, cur, info, i);
 		cur = cur->next;
 		i++;
 	}

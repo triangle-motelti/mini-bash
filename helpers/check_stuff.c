@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_stuff.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:24:29 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/13 10:39:24 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 12:19:52 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,7 @@ void	check_args(int ac)
 		exit_error("arguments not allowed : syntax { ./minishell }\n");
 }
 
-void exit_error(const char *msg)
+void	exit_error(const char *msg)
 {
 	perror(msg);
-	//implement a signal handling to bach again into the first stat
-	// exit(1);
 }

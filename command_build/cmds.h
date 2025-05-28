@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cmds.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:01:55 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/26 14:36:59 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:54:31 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMDS_H
-#define CMDS_H
+# define CMDS_H
 
-#include "../minishell.h"
+# include "../minishell.h"
 
-typedef struct	s_build_info
+typedef struct s_build_info
 {
 	t_command	*list;
 	t_command	*cmd;
@@ -31,7 +31,10 @@ int			add_arg(char ***args, int *count, char *value);
 int			handl_word(t_token *tok, char ***args, int *count);
 int			init_build(t_token *tokens, t_build_info *info);
 t_command	*finish_build(t_build_info *info);
-// t_command	*build_commands(t_token *tokens);
-t_command *build_commands(t_token *tokens, t_shell *shell);
+t_command	*build_commands(t_token *tokens, t_shell *shell);
+
+int			add_redir(t_command *cmd, t_redir **last, int flag, char *file);
+int			add_redirc(t_command *cmd, t_redir **last, int flag, char *delim);
+void		set_heredoc_expand(t_redir *last, int flag, int expand_vars);
 
 #endif

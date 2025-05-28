@@ -49,8 +49,9 @@ int	open_pipes(t_pipeline_info *info)
 
 void	close_pipes(t_pipeline_info *info)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (i < info->count - 1)
 	{
 		close(info->pipes[i][0]);

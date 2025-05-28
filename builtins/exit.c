@@ -6,27 +6,14 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:02:46 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/03 20:08:34 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:15:42 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-static	void	exit_cases(int ac, char **args, int status)
+static void	exit_number(char **args, int status)
 {
-	if (ac == 1)
-	{
-		if (!isatty(STDOUT_FILENO))
-			ft_putstr_fd("exit\n", STDOUT_FILENO);
-		exit(0);
-	}
-	if (ac > 2)
-	{
-		if (!isatty(STDOUT_FILENO))
-			ft_putstr_fd("exit\n", STDERR_FILENO);
-		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
-		return ;
-	}
 	if (ft_isnumber(args[1]))
 	{
 		status = ft_atoi(args[1]);
@@ -41,6 +28,24 @@ static	void	exit_cases(int ac, char **args, int status)
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		exit(2);
 	}
+}
+
+static void	exit_cases(int ac, char **args, int status)
+{
+	if (ac == 1)
+	{
+		if (!isatty(STDOUT_FILENO))
+			ft_putstr_fd("exit\n", STDOUT_FILENO);
+		exit(0);
+	}
+	if (ac > 2)
+	{
+		if (!isatty(STDOUT_FILENO))
+			ft_putstr_fd("exit\n", STDERR_FILENO);
+		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
+		return ;
+	}
+	exit_number(args, status);
 }
 
 void	ft_exit(int ac, char **args)

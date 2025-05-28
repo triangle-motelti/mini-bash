@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 14:03:43 by motelti           #+#    #+#             */
-/*   Updated: 2025/04/29 14:05:53 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:06:17 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	remove_env_node(t_env **env, const char *key)
 
 	current = *env;
 	prev = NULL;
-
 	while (current)
 	{
 		if (ft_strcmp(current->key, key) == 0)

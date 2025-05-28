@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quotes.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 09:17:22 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/04/24 21:08:53 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:24:15 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	quotes_syntax(char *input)
 			if (find_peer(input, quote, &i))
 				continue ;
 			else
-			 	return ('n');
+				return ('n');
 		}
 		else
 			i++;

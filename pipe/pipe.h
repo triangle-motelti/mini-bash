@@ -6,16 +6,16 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:17:38 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/03 18:00:41 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 14:34:51 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PIPE_H
-#define PIPE_H
+# define PIPE_H
 
-#include "../minishell.h"
+# include "../minishell.h"
 
-typedef struct	s_pipeline_info
+typedef struct s_pipeline_info
 {
 	int		pipes[1024][2];
 	pid_t	pids[1024];
@@ -29,6 +29,5 @@ int		open_pipes(t_pipeline_info *info);
 void	close_pipes(t_pipeline_info *info);
 
 void	execute_pipeline(t_shell *shell, t_command *cmds);
-
 
 #endif

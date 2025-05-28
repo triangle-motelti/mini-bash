@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:42:17 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 14:42:19 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 14:23:24 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,16 @@
 
 # include "../minishell.h"
 
-
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
-void exit_error(const char *msg);
+void	exit_error(const char *msg);
 t_token	*ft_lstnew(void *content, int type);
 t_token	*ft_lstlast(t_token *lst);
 void	ft_lstadd_back(t_token **lst, t_token *new);
 
-int ft_strrchr_advance(char *s, char *str_to_find);
+int		ft_strrchr_advance(char *s, char *str_to_find);
 
 char	quotes_syntax(char *input);
-int	ft_lstsize(t_token *lst);
+int		ft_lstsize(t_token *lst);
 void	clear_tokens(t_token **tokens);
 
 size_t	ft_strlen(const char *str);
@@ -49,7 +48,6 @@ char	*ft_strchr(char *s, int c);
 char	*ft_strdup(char *s1);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_strrchr(const char *s, int c);
-// int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
 

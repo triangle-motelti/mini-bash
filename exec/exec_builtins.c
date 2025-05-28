@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:44:01 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/23 18:19:32 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/05/28 12:08:33 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
-
 
 void	exec_builtin(t_shell *shell, char **args)
 {
@@ -50,4 +49,32 @@ void	exec_builtins(char **args, int ac, int exit_ac, t_shell *mini)
 		ft_export(mini, ac, args);
 	else if (ft_strncmp(args[0], "unset", 6) == 0)
 		unset(mini, ac, args);
+}
+
+void	exec_child(t_shell *shell, t_command *cmd)
+{
+	char	**envp;
+	char	*path;
+
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	setup_redirections(cmd->redirs);
+	if (cmd->args && cmd->args[0] && is_builtin(cmd->args[0]))
+	{
+		exec_builtin(shell, cmd->args);
+		exit(shell->exit_status);
+	}
+	if (cmd->args && cmd->args[0])
+	{
+		envp = copy_env_list(shell, shell->env);
+		path = path_cmd(cmd->args[0], envp);
+		if (!path)
+		{
+			path_check(shell, envp, &cmd->args[0]);
+			free_args(envp);
+			exit(127);
+		}
+		path_execv(cmd, envp, path);
+	}
+	exit(0);
 }

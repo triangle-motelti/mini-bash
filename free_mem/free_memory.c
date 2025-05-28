@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 11:26:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/26 14:38:12 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 12:17:59 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	free_args(char **args)
 
 void	free_redirs(t_redir *redirs)
 {
-	t_redir *next;
-	
+	t_redir	*next;
+
 	while (redirs)
 	{
 		next = redirs->next;
@@ -40,7 +40,7 @@ void	free_redirs(t_redir *redirs)
 void	free_commands(t_command *cmds)
 {
 	t_command	*next;
-	
+
 	while (cmds)
 	{
 		next = cmds->next;

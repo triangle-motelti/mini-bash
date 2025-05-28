@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:56:32 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/25 17:01:41 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 11:07:51 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	handle_with_equal_sign(char *arg, char *eq, char **key, char **value, int *i
 	return (0);
 }
 
-int	handle_without_equal_sign(char *arg, char **key, char **value, int *is_append)
+int	without_equal_sign(char *arg, char **key, char **value, int *is_append)
 {
 	*is_append = 0;
 	*key = ft_strdup(arg);

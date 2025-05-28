@@ -6,14 +6,13 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:07:05 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/27 10:01:31 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 15:08:33 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "signal.h"
 
-volatile sig_atomic_t g_received_signal = 0;
-
+volatile sig_atomic_t	g_received_signal = 0;
 
 void	sigint_handler(int sig)
 {
@@ -22,7 +21,6 @@ void	sigint_handler(int sig)
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
-	// g_received_signal = 1;
 }
 
 void	sigquit_handler(int sig)
@@ -30,7 +28,7 @@ void	sigquit_handler(int sig)
 	(void)sig;
 }
 
-void setup_signals(void)
+void	setup_signals(void)
 {
 	struct sigaction	sa_int;
 	struct sigaction	sa_quit;

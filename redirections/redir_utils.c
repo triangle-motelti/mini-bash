@@ -6,44 +6,15 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/27 10:38:52 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 14:54:36 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 
-t_bool	check_ambiguous_redirect(t_shell *mini)
-{
-	t_token	*token;
-	t_token	*next;
-
-	token = mini->tokens;
-	while (token)
-	{
-		if (token->flag == TRUNC || token->flag == APPEND || token->flag == INPUT)
-		{
-			next = token->next;
-			if (next && next->ambiguous == 1)
-			{
-				ft_putstr_fd("minishell: ", STDERR_FILENO);
-				if (next->valuebex)
-					ft_putstr_fd(next->valuebex, STDERR_FILENO);
-				else
-					ft_putstr_fd("(null)", STDERR_FILENO);
-				ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
-				mini->exit_status = 1;
-				return (TRUE);
-			}
-		}
-		token = token->next;
-	}
-	return (FALSE);
-}
-
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
-
 	g_received_signal = 1;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_replace_line("", 0);
@@ -101,26 +72,28 @@ static char	*append_line(char *buf, size_t *sizep, char *line)
 	return (nb);
 }
 
-char *collect_heredoc_input(const char *delimiter)
+char	*collect_heredoc_input(const char *delimiter)
 {
 	char				*buf;
 	size_t				buf_size;
 	char				*line;
 	struct sigaction	sa_heredoc;
 	struct sigaction	sa_old;
-	
+
 	buf = NULL;
 	buf_size = 0;
 	sa_heredoc.sa_handler = heredoc_sigint_handler;
 	sa_heredoc.sa_flags = 0;
 	sigemptyset(&sa_heredoc.sa_mask);
 	sigaction(SIGINT, &sa_heredoc, &sa_old);
-	while ((line = read_heredoc_line(delimiter)) != NULL)
+	line = read_heredoc_line(delimiter);
+	while (line)
 	{
 		buf = append_line(buf, &buf_size, line);
 		free(line);
 		if (!buf)
 			return (sigaction(SIGINT, &sa_old, NULL), NULL);
+		line = read_heredoc_line(delimiter);
 	}
 	sigaction(SIGINT, &sa_old, NULL);
 	return (buf);

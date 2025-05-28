@@ -3,40 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   build_cmd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:09:18 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/26 14:35:36 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 11:53:32 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
 
-static int add_redir(t_command *cmd, t_redir **last, int flag, char *file)
+static char	*extract_delimiter(t_token *next_tok, int *expand_vars)
 {
-	t_redir *r;
-
-	r = malloc(sizeof(*r));
-	if (!r)
-		return (1);
-	r->flag = flag;
-	r->file = ft_strdup(file);
-	if (!r->file)
-		return (free(r), 1);
-	r->expand_var = 0;
-	r->next = NULL;
-	if (!cmd->redirs)
-		cmd->redirs = r;
-	else
-		(*last)->next = r;
-	*last = r;
-	return (0);
-}
-
-static char *extract_delimiter(t_token *next_tok, int *expand_vars)
-{
-	char *delimiter;
-	size_t len;
+	char	*delimiter;
+	size_t	len;
 
 	delimiter = next_tok->value;
 	*expand_vars = 1;
@@ -60,23 +39,7 @@ static char *extract_delimiter(t_token *next_tok, int *expand_vars)
 	return (delimiter);
 }
 
-static int add_redirection(t_command *cmd, t_redir **last, int flag, char *delimiter)
-{
-	if (add_redir(cmd, last, flag, delimiter))
-	{
-		free(delimiter);
-		return (1);
-	}
-	return (0);
-}
-
-static void set_heredoc_expand(t_redir *last, int flag, int expand_vars)
-{
-	if (flag == HEREDOC)
-		last->expand_var = expand_vars;
-}
-
-int	handle_redirection(t_command *cmd, t_redir **last, t_token **tok_ptr, t_shell *shell)
+int	set_redir(t_command *cmd, t_redir **last, t_token **tok_ptr, t_shell *shell)
 {
 	t_token	*tok;
 	int		flag;
@@ -88,11 +51,14 @@ int	handle_redirection(t_command *cmd, t_redir **last, t_token **tok_ptr, t_shel
 	flag = tok->flag;
 	next_tok = tok->next;
 	if (!next_tok || next_tok->flag != WORD)
-		return (printf("syntax error near unexpected toke\n"), shell->exit_status = 0, 1);
+	{
+		printf("syntax error near unexpected toke\n");
+		return (shell->exit_status = 0, 1);
+	}
 	delimiter = extract_delimiter(next_tok, &expand_vars);
 	if (!delimiter)
 		return (1);
-	if (add_redirection(cmd, last, flag, delimiter))
+	if (add_redirc(cmd, last, flag, delimiter))
 		return (1);
 	set_heredoc_expand(*last, flag, expand_vars);
 	free(delimiter);
@@ -100,9 +66,9 @@ int	handle_redirection(t_command *cmd, t_redir **last, t_token **tok_ptr, t_shel
 	return (0);
 }
 
-static int handle_pipe(t_command **cmd_ptr, char ***args, int *count, t_redir **last)
+int	handle_pipe(t_command **cmd_ptr, char ***args, int *count, t_redir **last)
 {
-	t_command *cmd;
+	t_command	*cmd;
 
 	cmd = *cmd_ptr;
 	finalize_args(cmd, *args, *count);
@@ -116,29 +82,26 @@ static int handle_pipe(t_command **cmd_ptr, char ***args, int *count, t_redir **
 	return (0);
 }
 
-static int process_token(t_build_info *info, t_shell *bash)
+static int	process_token(t_build_info *info, t_shell *bash)
 {
-	int ret;
+	int	ret;
 
 	if (info->tok->flag == WORD)
 		ret = handl_word(info->tok, &info->args, &info->arg_count);
-	else if (info->tok->flag == INPUT || info->tok->flag == TRUNC || info->tok->flag == APPEND || info->tok->flag == HEREDOC)
-		ret = handle_redirection(info->cmd,
-								 &info->last_redir,
-								 &info->tok, bash);
+	else if (info->tok->flag == INPUT || info->tok->flag == TRUNC
+		|| info->tok->flag == APPEND || info->tok->flag == HEREDOC)
+		ret = set_redir(info->cmd, &info->last_redir, &info->tok, bash);
 	else if (info->tok->flag == PIPE)
-		ret = handle_pipe(&info->cmd,
-						  &info->args,
-						  &info->arg_count,
-						  &info->last_redir);
+		ret = handle_pipe(&info->cmd, &info->args, &info->arg_count,
+				&info->last_redir);
 	else
 		ret = 0;
 	return (ret);
 }
 
-t_command *build_commands(t_token *tokens, t_shell *shell)
+t_command	*build_commands(t_token *tokens, t_shell *shell)
 {
-	t_build_info info;
+	t_build_info	info;
 
 	if (init_build(tokens, &info))
 		return (NULL);

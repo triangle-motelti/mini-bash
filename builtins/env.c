@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 19:11:49 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/12 08:25:14 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/28 10:54:49 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_env(t_shell *mini, int ac, char **av)
 {
-	t_env *current;
+	t_env	*current;
 
 	(void)av;
 	if (ac > 1)

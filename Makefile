@@ -6,7 +6,7 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/27 10:44:14 by motelti          ###   ########.fr        #
+#    Updated: 2025/05/28 12:00:02 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ EXPENDER_SRC = expander.c env_copy.c utils.c ambiguous.c more_utils.c
 
 PARSER_SRC = parser.c  token_utils.c tokenizer.c
 
-ENVP_SRC = envirement.c
+ENVP_SRC = envirement.c build_env.c 
 
 SIG_SRC = signal.c
 
@@ -40,14 +40,14 @@ FREE_MEM_SRC = free_memory.c
 
 REDIREC_SRC = redirections.c redir_utils.c herdoc.c
 
-BUILD_CMD_SRC =  build_cmd.c cmd_utils.c 
+BUILD_CMD_SRC =  build_cmd.c cmd_utils.c cmd_helpers.c
 
 EXEC_SRC = exec_single_cmd.c exec_builtins.c path.c exe_sngl_cmd_utlis.c 
 
 PIPE_SRC = pipe.c pipe_utils.c
 
 BUILTINS_SRC = cd.c echo.c exit.c pwd.c export.c env.c builtin.c  export_utils.c \
-			unset.c export_helpers.c
+			unset.c export_helpers.c export_utils2.c
 
 MAINSHELL_SRC = main.c
 
