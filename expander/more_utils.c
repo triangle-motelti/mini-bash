@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 19:54:04 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/05/29 09:27:16 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,19 @@ void	invalid_or_not_expanded(char *newvalue, t_token *token)
 t_bool	dollar_expansion(char *token, t_shell *mini, char **new, int cap)
 {
 	if (token[(mini->i) + 1] == '\'' || token[(mini->i) + 1] == '"')
+	{
 		(mini->i)++;
-	else if (token[(mini->i) + 1] != '_'
+		return (TRUE);
+	}
+	if (token[(mini->i) + 1] != '_'
 		&& !ft_isalnum(token[(mini->i) + 1])
 		&& token[(mini->i) + 1] != '?')
+	{
 		append_character(new, &(mini->j), token[(mini->i)++]);
-	else if ((token[mini->i])
-		&& !(*new = handle_dollar(*new, token, mini)) && mini->i == cap)
+		return (TRUE);
+	}
+	*new = handle_dollar(*new, token, mini);
+	if ((token[mini->i]) && !(*new) && mini->i == cap)
 		return (FALSE);
 	return (TRUE);
 }
