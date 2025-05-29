@@ -6,65 +6,60 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 14:29:36 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/29 17:55:25 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void	free_env_list(t_env *env)
+static int	handle_empty_or_invalid_input(t_shell *mini, char *input)
 {
-	t_env	*tmp;
-
-	while (env)
+	if (*input == '\0')
 	{
-		tmp = env;
-		env = env->next_pt;
-		free(tmp->key);
-		free(tmp->value);
-		free(tmp);
+		free(input);
+		return (1);
 	}
+	add_history(input);
+	if (!tokenizer(mini, input, 0, ft_strlen(input))
+		|| !parsing_and_expanding(mini))
+	{
+		free(input);
+		clear_tokens(&mini->tokens);
+		return (1);
+	}
+	if (check_ambiguous_redirect(mini))
+	{
+		mini->exit_status = 1;
+		free(input);
+		clear_tokens(&mini->tokens);
+		return (1);
+	}
+	return (0);
 }
 
-t_bool	parsing_and_expanding(t_shell *mini)
+static void	process_input(t_shell *mini, char *input)
 {
-	if (!parser(mini))
-	{
-		clear_tokens(&mini->tokens);
-		mini->exit_status = 1;
-		return (FALSE);
-	}
-	if (!expander(mini))
-	{
-		clear_tokens(&mini->tokens);
-		mini->exit_status = 1;
-		return (FALSE);
-	}
-	return (TRUE);
-}
+	t_command	*cmds;
 
-void	execute_commands(t_shell *shell, t_command *cmds)
-{
-	int			cmd_count;
-	t_command	*tmp;
-
-	cmd_count = 0;
-	tmp = cmds;
-	while (tmp)
+	if (handle_empty_or_invalid_input(mini, input))
+		return ;
+	cmds = build_commands(mini->tokens, mini);
+	if (cmds)
+		execute_commands(mini, cmds);
+	if (g_received_signal)
 	{
-		cmd_count++;
-		tmp = tmp->next;
+		g_received_signal = 0;
+		rl_on_new_line();
+		rl_redisplay();
 	}
-	if (cmd_count == 1)
-		execute_single_command(shell, cmds);
-	else
-		execute_pipeline(shell, cmds);
+	free_commands(cmds);
+	clear_tokens(&mini->tokens);
+	free(input);
 }
 
 int	shell(t_shell *mini)
 {
-	char		*input;
-	t_command	*cmds;
+	char	*input;
 
 	setup_signals();
 	while (1)
@@ -72,78 +67,9 @@ int	shell(t_shell *mini)
 		input = readline("minishell> ");
 		if (!input)
 			return (ft_putstr_fd("exit\n", STDERR_FILENO), mini->exit_status);
-		if (g_received_signal == SIGINT)
-		{
-			free(input);
-			continue ;
-		}
-		add_history(input);
-		if (!tokenizer(mini, input, 0, ft_strlen(input))
-			|| !parsing_and_expanding(mini))
-		{
-			free(input);
-			clear_tokens(&mini->tokens);
-			continue ;
-		}
-		if (check_ambiguous_redirect(mini))
-		{
-			mini->exit_status = 1;
-			free(input);
-			clear_tokens(&mini->tokens);
-			continue ;
-		}
-		cmds = build_commands(mini->tokens, mini);
-		if (cmds)
-			execute_commands(mini, cmds);
-		if (g_received_signal)
-		{
-			g_received_signal = 0;
-			rl_on_new_line();
-			rl_redisplay();
-		}
-		free_commands(cmds);
-		clear_tokens(&mini->tokens);
-		free(input);
+		process_input(mini, input);
 	}
 	return (mini->exit_status);
-}
-
-void	empty_env(t_shell *minishell)
-{
-	char	*pwd;
-	char	*pwd_key;
-	char	*shlvl_key;
-	char	*shlvl_value;
-	char	*path_key;
-	char	*path_value;
-
-	if (!find_env_node(minishell->env, "PWD"))
-	{
-		pwd = getcwd(NULL, 0);
-		if (pwd)
-		{
-			pwd_key = ft_strdup("PWD");
-			if (pwd_key)
-				append_env_node(minishell, pwd_key, pwd);
-			free(pwd);
-		}
-	}
-	if (!find_env_node(minishell->env, "SHLVL"))
-	{
-		shlvl_key = ft_strdup("SHLVL");
-		shlvl_value = ft_strdup("1");
-		if (shlvl_key && shlvl_value)
-			append_env_node(minishell, shlvl_key, shlvl_value);
-		free(shlvl_value);
-	}
-	if (!find_env_node(minishell->env, "PATH"))
-	{
-		path_key = ft_strdup("PATH");
-		path_value = ft_strdup("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
-		if (path_key && path_value)
-			append_env_node(minishell, path_key, path_value);
-		free(path_value);
-	}
 }
 
 int	main(int ac, char **av, char **envp)

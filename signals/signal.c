@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 16:07:05 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 15:08:33 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/29 17:50:15 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ volatile sig_atomic_t	g_received_signal = 0;
 void	sigint_handler(int sig)
 {
 	(void)sig;
+	g_received_signal = SIGINT;
 	write(STDOUT_FILENO, "\n", 1);
 	rl_replace_line("", 0);
 	rl_on_new_line();

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
+#    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/28 18:41:23 by aamraouy         ###   ########.fr        #
+#    Updated: 2025/05/29 17:41:27 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ PIPE_SRC = pipe.c pipe_utils.c
 BUILTINS_SRC = cd.c echo.c exit.c pwd.c export.c env.c builtin.c  export_utils.c \
 			unset.c export_helpers.c export_utils2.c
 
-MAINSHELL_SRC = main.c
+MAINSHELL_SRC = main.c main_utils.c
 
 SRC		= $(addprefix ./helpers/, $(LIBFT_SRC)) \
 		$(addprefix ./expander/, $(EXPENDER_SRC)) \
