@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/29 17:51:40 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/30 11:59:29 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,7 @@ char	*get_env_value(char *value, t_shell *mini)
 		return (NULL);
 	tmp_env = mini->env;
 	if (ft_strcmp(value, "?") == 0)
-	{
-		if (g_received_signal == SIGINT)
-		{
-			mini->exit_status = 130;
-			g_received_signal = 0;
-		}
 		return (ft_itoa(mini->exit_status));
-	}
 	while (tmp_env)
 	{
 		if (ft_strcmp(value, tmp_env->key) == 0)
