@@ -32,6 +32,12 @@ static char	*extract_delimiter(t_token *next_tok, int *expand_vars)
 				return (NULL);
 			}
 		}
+		else
+		{
+			delimiter = ft_strdup(delimiter);
+			if (delimiter == NULL)
+				return (NULL);
+		}
 		*expand_vars = 0;
 	}
 	else
