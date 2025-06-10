@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/10 16:13:27 by kali             ###   ########.fr       */
+/*   Updated: 2025/05/30 11:58:55 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void)ac;
 	(void)av;
-	ft_memset(&minishell, 0, sizeof(t_shell));
+	memset(&minishell, 0, sizeof(t_shell));
 	minishell.exit_status = 0;
 	minishell.env = build_env_list(&minishell, envp);
 	if (!minishell.env)
