@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 18:54:38 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/08 19:35:28 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char	*handle_dquote(char *new, char *value, t_shell *mini)
 	char	quote;
 
 	quote = value[mini->i];
+	append_character(&new, &(mini->j), value[mini->i]);
 	(mini->i)++;
 	while (value[mini->i] && value[mini->i] != quote)
 	{
@@ -67,42 +68,9 @@ char	*handle_dquote(char *new, char *value, t_shell *mini)
 			append_character(&new, &(mini->j), value[(mini->i)++]);
 	}
 	if (value[mini->i] == '"')
-		(mini->i)++;
+			append_character(&new, &(mini->j), value[(mini->i)++]);
 	return (new);
 }
-
-// char	*expand_each_token(char *token, int i, int j, t_shell *mini)
-// {
-// 	char	*new;
-// 	int		capacity;
-// 	each_token	*i_j;
-
-// 	capacity = ft_strlen(token);
-// 	new = NULL;
-// 	*i_j->i = i;
-// 	*i_j->j = j;
-// 	while (token[i])
-// 	{
-// 		if (token[i] == '\'')
-// 			single_quote(token, &i, &new, &j);
-// 		else if (token[i] == '"')
-// 			new = handle_dquote(new, &j, token, &i, mini);
-// 		else if (token[i] == '$')
-// 		{
-// 			if (!token[i + 1] || (token[i + 1] == '$' && token[i + 1] != '?'
-// 				&& ft_isalnum(token[i + 1]) == 0
-// 				&& token[i + 1] != '_'))
-// 				append_character(&new, &j, token[i++]);
-// 			else if ((token[i])
-// && !(new = handle_dollar(new, &j, token, &i, mini)) && i == capacity)
-// 				return (NULL);
-// 		}
-// 		else
-// 			append_character(&new, &j, token[i++]);
-// 	}
-// 	append_character(&new, &j, '\0');
-// 	return (new);
-// }
 
 char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 {
@@ -144,8 +112,6 @@ t_bool	expander(t_shell *mini)
 			new_value = expand_each_token(token->value, 0, 0, mini);
 		else
 			new_value = ft_strdup(token->value);
-		if (token->quote == QUOTE && new_value)
-			rm_quotes(token);
 		if (new_value && ft_strcmp(new_value, token->value) != 0)
 		{
 			free(token->value);
@@ -155,6 +121,7 @@ t_bool	expander(t_shell *mini)
 		}
 		else
 			invalid_or_not_expanded(new_value, token);
+		rm_quotes(token);
 		token = token->next;
 	}
 	return (TRUE);

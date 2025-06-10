@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/29 17:57:43 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/06 13:39:40 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_bool	parsing_and_expanding(t_shell *mini)
 		mini->exit_status = 1;
 		return (FALSE);
 	}
+	mini->tkn = mini->tokens;
 	if (!expander(mini))
 	{
 		clear_tokens(&mini->tokens);

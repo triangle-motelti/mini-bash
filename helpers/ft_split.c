@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:42:02 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 14:42:04 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:28:49 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,22 +34,6 @@ static size_t	ft_countword(char const *s, char c)
 	}
 	return (words);
 }
-// static size_t	ft_countword(char const *s, char c)
-// {
-// 	size_t	words;
-// 	size_t	i;
-
-// 	words = 0;
-// 	i = 0;
-// 	while (s[i])
-// 	{
-// 		if (s[i] != c && (s[i + 1] == c || s[i + 1] == '\0')
-// 			|| s[i] == c && (s[i + 1] != c ))
-// 			words++;
-// 		i++;
-// 	}
-// 	return (words);
-// }
 
 static char	*fill_with_words(char const *s, char c)
 {

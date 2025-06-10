@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 18:41:03 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/06 13:40:16 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define EXPANDER_H
 # include "../minishell.h"
 
+t_bool	standard_case(t_shell *shll);
+
+char	**advanced_split(t_token *tkn, char delim);;
 char	*norm_for_dollar_hand(char *value, t_shell *mini);
 // int	    check_environements(char *value, t_shell *mini, t_token *token);
 // char	*check_dollar(char *value, t_shell *mini);
