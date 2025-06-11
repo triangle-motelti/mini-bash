@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:17:03 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/06 13:38:19 by kali             ###   ########.fr       */
+/*   Updated: 2025/06/11 20:48:29 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_token
 	char			*valuebex;
 	t_bool			var_exist;
 	int				flag;
+	size_t			spaces;
 	int				ambiguous;
 	int				quote;
 	int				status;

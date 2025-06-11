@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/06 13:39:59 by kali             ###   ########.fr       */
+/*   Updated: 2025/06/11 20:51:29 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ void	split_in_case(t_token *token, t_shell *mini)
 	split = NULL;
 	if (standard_case(mini))
 		return ;
-	if (token->quote == QUOTE)
-	{
+	if (token->quote == QUOTE && ft_strchr_sp(token->value, token) != 0)
 		split = advanced_split(token, ' ');
-	}
 	if (token->quote == NQUOTE && (ft_strchr(token->value, ' ') != NULL))
 		split = ft_split(token->value, ' ');
 	if (!split || !split[0] || !split[1])

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/10 16:25:17 by kali             ###   ########.fr       */
+/*   Updated: 2025/06/11 20:57:01 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char	*handle_dquote(char *new, char *value, t_shell *mini)
 			append_character(&new, &(mini->j), value[(mini->i)++]);
 	}
 	if (value[mini->i] == '"')
-			append_character(&new, &(mini->j), value[(mini->i)++]);
+		append_character(&new, &(mini->j), value[(mini->i)++]);
 	return (new);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   maximum_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:34:50 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/08 08:58:32 by kali             ###   ########.fr       */
+/*   Updated: 2025/06/11 20:45:32 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,14 +90,13 @@ char	**advanced_split(t_token *tkn, char delim)
 	w = 0;
 	i = 0;
 	s = tkn->value;
-	// printf("there are %ld words out there \n", words);
+	if (tkn->spaces + 1 != words)
+		return (NULL);
 	list = malloc((words + 1) * sizeof(char *));
 	if (!list)
 		return NULL;
 	while (w < words)
 	{
-		// while (s[i] && s[i] == delim && !inside_quote(s, i))
-		// 	i++;
 		while (s[i] && s[i] == delim)
 			i++;
 		start = i;
@@ -110,12 +109,10 @@ char	**advanced_split(t_token *tkn, char delim)
 			if (s[i] && s[i] == quote)
 				i++;
 		}
-		else //not a delim and not a quote;
+		else
 		{
 			while (s[i] && s[i] != delim && (s[i] != '\'' && s[i] != '"'))
 				i++;
-			// while (s[i] && !(!inside_quote(s, i) && s[i] == delim))
-			// 	i++; 
 		}
 		list[w++] = ft_substr(s, start, i - start);
 		if (!list[w-1])

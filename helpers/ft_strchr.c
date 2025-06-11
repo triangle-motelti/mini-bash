@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:42:11 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/26 14:42:13 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/11 20:47:31 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,27 @@ char	*ft_strchr(char *s, int c)
 	if (*str == (char)c)
 		return ((char *)str);
 	return (NULL);
+}
+
+int	ft_strchr_sp(char *value, t_token *tkn)
+{
+	int		i;
+	char	quote;
+
+	i = 0;
+	tkn->spaces = 0;
+	while (value[i])
+	{
+		if (value[i] == '\'' || value[i] == '"')
+		{
+			quote = value[i];
+			i++;
+			while (value[i] && value[i] != quote)
+				i++;
+		}
+		else if (value[i] == ' ')
+			tkn->spaces++;
+		i++;
+	}
+	return (tkn->spaces);
 }
