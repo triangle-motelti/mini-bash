@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:35:58 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 20:12:54 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:55:30 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ int	handle_word(t_shell *mini, char *input, int i)
 		quote = input[track];
 		if (quote == '\'')
 		{
-			if (!more_quote_handling(input, &track, 1))
+			if (!more_quote_handling(input, &track, 1, mini))
 				return (0);
 		}
 		else if (quote == '"')
 		{
-			if (!more_quote_handling(input, &track, 2))
+			if (!more_quote_handling(input, &track, 2, mini))
 				return (0);
 		}
 		else
@@ -77,6 +77,7 @@ int	handle_quotes(t_shell *mini, char *input, int *i, int start)
 			if (input[*i] != quote)
 			{
 				printf("missing closing quote `%c'\n", quote);
+				mini->exit_status = 69;
 				return (0);
 			}
 			(*i)++;

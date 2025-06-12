@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 10:29:54 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 20:06:37 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/12 20:56:52 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	add_token(t_shell *mini, char *sep, int type)
 	ft_lstadd_back(&mini->tokens, new);
 }
 
-int	more_quote_handling(char *input, int *track, int sing_or_doub)
+int	more_quote_handling(char *input, int *track, int sing_or_doub, t_shell *shell)
 {
 	if (sing_or_doub == 1)
 	{
@@ -63,6 +63,7 @@ int	more_quote_handling(char *input, int *track, int sing_or_doub)
 		if (input[(*track)] != '\'')
 		{
 			printf("mini: unexpected EOF while looking for matching `''\n");
+			shell->exit_status = 1337;
 			return (0);
 		}
 		(*track)++;
@@ -75,6 +76,7 @@ int	more_quote_handling(char *input, int *track, int sing_or_doub)
 		if (input[(*track)] != '"')
 		{
 			printf("mini: unexpected EOF while looking for matching `\"'\n");
+			shell->exit_status = 1337;
 			return (0);
 		}
 		(*track)++;
