@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:34:50 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/11 20:45:32 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/12 12:16:21 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*norm_for_dollar_hand(char *value, t_shell *mini)
 
 t_bool	standard_case(t_shell *shll)
 {
+	// printf("value of is %s\n", shll->tkn->value);
 	if (ft_strcmp(shll->tkn->value, "export") == 0)
 		return (TRUE);
 	return (FALSE);

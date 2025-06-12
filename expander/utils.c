@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/11 20:51:29 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/12 11:56:17 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	split_in_case(t_token *token, t_shell *mini)
 {
 	char	**split;
 
-	(void)mini;
 	split = NULL;
 	if (standard_case(mini))
 		return ;

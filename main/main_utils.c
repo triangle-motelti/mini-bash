@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/06 13:39:40 by kali             ###   ########.fr       */
+/*   Updated: 2025/06/12 12:11:02 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	parsing_and_expanding(t_shell *mini)
 		mini->exit_status = 1;
 		return (FALSE);
 	}
-	mini->tkn = mini->tokens;
+	mini->tkn = mini->tokens; // for this to work i need to duplicate it so that even  i changed it it doesn't affect the other
 	if (!expander(mini))
 	{
 		clear_tokens(&mini->tokens);
