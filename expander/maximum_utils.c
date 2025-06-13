@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:34:50 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/12 12:16:21 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/13 12:11:08 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,94 +29,87 @@ char	*norm_for_dollar_hand(char *value, t_shell *mini)
 
 t_bool	standard_case(t_shell *shll)
 {
-	// printf("value of is %s\n", shll->tkn->value);
 	if (ft_strcmp(shll->tkn->value, "export") == 0)
 		return (TRUE);
 	return (FALSE);
 }
 
-size_t	ft_count_words(t_token *tkn, char delim)
+void	norm_optimazition(int *flag, size_t *cnt)
 {
-	char	*s;
-	int		flag;
-	size_t	cnt;
-	int		i;
-	char	quote;
-
-	s = tkn->value;
-	cnt = 0;
-	i = 0;
-	flag = 0;
-	while (s[i])
-	{
-		if (s[i] == '\'' || s[i] == '"')
-		{
-		   quote = s[i];
-			i++;
-			while (s[i] && s[i] != quote)
-				i++;
-			if (s[i] && s[i] == quote)
-				i++;
-			cnt++;
-			flag = 0;
-		}
-		else if (s[i] == delim)
-		{
-			flag = 0;
-			i++;
-		}
-		else if (s[i] != delim && flag == 0)
-		{
-			flag = 1;
-			cnt++;
-			i++;
-		}
-		else
-			i++;
-	}
-	return cnt;
+	*flag = 1;
+	(*cnt)++;
 }
 
-char	**advanced_split(t_token *tkn, char delim)
+size_t	ft_count_words(t_token *tkn, char delim, int flag, int i)
+{
+	size_t	cnt;
+	char	quote;
+
+	cnt = 0;
+	while (tkn->value[i])
+	{
+		if (tkn->value[i] == '\'' || tkn->value[i] == '"')
+		{
+			quote = tkn->value[i];
+			i++;
+			while (tkn->value[i] && tkn->value[i] != quote)
+				i++;
+			cnt++;
+			flag = 0;
+		}
+		else if (tkn->value[i] == delim)
+			flag = 0;
+		else if (tkn->value[i] != delim && flag == 0)
+			norm_optimazition(&flag, &cnt);
+		if (tkn->value[i])
+			i++;
+	}
+	return (cnt);
+}
+
+char	*adv_split_normalzing(char *list, int *i, char *s)
+{
+	char	quote;
+	int		start;
+
+	while (s[*i] && s[*i] == ' ')
+		(*i)++;
+	start = *i;
+	if (s[*i] == '\'' || s[*i] == '"')
+	{
+		quote = s[*i];
+		(*i)++;
+		while (s[*i] && s[*i] != quote)
+			(*i)++;
+		if (s[*i] && s[*i] == quote)
+			(*i)++;
+	}
+	else
+	{
+		while (s[*i] && s[*i] != ' ' && (s[*i] != '\'' && s[*i] != '"'))
+			(*i)++;
+	}
+	list = ft_substr(s, start, *i - start);
+	return (list);
+}
+
+char	**advanced_split(t_token *tkn, char delim, int i, size_t w)
 {
 	char	*s;
 	size_t	words;
 	char	**list;
-	size_t	w;
-	int		i;
-	int		start;
-	char	quote;
 
-	words = ft_count_words(tkn, delim);
-	w = 0;
-	i = 0;
+	words = ft_count_words(tkn, delim, 0, 0);
 	s = tkn->value;
 	if (tkn->spaces + 1 != words)
 		return (NULL);
 	list = malloc((words + 1) * sizeof(char *));
 	if (!list)
-		return NULL;
+		return (NULL);
 	while (w < words)
 	{
-		while (s[i] && s[i] == delim)
-			i++;
-		start = i;
-		if (s[i] == '\'' || s[i] == '"')
-		{
-			quote = s[i];
-			i++;
-			while (s[i] && s[i] != quote)
-				i++;
-			if (s[i] && s[i] == quote)
-				i++;
-		}
-		else
-		{
-			while (s[i] && s[i] != delim && (s[i] != '\'' && s[i] != '"'))
-				i++;
-		}
-		list[w++] = ft_substr(s, start, i - start);
-		if (!list[w-1])
+		list[w++] = adv_split_normalzing(*list, &i, s);
+		if (!list[w - 1])
 		{
 			while (w-- > 0)
 				free(list[w]);

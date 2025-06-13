@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/12 11:56:17 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/13 09:44:49 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	split_in_case(t_token *token, t_shell *mini)
 	if (standard_case(mini))
 		return ;
 	if (token->quote == QUOTE && ft_strchr_sp(token->value, token) != 0)
-		split = advanced_split(token, ' ');
+		split = advanced_split(token, ' ', 0, 0);
 	if (token->quote == NQUOTE && (ft_strchr(token->value, ' ') != NULL))
 		split = ft_split(token->value, ' ');
 	if (!split || !split[0] || !split[1])

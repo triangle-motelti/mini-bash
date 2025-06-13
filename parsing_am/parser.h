@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 22:37:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/12 20:56:08 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/28 20:00:09 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void		add_token(t_shell *mini, char *sep, int type);
 void		free_tokens(t_token *tokens);
 void		free_env(t_env *env);
 
-int			more_quote_handling(char *input, int *track, int sing_or_doub, t_shell *shell);
+int			more_quote_handling(char *input, int *track, int sing_or_doub);
 
 #endif
