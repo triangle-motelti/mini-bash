@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:56:32 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:07:51 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/13 18:10:29 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	handle_append_case(t_shell *mini, t_env *found, char *key, char *value)
 	return (free(value), ret);
 }
 
-int	handle_non_append_case(t_shell *mini, t_env *found, char *key, char *value)
+int	non_append_case(t_shell *mini, t_env *found, char *key, char *value)
 {
 	int	ret;
 

@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:59:16 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:08:58 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/13 18:14:28 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	extract_key_value(char *arg, char **key, char **value, int *is_append)
 		return (without_equal_sign(arg, key, value, is_append));
 }
 
-int	update_or_append_env(t_shell *mini, char *key, char *value, int is_append)
+int	update_append_env(t_shell *mini, char *key, char *value, int is_append)
 {
 	t_env	*found;
 
@@ -31,5 +31,5 @@ int	update_or_append_env(t_shell *mini, char *key, char *value, int is_append)
 	if (is_append)
 		return (handle_append_case(mini, found, key, value));
 	else
-		return (handle_non_append_case(mini, found, key, value));
+		return (handle_append_case(mini, found, key, value));
 }

@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:29:45 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:02:19 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/13 18:13:52 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	parse_and_add_variable(t_shell *mini, char *arg)
 		return (1);
 	if (validate_export_key(arg, key, value, is_append))
 		return (1);
-	return (update_or_append_env(mini, key, value, is_append));
+	return (update_append_env(mini, key, value, is_append));
 }
 
 void	ft_export(t_shell *mini, int ac, char **av)

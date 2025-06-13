@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:02:46 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/10 17:10:43 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/06/13 19:14:16 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	exit_number(char **args, int status)
 	else
 	{
 		ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-		ft_putstr_fd(args[1],       STDERR_FILENO);
+		ft_putstr_fd(args[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		exit(2);
 	}
@@ -44,7 +44,7 @@ static void	exit_cases(int ac, char **args, int status, t_shell *shell)
 			ft_putstr_fd("exit\n", STDERR_FILENO);
 		ft_putstr_fd("minishell: exit: too many arguments\n", STDERR_FILENO);
 		shell->exit_status = 1;
-		return;
+		return ;
 	}
 	exit_number(args, status);
 }
