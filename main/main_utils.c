@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/12 12:11:02 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:03:25 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_bool	parsing_and_expanding(t_shell *mini)
 	if (!parser(mini))
 	{
 		clear_tokens(&mini->tokens);
-		mini->exit_status = 1;
+		mini->exit_status = 2;
 		return (FALSE);
 	}
 	mini->tkn = mini->tokens; // for this to work i need to duplicate it so that even  i changed it it doesn't affect the other

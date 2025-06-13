@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:35:58 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 20:12:54 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:15:11 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ t_bool	tokenizer(t_shell *mini, char *input, int i, int len)
 		else if (input[i] == '"' || input[i] == '\'')
 		{
 			if (!handle_quotes(mini, input, &i, 0))
-				return (FALSE);
+				return (mini->exit_status = 2, FALSE);
 		}
 		else
 		{
