@@ -6,13 +6,13 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:56:16 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:58:38 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 15:18:57 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "envirement.h"
 
-static int	env_count(t_env *env)
+int	env_count(t_env *env)
 {
 	int	count;
 

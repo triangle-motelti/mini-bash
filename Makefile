@@ -6,7 +6,7 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/05/29 17:41:27 by motelti          ###   ########.fr        #
+#    Updated: 2025/06/14 15:19:59 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,11 @@ LIBFT_SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 	ft_lstlast.c ft_lstadd_back.c ft_lstclear.c check_stuff.c ft_lstsize.c \
 	ft_realloc.c ft_strrchr.c
 
-EXPENDER_SRC = expander.c env_copy.c utils.c ambiguous.c more_utils.c maximum_utils.c
+EXPENDER_SRC = expander.c utils.c ambiguous.c more_utils.c maximum_utils.c
 
 PARSER_SRC = parser.c  token_utils.c tokenizer.c
 
-ENVP_SRC = envirement.c build_env.c 
+ENVP_SRC = envirement.c build_env.c env_utils.c 
 
 SIG_SRC = signal.c
 
