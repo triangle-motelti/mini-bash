@@ -6,11 +6,30 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 10:46:07 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:45:24 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 11:30:35 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cmds.h"
+
+char	*process_quoted_delimiter(char *delimiter)
+{
+	size_t	len;
+
+	if (delimiter[0] == '\'' || delimiter[0] == '"')
+	{
+		len = ft_strlen(delimiter);
+		if (len >= 2 && delimiter[len - 1] == delimiter[0])
+			return (ft_strndup(delimiter + 1, len - 2));
+		else
+		{
+			printf("syntax error: unclosed quote in delimiter\n");
+			return (NULL);
+		}
+	}
+	else
+		return (ft_strdup(delimiter));
+}
 
 int	add_redir(t_command *cmd, t_redir **last, int flag, char *file)
 {

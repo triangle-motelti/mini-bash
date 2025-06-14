@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:40:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:17:08 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 11:31:14 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,21 @@ int	update_env_node(t_env *node, char *value)
 {
 	char	*newval;
 
-	if (!value)
-		return (0);
-	newval = ft_strdup(value);
-	if (!newval)
-		return (1);
 	free(node->value);
-	node->value = newval;
+	node->value = NULL;
+	if (!value)
+	{
+		node->value = ft_strdup("");
+		if (!node->value)
+			return (1);
+	}
+	else
+	{
+		newval = ft_strdup(value);
+		if (!newval)
+			return (1);
+		node->value = newval;
+	}
 	return (0);
 }
 

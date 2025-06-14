@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/13 13:03:25 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 11:38:04 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_bool	parsing_and_expanding(t_shell *mini)
 		mini->exit_status = 2;
 		return (FALSE);
 	}
-	mini->tkn = mini->tokens; // for this to work i need to duplicate it so that even  i changed it it doesn't affect the other
+	mini->tkn = mini->tokens;
 	if (!expander(mini))
 	{
 		clear_tokens(&mini->tokens);
@@ -86,8 +86,10 @@ void	empty_env(t_shell *minishell)
 	char	*shlvl_value;
 	char	*path_key;
 	char	*path_value;
+	char	*deflt_path;
 
 	pwd_env(minishell);
+	deflt_path = "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin";
 	if (!find_env_node(minishell->env, "SHLVL"))
 	{
 		shlvl_key = ft_strdup("SHLVL");
@@ -99,7 +101,7 @@ void	empty_env(t_shell *minishell)
 	if (!find_env_node(minishell->env, "PATH"))
 	{
 		path_key = ft_strdup("PATH");
-		path_value = ft_strdup("/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin");
+		path_value = ft_strdup(deflt_path);
 		if (path_key && path_value)
 			append_env_node(minishell, path_key, path_value);
 		free(path_value);

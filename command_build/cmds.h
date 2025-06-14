@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:01:55 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:54:31 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 11:30:47 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ t_command	*build_commands(t_token *tokens, t_shell *shell);
 int			add_redir(t_command *cmd, t_redir **last, int flag, char *file);
 int			add_redirc(t_command *cmd, t_redir **last, int flag, char *delim);
 void		set_heredoc_expand(t_redir *last, int flag, int expand_vars);
+
+char		*process_quoted_delimiter(char *delimiter);
 
 #endif

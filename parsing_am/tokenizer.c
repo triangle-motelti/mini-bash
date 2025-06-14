@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 16:35:58 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/13 13:15:11 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 12:02:07 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ int	handle_word(t_shell *mini, char *input, int i)
 		if (quote == '\'')
 		{
 			if (!more_quote_handling(input, &track, 1))
-				return (0);
+				return (mini->exit_status = 2, 0);
 		}
 		else if (quote == '"')
 		{
 			if (!more_quote_handling(input, &track, 2))
-				return (0);
+				return (mini->exit_status = 2, 0);
 		}
 		else
 			track++;

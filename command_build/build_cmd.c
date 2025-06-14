@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:09:18 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/13 18:40:45 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 11:30:30 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,33 +15,22 @@
 static char	*extract_delimiter(t_token *next_tok, int *expand_vars)
 {
 	char	*delimiter;
-	size_t	len;
 
 	delimiter = next_tok->value;
 	*expand_vars = 1;
 	if (next_tok->quote == QUOTE)
 	{
-		if (delimiter[0] == '\'' || delimiter[0] == '"')
-		{
-			len = ft_strlen(delimiter);
-			if (len >= 2 && delimiter[len - 1] == delimiter[0])
-				delimiter = ft_strndup(delimiter + 1, len - 2);
-			else
-			{
-				printf("syntax error: unclosed quote in delimiter\n");
-				return (NULL);
-			}
-		}
-		else
-		{
-			delimiter = ft_strdup(delimiter);
-			if (delimiter == NULL)
-				return (NULL);
-		}
+		delimiter = process_quoted_delimiter(delimiter);
+		if (!delimiter)
+			return (NULL);
 		*expand_vars = 0;
 	}
 	else
+	{
 		delimiter = ft_strdup(delimiter);
+		if (!delimiter)
+			return (NULL);
+	}
 	return (delimiter);
 }
 

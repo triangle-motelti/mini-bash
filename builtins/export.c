@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:29:45 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/13 18:13:52 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/14 11:01:26 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,15 +60,13 @@ int	append_env_node(t_shell *mini, char *key, char *value)
 
 int	parse_and_add_variable(t_shell *mini, char *arg)
 {
-	char	*key;
-	char	*value;
-	int		is_append;
+	t_kv	kv;
 
-	if (extract_key_value(arg, &key, &value, &is_append))
+	if (extract_key_value(arg, &kv))
 		return (1);
-	if (validate_export_key(arg, key, value, is_append))
+	if (validate_export_key(arg, kv.key, kv.value, kv.is_append))
 		return (1);
-	return (update_append_env(mini, key, value, is_append));
+	return (update_append_env(mini, kv.key, kv.value, kv.is_append));
 }
 
 void	ft_export(t_shell *mini, int ac, char **av)
