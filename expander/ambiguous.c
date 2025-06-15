@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:41:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 17:51:37 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/15 10:19:00 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,11 @@ void	ambiguous_case(t_token *tokens, t_shell *mini)
 			tokens->ambiguous = 1;
 		free_args(split);
 	}
+}
+
+t_bool	standard_case(t_shell *shll)
+{
+	if (ft_strcmp(shll->tkn->value, "export") == 0)
+		return (TRUE);
+	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:34:50 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/13 12:11:08 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/15 10:19:09 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,6 @@ char	*norm_for_dollar_hand(char *value, t_shell *mini)
 		extracted_val[k++] = value[(mini->i)++];
 	extracted_val[k] = '\0';
 	return (extracted_val);
-}
-
-t_bool	standard_case(t_shell *shll)
-{
-	if (ft_strcmp(shll->tkn->value, "export") == 0)
-		return (TRUE);
-	return (FALSE);
 }
 
 void	norm_optimazition(int *flag, size_t *cnt)
