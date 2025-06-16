@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:48:11 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/14 11:02:15 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/16 18:35:23 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int		is_builtin(char *cmd);
 
 void	echo(int ac, char **av);
 int		cd(t_shell *shell, int ac, char **args);
-void	pwd(int ac);
+void	pwd(t_shell *shell, int ac);
 void	ft_exit(int ac, char **args, t_shell *shell);
 void	ft_env(t_shell *mini, int ac, char **av);
 void	unset(t_shell *mini, int ac, char **args);
