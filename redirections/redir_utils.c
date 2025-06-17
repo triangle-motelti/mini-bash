@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 14:54:36 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/17 17:35:59 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,13 @@ static char	*read_heredoc_line(const char *delimiter)
 		return (NULL);
 	}
 	if (!line)
+	{
+		ft_putstr_fd("minishell: warning: here-document at", STDERR_FILENO);
+		ft_putstr_fd(" line 14 delimited by end-of-file (wanted `", 2);
+		ft_putstr_fd(delimiter, STDERR_FILENO);
+		ft_putstr_fd("')\n", 2);
 		return (NULL);
+	}
 	if (ft_strcmp(line, delimiter) == 0)
 		return (free(line), NULL);
 	return (line);
