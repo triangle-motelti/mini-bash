@@ -6,13 +6,13 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:40:48 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 11:18:40 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/17 16:40:09 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
 
-void	echo(int ac, char **av)
+void	echo(int ac, char **av, t_shell *shell)
 {
 	int	newline;
 	int	start;
@@ -35,4 +35,5 @@ void	echo(int ac, char **av)
 	}
 	if (newline)
 		ft_putstr_fd("\n", STDOUT_FILENO);
+	shell->exit_status = 0;
 }
