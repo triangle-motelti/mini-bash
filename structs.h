@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: kali <kali@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:17:03 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/11 20:48:29 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/17 19:11:28 by kali             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_token
 	t_bool			var_exist;
 	int				flag;
 	size_t			spaces;
+	int				standard_case;
 	int				ambiguous;
 	int				quote;
 	int				status;
@@ -84,7 +85,6 @@ typedef struct s_minishell
 	t_command	*cmds;
 	t_env		*env;
 	t_token		*tokens;
-	t_token		*tkn;
 	int			i;
 	int			j;
 	int			exit_status;
