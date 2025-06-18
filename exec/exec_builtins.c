@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:44:01 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/17 16:40:45 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/18 19:16:58 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	exec_child(t_shell *shell, t_command *cmd)
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	setup_redirections(cmd->redirs);
+	setup_redirections(cmd->redirs, shell);
 	if (cmd->args && cmd->args[0] && is_builtin(cmd->args[0]))
 	{
 		exec_builtin(shell, cmd->args);

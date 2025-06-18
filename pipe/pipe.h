@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:17:38 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/28 14:34:51 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/18 19:26:05 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		count_cmds(t_command *cmd);
 void	init_pipeline_info(t_pipeline_info *info, int count);
 int		open_pipes(t_pipeline_info *info);
 void	close_pipes(t_pipeline_info *info);
+void	set_pipe_status(t_shell *shell, int status);
 
 void	execute_pipeline(t_shell *shell, t_command *cmds);
 

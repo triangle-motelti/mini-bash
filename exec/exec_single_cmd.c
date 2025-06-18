@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:00:06 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/14 10:24:46 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/18 19:17:06 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	execute_single_command(t_shell *shell, t_command *cmd)
 	setup_signal_and_heredoc(shell, cmd, &sa_ignore, &sa_original);
 	if (is_simple_builtin(shell, cmd))
 	{
-		setup_redirections(cmd->redirs);
+		setup_redirections(cmd->redirs, shell);
 		exec_builtin(shell, cmd->args);
 		sigaction(SIGINT, &sa_original, NULL);
 		return ;
