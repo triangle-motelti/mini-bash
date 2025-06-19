@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:23 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 14:45:18 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/19 23:24:35 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	fork_suces(char *input, int pipe_fd[2], t_redir *redir, t_shell *shell)
 	{
 		close(pipe_fd[0]);
 		close(pipe_fd[1]);
-		exit(130);
+		exit(0);
 	}
 	if (redir->expand_var)
 	{
@@ -76,15 +76,20 @@ void	fork_fails(pid_t pid, int pipe_fd[2], t_redir *redir, t_shell *shell)
 
 	waitpid(pid, &status, 0);
 	close(pipe_fd[1]);
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+	if (WIFEXITED(status))
 	{
+		if (WEXITSTATUS(status) == 130)
+            redir->heredoc_fd = 69;
+        else
+            redir->heredoc_fd = -69;
 		shell->exit_status = 130;
-		redir->heredoc_fd = -1;
+		// redir->heredoc_fd = -1;
 		close(pipe_fd[0]);
 		return ;
 	}
 	redir->heredoc_fd = pipe_fd[0];
 }
+
 
 void	herdoc_chck(t_shell *shell, int pipe_fd[2], t_redir *redir, char *input)
 {

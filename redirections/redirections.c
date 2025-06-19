@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:45:38 by motelti           #+#    #+#             */
-/*   Updated: 2025/05/10 18:40:52 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/19 23:23:03 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,10 @@
 
 static void	heredoc_flag(t_redir *redirs)
 {
-	if (redirs->heredoc_fd == -1)
-		exit(1);
+	if (redirs->heredoc_fd == 69)
+		exit(130);
+	else
+		exit(0);
 	dup2(redirs->heredoc_fd, STDIN_FILENO);
 	close(redirs->heredoc_fd);
 }
