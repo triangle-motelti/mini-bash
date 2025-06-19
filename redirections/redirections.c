@@ -6,24 +6,21 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 13:45:38 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/18 19:18:35 by motelti          ###   ########.fr       */
+/*   Updated: 2025/05/10 18:40:52 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
 
-static void	heredoc_flag(t_redir *redirs, t_shell *shell)
+static void	heredoc_flag(t_redir *redirs)
 {
 	if (redirs->heredoc_fd == -1)
-	{
-		shell->exit_status = 1;
-		return ;
-	}
+		exit(1);
 	dup2(redirs->heredoc_fd, STDIN_FILENO);
 	close(redirs->heredoc_fd);
 }
 
-static void	input_flag(t_redir *redirs, t_shell *shell)
+static void	input_flag(t_redir *redirs)
 {
 	int	fd;
 
@@ -34,14 +31,13 @@ static void	input_flag(t_redir *redirs, t_shell *shell)
 		ft_putstr_fd(redirs->file, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 		perror("");
-		shell->exit_status = 1;
-		return ;
+		exit(EXIT_FAILURE);
 	}
 	dup2(fd, STDIN_FILENO);
 	close(fd);
 }
 
-static void	trunc_flag(t_redir *redirs, t_shell *shell)
+static void	trunc_flag(t_redir *redirs)
 {
 	int	fd;
 
@@ -52,14 +48,13 @@ static void	trunc_flag(t_redir *redirs, t_shell *shell)
 		ft_putstr_fd(redirs->file, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 		perror("");
-		shell->exit_status = 1;
-		return ;
+		exit(EXIT_FAILURE);
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }
 
-static void	append_flag(t_redir *redirs, t_shell *shell)
+static void	append_flag(t_redir *redirs)
 {
 	int	fd;
 
@@ -70,25 +65,24 @@ static void	append_flag(t_redir *redirs, t_shell *shell)
 		ft_putstr_fd(redirs->file, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 		perror("");
-		shell->exit_status = 1;
-		return ;
+		exit(EXIT_FAILURE);
 	}
 	dup2(fd, STDOUT_FILENO);
 	close(fd);
 }
 
-void	setup_redirections(t_redir *redirs, t_shell *shell)
+void	setup_redirections(t_redir *redirs)
 {
 	while (redirs)
 	{
 		if (redirs->flag == INPUT)
-			input_flag(redirs, shell);
+			input_flag(redirs);
 		else if (redirs->flag == HEREDOC)
-			heredoc_flag(redirs, shell);
+			heredoc_flag(redirs);
 		else if (redirs->flag == TRUNC)
-			trunc_flag(redirs, shell);
+			trunc_flag(redirs);
 		else if (redirs->flag == APPEND)
-			append_flag(redirs, shell);
+			append_flag(redirs);
 		redirs = redirs->next;
 	}
 }

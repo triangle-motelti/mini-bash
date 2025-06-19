@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:34:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/14 11:48:30 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/19 18:41:09 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ t_bool	parser(t_shell *mini)
 	if (!mini->tokens)
 		return (FALSE);
 	if (!check_pipe(mini->tokens) || !check_redirections(mini->tokens))
-		return (FALSE);
+		return (mini->exit_status = 2, FALSE);
 	return (TRUE);
 }

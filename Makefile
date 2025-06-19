@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra
 RM		= @rm -f
 
 
@@ -68,7 +68,7 @@ OBJ		= $(SRC:.c=.o)
 
 
 
-all: $(NAME) clean
+all: $(NAME)
 
 
 %.o: %.c $(HEADER)

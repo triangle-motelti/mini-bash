@@ -6,13 +6,13 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:18:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/18 19:25:41 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/19 21:05:35 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
 
-void	exec_pipe_setup(t_shell *shell, t_command *cmd,
+void	exec_pipe_setup(t_command *cmd,
 							t_pipeline_info *info, int i)
 {
 	signal(SIGINT, SIG_DFL);
@@ -22,12 +22,12 @@ void	exec_pipe_setup(t_shell *shell, t_command *cmd,
 	if (i < info->count - 1)
 		dup2(info->pipes[i][1], STDOUT_FILENO);
 	close_pipes(info);
-	setup_redirections(cmd->redirs, shell);
+	setup_redirections(cmd->redirs);
 }
 
 void	exec_pipe(t_shell *shell, t_command *cmd, t_pipeline_info *info, int i)
 {
-	exec_pipe_setup(shell, cmd, info, i);
+	exec_pipe_setup(cmd, info, i);
 	if (!cmd->args || !cmd->args[0])
 	{
 		if (cmd->redirs)

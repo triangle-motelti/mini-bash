@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/17 22:32:18 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/19 18:40:32 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ t_bool	parsing_and_expanding(t_shell *mini)
 	if (!parser(mini))
 	{
 		clear_tokens(&mini->tokens);
-		mini->exit_status = 2;
 		return (FALSE);
 	}
 	if (ft_strcmp(mini->tokens->value, "export") == 0)
