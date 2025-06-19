@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 12:09:18 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/14 11:30:30 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/19 12:17:54 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,10 @@ int	set_redir(t_command *cmd, t_redir **last, t_token **tok_ptr, t_shell *shell)
 	next_tok = tok->next;
 	if (!next_tok || next_tok->flag != WORD)
 	{
-		printf("syntax error near unexpected toke\n");
-		return (shell->exit_status = 0, 1);
+		ft_putstr_fd("mini-shell: syntax error near unexpected token `", 2);
+		ft_putstr_fd(next_tok->value, 2);
+		ft_putstr_fd("'\n", 2);
+		return (shell->exit_status = 2, 1);
 	}
 	delimiter = extract_delimiter(next_tok, &expand_vars);
 	if (!delimiter)
