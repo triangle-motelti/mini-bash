@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 18:34:50 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/15 10:19:09 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:52:07 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ char	**advanced_split(t_token *tkn, char delim, int i, size_t w)
 
 	words = ft_count_words(tkn, delim, 0, 0);
 	s = tkn->value;
-	if (tkn->spaces + 1 != words)
-		return (NULL);
 	list = malloc((words + 1) * sizeof(char *));
 	if (!list)
 		return (NULL);

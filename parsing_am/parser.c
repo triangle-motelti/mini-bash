@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:34:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/14 11:48:30 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/21 11:08:43 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,20 @@ t_bool	check_pipe(t_token *tokens)
 	return (TRUE);
 }
 
+int	count_herdoc(t_token *tmp_tkn)
+{
+	int	cnt;
+
+	cnt = 0;
+	while (tmp_tkn)
+	{
+		if (tmp_tkn->flag == HEREDOC)
+			cnt++;
+		tmp_tkn = tmp_tkn->next;
+	}
+	return (cnt);
+}
+
 t_bool	check_redirections(t_token *tokens)
 {
 	t_token	*tmp;
@@ -49,6 +63,11 @@ t_bool	check_redirections(t_token *tokens)
 			|| (tmp->flag == APPEND && !tmp->next))
 		{
 			printf("mini: syntax error near unexpected token `redirection'\n");
+			return (FALSE);
+		}
+		if (count_herdoc(tmp) > 16)
+		{
+			printf("mini: maximum here-document count exceeded\n");
 			return (FALSE);
 		}
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/13 09:44:49 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:52:48 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,11 @@ void	pass_quote(t_token *tkn, char **new_str, int *j, int *i)
 
 	value = tkn->value;
 	quote = tkn->value[*i];
+	if (!has_complement(value, *i))
+	{
+		(*new_str)[(*j)++] = value[(*i)++];
+		return ;
+	}
 	(*i)++;
 	while (value[*i] && value[*i] != quote)
 	{

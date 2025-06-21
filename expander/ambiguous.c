@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:41:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/17 22:32:02 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:52:31 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,18 @@ t_bool	standard_case(t_shell *shll)
 	if (shll->tokens->standard_case == 1)
 		return (TRUE);
 	return (FALSE);
+}
+
+t_bool	has_complement(char *value, int i)
+{
+	char	quote;
+
+	quote = value[i];
+	i++;
+	while (value[i] && value[i] != quote)
+		i++;
+	if (value[i] == quote)
+		return (TRUE);
+	else
+		return (FALSE);
 }

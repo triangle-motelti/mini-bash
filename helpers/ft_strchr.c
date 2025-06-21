@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:42:11 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/11 20:47:31 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/21 11:51:54 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_strchr_sp(char *value, t_token *tkn)
 		}
 		else if (value[i] == ' ')
 			tkn->spaces++;
-		i++;
+		if (value[i])
+			i++;
 	}
 	return (tkn->spaces);
 }
