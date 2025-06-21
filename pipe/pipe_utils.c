@@ -25,21 +25,6 @@ int	count_cmds(t_command *cmd)
 	return (i);
 }
 
-void	set_pipe_status(t_shell *shell, int status)
-{
-	int	sig;
-
-	if (WIFEXITED(status))
-		shell->exit_status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-	{
-		sig = WTERMSIG(status);
-		if (sig == SIGQUIT)
-			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
-		shell->exit_status = 128 + sig;
-	}
-}
-
 void	init_pipeline_info(t_pipeline_info *info, int count)
 {
 	info->count = count;

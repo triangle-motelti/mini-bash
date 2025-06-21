@@ -6,14 +6,13 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:18:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/19 21:05:35 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/13 18:21:48 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipe.h"
 
-void	exec_pipe_setup(t_command *cmd,
-							t_pipeline_info *info, int i)
+void	exec_pipe(t_shell *shell, t_command *cmd, t_pipeline_info *info, int i)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
@@ -23,18 +22,8 @@ void	exec_pipe_setup(t_command *cmd,
 		dup2(info->pipes[i][1], STDOUT_FILENO);
 	close_pipes(info);
 	setup_redirections(cmd->redirs);
-}
-
-void	exec_pipe(t_shell *shell, t_command *cmd, t_pipeline_info *info, int i)
-{
-	exec_pipe_setup(cmd, info, i);
-	if (!cmd->args || !cmd->args[0])
-	{
-		if (cmd->redirs)
-			exit(shell->exit_status);
-		exit(0);
-	}
-	exec_child(shell, cmd);
+	if (cmd->args[0])
+		exec_child(shell, cmd);
 }
 
 int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
@@ -57,21 +46,36 @@ int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
 	return (i);
 }
 
+static void	pipe_status(t_shell *shell, int sig, int status)
+{
+	if (WIFEXITED(status))
+		shell->exit_status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+	{
+		sig = WTERMSIG(status);
+		if (sig == SIGQUIT)
+			write(STDOUT_FILENO, "Quit (core dumped)\n", 19);
+		shell->exit_status = 128 + sig;
+	}
+}
+
 static void	wait_pipeline(t_shell *shell, t_pipeline_info *info)
 {
 	int	i;
 	int	status;
 	int	interrupted;
+	int	sig;
 
 	i = 0;
 	interrupted = 0;
+	sig = 0;
 	while (i < info->count)
 	{
 		waitpid(info->pids[i], &status, 0);
 		if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
 			interrupted = 1;
 		if (i == info->count - 1)
-			set_pipe_status(shell, status);
+			pipe_status(shell, sig, status);
 		i++;
 	}
 	if (interrupted)
