@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:23 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 14:45:18 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/21 21:55:10 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,11 @@ void	herdoc_chck(t_shell *shell, int pipe_fd[2], t_redir *redir, char *input)
 			if (pid == 0)
 				fork_suces(input, pipe_fd, redir, shell);
 			else if (pid > 0)
+			{
 				fork_fails(pid, pipe_fd, redir, shell);
+				if (shell->exit_status == 130)
+					return ;
+			}
 			else
 			{
 				perror("minishell: fork");

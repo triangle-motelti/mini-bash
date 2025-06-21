@@ -6,12 +6,12 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/06/14 15:19:59 by motelti          ###   ########.fr        #
+#    Updated: 2025/06/21 21:22:59 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra #-fsanitize=address
 RM		= @rm -f
 
 
