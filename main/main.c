@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/21 21:53:30 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/22 20:03:37 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int	shell(t_shell *mini)
 		if (!input)
 			return (ft_putstr_fd("exit\n", STDERR_FILENO), mini->exit_status);
 		process_input(mini, input);
+		closefd();
 	}
 	return (mini->exit_status);
 }

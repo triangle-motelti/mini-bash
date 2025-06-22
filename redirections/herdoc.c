@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:23 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/21 21:55:10 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/22 19:55:44 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	fork_suces(char *input, int pipe_fd[2], t_redir *redir, t_shell *shell)
 	else
 		ft_putstr_fd(input, pipe_fd[1]);
 	free(input);
+	close(pipe_fd[0]);
 	close(pipe_fd[1]);
 	exit(0);
 }

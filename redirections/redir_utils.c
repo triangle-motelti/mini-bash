@@ -3,20 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   redir_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/21 21:54:21 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/22 18:03:49 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
+
+void	closefd(void)
+{
+	int			fd;
+	struct stat	st;
+
+	fd = 3;
+	while (fd < 1024)
+	{
+		if (fstat(fd, &st) == 0)
+		{
+			close(fd);
+		}
+		fd++;
+	}
+}
 
 void	heredoc_sigint_handler(int sig)
 {
 	(void)sig;
 	g_received_signal = 1;
 	write(STDOUT_FILENO, "\n", 1);
+	closefd();
 	rl_replace_line("", 0);
 	rl_on_new_line();
 	exit(130);
