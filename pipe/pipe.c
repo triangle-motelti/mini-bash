@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:18:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/13 18:21:48 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/22 17:20:28 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void	exec_pipe(t_shell *shell, t_command *cmd, t_pipeline_info *info, int i)
 		dup2(info->pipes[i][1], STDOUT_FILENO);
 	close_pipes(info);
 	setup_redirections(cmd->redirs);
-	if (cmd->args[0])
-		exec_child(shell, cmd);
+	exec_child(shell, cmd);
 }
 
 int	fork_pipeline(t_shell *shell, t_command *cmds, t_pipeline_info *info)
