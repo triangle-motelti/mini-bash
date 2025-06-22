@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
+#    By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/06/21 21:22:59 by motelti          ###   ########.fr        #
+#    Updated: 2025/06/22 22:16:34 by mohamed          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SIG_SRC = signal.c
 
 FREE_MEM_SRC = free_memory.c
 
-REDIREC_SRC = redirections.c redir_utils.c herdoc.c
+REDIREC_SRC = redirections.c redir_utils.c herdoc.c heredoc_utils.c
 
 BUILD_CMD_SRC =  build_cmd.c cmd_utils.c cmd_helpers.c
 

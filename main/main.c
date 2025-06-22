@@ -6,11 +6,40 @@
 /*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/22 20:03:37 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/06/22 22:14:39 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+t_bool	check_ambiguous_redirect(t_shell *mini)
+{
+	t_token	*token;
+	t_token	*next;
+
+	token = mini->tokens;
+	while (token)
+	{
+		if (token->flag == TRUNC || token->flag == APPEND
+			|| token->flag == INPUT)
+		{
+			next = token->next;
+			if (next && next->ambiguous == 1)
+			{
+				ft_putstr_fd("minishell: ", STDERR_FILENO);
+				if (next->valuebex)
+					ft_putstr_fd(next->valuebex, STDERR_FILENO);
+				else
+					ft_putstr_fd("(null)", STDERR_FILENO);
+				ft_putstr_fd(": ambiguous redirect\n", STDERR_FILENO);
+				mini->exit_status = 1;
+				return (TRUE);
+			}
+		}
+		token = token->next;
+	}
+	return (FALSE);
+}
 
 static int	handle_empty_or_invalid_input(t_shell *mini, char *input)
 {

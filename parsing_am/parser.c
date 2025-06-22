@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:34:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/21 11:08:43 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/22 22:20:12 by mohamed          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ t_bool	check_redirections(t_token *tokens)
 		}
 		if (count_herdoc(tmp) > 16)
 		{
-			printf("mini: maximum here-document count exceeded\n");
-			return (FALSE);
+			ft_putstr_fd("minishell: maximum here-document count exceeded\n", 2);
+			exit(2);
 		}
 		tmp = tmp->next;
 	}
