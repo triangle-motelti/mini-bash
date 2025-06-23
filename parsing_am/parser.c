@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:34:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/23 02:31:22 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/23 13:50:53 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ t_bool	check_redirections(t_token *tokens)
 			|| (tmp->flag == INPUT && !tmp->next)
 			|| (tmp->flag == APPEND && !tmp->next))
 		{
-			printf("mini: syntax error near unexpected token `redirection'\n");
+			ft_putstr_fd("minishell: syntax error near unexpected token `", 2);
+			ft_putstr_fd(tmp->value, 2);
+			ft_putstr_fd("'\n", 2);
 			return (FALSE);
 		}
 		if (count_herdoc(tmp) > 16)
