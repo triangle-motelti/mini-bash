@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   herdoc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:23 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/22 22:14:13 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/06/22 23:46:47 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	handle_fork_error(void)
 	exit(1);
 }
 
-static void	handle_heredoc_process(char *input, int pipe_fd[2], t_redir *redir, t_shell *shell)
+void	handl_herdc(char *input, int pipe_fd[2], t_redir *redir, t_shell *shell)
 {
 	pid_t	pid;
 
@@ -35,14 +35,14 @@ static void	handle_heredoc_process(char *input, int pipe_fd[2], t_redir *redir, 
 		handle_fork_error();
 }
 
-static void	process_heredoc(t_shell *shell, int pipe_fd[2], t_redir *redir, char *input)
+void	prces_herdc(t_shell *shell, int pipe_fd[2], t_redir *redir, char *input)
 {
 	if (pipe(pipe_fd) < 0)
 	{
 		perror("minishell");
 		exit(1);
 	}
-	handle_heredoc_process(input, pipe_fd, redir, shell);
+	handl_herdc(input, pipe_fd, redir, shell);
 }
 
 void	herdoc_chck(t_shell *shell, int pipe_fd[2], t_redir *redir, char *input)
@@ -51,15 +51,13 @@ void	herdoc_chck(t_shell *shell, int pipe_fd[2], t_redir *redir, char *input)
 	{
 		if (redir->flag == HEREDOC)
 		{
-			process_heredoc(shell, pipe_fd, redir, input);
+			prces_herdc(shell, pipe_fd, redir, input);
 			if (shell->exit_status == 130)
 				return ;
 		}
 		redir = redir->next;
 	}
 }
-
-
 
 void	preprocess_heredocs(t_shell *shell, t_command *cmds)
 {

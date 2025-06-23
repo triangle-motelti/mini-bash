@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mohamed <mohamed@student.42.fr>            +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:44:01 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/22 17:20:57 by mohamed          ###   ########.fr       */
+/*   Updated: 2025/06/22 23:41:21 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void	exec_builtins(char **args, int ac, int exit_ac, t_shell *mini)
 
 void	exec_child(t_shell *shell, t_command *cmd)
 {
-	char **envp;
-	char *path;
+	char	**envp;
+	char	*path;
 
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
@@ -78,4 +78,3 @@ void	exec_child(t_shell *shell, t_command *cmd)
 	}
 	exit(0);
 }
-

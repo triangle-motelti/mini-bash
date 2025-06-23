@@ -1,6 +1,32 @@
-//===> header <===
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   heredoc_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/22 23:40:15 by motelti           #+#    #+#             */
+/*   Updated: 2025/06/22 23:41:55 by motelti          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "redirection.h"
+
+void	closefd(void)
+{
+	int			fd;
+	struct stat	st;
+
+	fd = 3;
+	while (fd < 1024)
+	{
+		if (fstat(fd, &st) == 0)
+		{
+			close(fd);
+		}
+		fd++;
+	}
+}
 
 void	heredoc_expand(char *input, int pipe_fd[2], char *expanded_input)
 {
