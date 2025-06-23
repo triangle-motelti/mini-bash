@@ -6,7 +6,7 @@
 #    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/06/23 02:31:31 by motelti          ###   ########.fr        #
+#    Updated: 2025/06/23 22:31:01 by motelti          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ SIG_SRC = signal.c
 
 FREE_MEM_SRC = free_memory.c
 
-REDIREC_SRC = redirections.c redir_utils.c herdoc.c heredoc_utils.c
+REDIREC_SRC = redirections.c redir_utils.c herdoc.c heredoc_utils.c helpers.c
 
 BUILD_CMD_SRC =  build_cmd.c cmd_utils.c cmd_helpers.c
 

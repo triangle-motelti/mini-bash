@@ -6,22 +6,11 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/23 13:55:07 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/23 22:36:21 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
-
-void	heredoc_sigint_handler(int sig)
-{
-	(void)sig;
-	g_received_signal = 1;
-	write(STDOUT_FILENO, "\n", 1);
-	closefd();
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	exit(130);
-}
 
 static char	*read_heredoc_line(const char *delimiter)
 {
@@ -79,23 +68,12 @@ static char	*append_line(char *buf, size_t *sizep, char *line)
 	return (nb);
 }
 
-void	*ctrld_heredoc(char *buf, struct sigaction	sa_old)
+void	signal_setup(struct sigaction sa_heredoc, struct sigaction sa_old)
 {
-	buf = malloc(1);
-	if (!buf)
-		return (NULL);
-	buf[0] = '\0';
-	sigaction(SIGINT, &sa_old, NULL);
-	return (buf);
-}
-
-void	*EOF_heredoc(char *buf)
-{
-	buf = malloc(1);
-	if (!buf)
-		return (NULL);
-	buf[0] = '\0';
-	return (buf);
+	sa_heredoc.sa_handler = heredoc_sigint_handler;
+	sa_heredoc.sa_flags = 0;
+	sigemptyset(&sa_heredoc.sa_mask);
+	sigaction(SIGINT, &sa_heredoc, &sa_old);
 }
 
 char	*collect_heredoc_input(const char *delimiter)
@@ -108,10 +86,7 @@ char	*collect_heredoc_input(const char *delimiter)
 
 	buf = NULL;
 	buf_size = 0;
-	sa_heredoc.sa_handler = heredoc_sigint_handler;
-	sa_heredoc.sa_flags = 0;
-	sigemptyset(&sa_heredoc.sa_mask);
-	sigaction(SIGINT, &sa_heredoc, &sa_old);
+	signal_setup(sa_heredoc, sa_old);
 	line = read_heredoc_line(delimiter);
 	if (!line && !g_received_signal)
 		return (ctrld_heredoc(buf, sa_old));
@@ -125,6 +100,6 @@ char	*collect_heredoc_input(const char *delimiter)
 	}
 	sigaction(SIGINT, &sa_old, NULL);
 	if (!buf && !g_received_signal)
-		return (EOF_heredoc(buf));
+		return (eof_heredoc(buf));
 	return (buf);
 }

@@ -6,11 +6,22 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 23:40:15 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/22 23:41:55 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/23 22:28:58 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
+
+void	heredoc_sigint_handler(int sig)
+{
+	(void)sig;
+	g_received_signal = 1;
+	write(STDOUT_FILENO, "\n", 1);
+	closefd();
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	exit(130);
+}
 
 void	closefd(void)
 {
