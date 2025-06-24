@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 20:45:10 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/23 22:36:21 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/24 10:52:48 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,14 @@ static char	*append_line(char *buf, size_t *sizep, char *line)
 	return (nb);
 }
 
-void	signal_setup(struct sigaction sa_heredoc, struct sigaction sa_old)
+void	init_sigaction(struct sigaction *sa_heredoc, struct sigaction *sa_old)
 {
-	sa_heredoc.sa_handler = heredoc_sigint_handler;
-	sa_heredoc.sa_flags = 0;
-	sigemptyset(&sa_heredoc.sa_mask);
-	sigaction(SIGINT, &sa_heredoc, &sa_old);
+	sa_heredoc->sa_handler = heredoc_sigint_handler;
+	sa_heredoc->sa_flags = 0;
+	sigemptyset(&sa_heredoc->sa_mask);
+	sa_old->sa_handler = NULL;
+	sa_old->sa_flags = 0;
+	sigemptyset(&sa_old->sa_mask);
 }
 
 char	*collect_heredoc_input(const char *delimiter)
@@ -86,6 +88,7 @@ char	*collect_heredoc_input(const char *delimiter)
 
 	buf = NULL;
 	buf_size = 0;
+	init_sigaction(&sa_heredoc, &sa_old);
 	signal_setup(sa_heredoc, sa_old);
 	line = read_heredoc_line(delimiter);
 	if (!line && !g_received_signal)

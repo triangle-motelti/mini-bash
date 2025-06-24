@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/10 17:46:03 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/23 22:30:22 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/24 10:52:08 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	fork_fails(pid_t pid, int pipe_fd[2], t_redir *redir, t_shell *shell);
 
 void	*ctrld_heredoc(char *buf, struct sigaction sa_old);
 void	*eof_heredoc(char *buf);
+void	signal_setup(struct sigaction sa_heredoc, struct sigaction sa_old);
 
 #endif
