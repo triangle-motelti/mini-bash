@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:17:03 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/21 21:13:08 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/25 14:38:52 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ typedef struct s_minishell
 	t_token		*tokens;
 	int			i;
 	int			j;
-	int			exit_status;
+	long		exit_status;
 }	t_shell;
 
 #endif
