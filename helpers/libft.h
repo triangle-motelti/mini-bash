@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:42:17 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/17 17:31:35 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/25 19:00:29 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ int		ft_strcmp(const char *a, const char *b);
 char	*ft_strjoin_sep(const char *s1, const char *s2, const char *sep);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 int		ft_isnumber(const char *str);
+
+int		ft_atol(const char *p, long *result);
 
 #endif
