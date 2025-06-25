@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:40:48 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/17 16:40:09 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/25 19:17:28 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,12 @@ void	echo(int ac, char **av, t_shell *shell)
 
 	newline = 1;
 	start = 1;
-	if (ac > 1 && ft_strncmp(av[1], "-n", 2) == 0)
+	i = 1;
+	while (i < ac && ft_strcmp(av[i], "-n") == 0)
 	{
 		newline = 0;
-		start = 2;
+		start++;
+		i++;
 	}
 	i = start;
 	while (i < ac)
