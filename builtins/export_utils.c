@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:40:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/26 18:34:08 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/26 21:19:29 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,28 @@ t_env	*find_env_node(t_env *env, const char *key)
 	}
 	return (NULL);
 }
+
+// int	update_env_node(t_env *node, char *value)
+// {
+// 	char	*newval;
+
+// 	free(node->value);
+// 	node->value = NULL;
+// 	if (!value)
+// 	{
+// 		node->value = ft_strdup("");
+// 		if (!node->value)
+// 			return (1);
+// 	}
+// 	else
+// 	{
+// 		newval = ft_strdup(value);
+// 		if (!newval)
+// 			return (1);
+// 		node->value = newval;
+// 	}
+// 	return (0);
+// }
 
 int	update_env_node(t_env *node, char *value)
 {
