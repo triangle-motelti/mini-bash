@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 16:56:32 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/14 11:01:33 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/26 20:30:38 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,12 @@ int	non_append_case(t_shell *mini, t_env *found, char *key, char *value)
 
 	if (found)
 	{
-		ret = update_env_node(found, value);
+		// ret = update_env_node(found, value);
 		free(key);
+		ret = 0;
 	}
 	else
 		ret = append_env_node(mini, key, value);
-	return (free(value), ret);
+	free(value);
+	return (ret);
 }

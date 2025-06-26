@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:40:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/14 11:31:14 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/26 18:34:08 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	update_env_node(t_env *node, char *value)
 	}
 	return (0);
 }
+
 
 void	sort(char **env_arr, char *tmp, int *i, int *s)
 {
