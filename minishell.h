@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:05:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 15:21:33 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/24 10:59:06 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@
 # include <stdint.h>
 # include <unistd.h>
 # include <errno.h>
-# include <ctype.h>
 # include <fcntl.h>
 # include <signal.h>
-# include <readline/readline.h>
 # include <sys/wait.h>
 
 # include "structs.h"

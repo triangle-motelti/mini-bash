@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/23 02:30:39 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/25 15:00:40 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	handle_empty_or_invalid_input(t_shell *mini, char *input)
 	}
 	add_history(input);
 	if (!tokenizer(mini, input, 0, ft_strlen(input))
-		|| !parsing_and_expanding(mini))
+		|| !parsing_and_expanding(mini, input))
 	{
 		free(input);
 		clear_tokens(&mini->tokens);

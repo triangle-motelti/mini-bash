@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/17 22:32:18 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:04:13 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,15 @@ void	free_env_list(t_env *env)
 	}
 }
 
-t_bool	parsing_and_expanding(t_shell *mini)
+t_bool	parsing_and_expanding(t_shell *mini, char *input)
 {
+	if (herdoc_count(mini->tokens) > 16) // this function will check if the heredoc number is 16
+	{
+		ft_putstr_fd("minishell: maximum here-document count exceeded\n", 2);
+		clear_tokens(&mini->tokens);
+		free(input);
+		exit(2);
+	}
 	if (!parser(mini))
 	{
 		clear_tokens(&mini->tokens);

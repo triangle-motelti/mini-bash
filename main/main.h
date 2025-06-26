@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 21:06:25 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/17 22:32:50 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:00:56 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 int		main(int argc, char **v, char **env);
 
 void	free_env_list(t_env *env);
-t_bool	parsing_and_expanding(t_shell *mini);
+t_bool	parsing_and_expanding(t_shell *mini, char *input);
 void	execute_commands(t_shell *shell, t_command *cmds);
 
 void	pwd_env(t_shell *minishell);

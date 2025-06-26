@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
+#    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/06/23 22:31:01 by motelti          ###   ########.fr        #
+#    Updated: 2025/06/26 12:06:30 by aamraouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -g -fsanitize=address
 RM		= @rm -f
 
 

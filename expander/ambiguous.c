@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:41:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/21 11:52:31 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:12:27 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,30 @@ void	ambiguous_case(t_token *tokens, t_shell *mini)
 
 t_bool	standard_case(t_shell *shll)
 {
-	if (shll->tokens->standard_case == 1)
+	int	i;
+	t_token	*tkn;
+
+	i = 0;
+	tkn = shll->tokens;
+	if (tkn->standard_case == 1)
+	{
+		while (tkn)
+		{
+			if (ft_strcmp(tkn->value, "export") != 0)
+			{
+				while (tkn->value[i])
+				{
+					if (tkn->value[i] == '=')
+						return (TRUE);
+					if (tkn->value[i] == ' ')
+						return (FALSE);
+					i++;
+				}
+			}
+			tkn = tkn->next;
+		}
 		return (TRUE);
+	}
 	return (FALSE);
 }
 
@@ -56,4 +78,20 @@ t_bool	has_complement(char *value, int i)
 		return (TRUE);
 	else
 		return (FALSE);
+}
+
+long	herdoc_count(t_token *tokens)
+{
+	t_token	*tkn;
+	long	count;
+
+	tkn = tokens;
+	count = 0;
+	while (tkn)
+	{
+		if (ft_strcmp(tkn->value, "<<") == 0)
+			count++;
+		tkn = tkn->next;
+	}
+	return (count);
 }

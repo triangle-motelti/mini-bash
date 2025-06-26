@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 10:34:12 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/23 13:50:53 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/25 14:09:35 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,6 @@ t_bool	check_redirections(t_token *tokens)
 			ft_putstr_fd(tmp->value, 2);
 			ft_putstr_fd("'\n", 2);
 			return (FALSE);
-		}
-		if (count_herdoc(tmp) > 16)
-		{
-			ft_putstr_fd("minishell: maximum here-document count exceeded\n", 2);
-			exit(2);
 		}
 		tmp = tmp->next;
 	}

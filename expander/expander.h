@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:59:26 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/21 11:52:41 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:19:58 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 t_bool	standard_case(t_shell *shll);
 t_bool	has_complement(char *value, int i);
+long	herdoc_count(t_token *tokens);
 
 char	**advanced_split(t_token *tkn, char delim, int i, size_t w);
 char	*norm_for_dollar_hand(char *value, t_shell *mini);
