@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ambiguous.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:41:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/26 11:12:27 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:02:02 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ambiguous_case(t_token *tokens, t_shell *mini)
 
 t_bool	standard_case(t_shell *shll)
 {
-	int	i;
+	int		i;
 	t_token	*tkn;
 
 	i = 0;

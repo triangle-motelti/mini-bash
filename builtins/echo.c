@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 13:40:48 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/26 11:48:59 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:00:32 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
+
+static int	parse_options(int ac, char **av, int *newline)
+{
+	int	i;
+	int	j;
+
+	i = 1;
+	*newline = 1;
+	while (i < ac && av[i][0] == '-' && av[i][1] == 'n')
+	{
+		j = 1;
+		while (av[i][j] == 'n')
+			j++;
+		if (av[i][j] == '\0')
+		{
+			*newline = 0;
+			i++;
+		}
+		else
+			break ;
+	}
+	return (i);
+}
 
 void	echo(int ac, char **av, t_shell *shell)
 {
@@ -18,15 +41,7 @@ void	echo(int ac, char **av, t_shell *shell)
 	int	start;
 	int	i;
 
-	newline = 1;
-	start = 1;
-	i = 1;
-	while (i < ac && ft_strcmp(av[i], "-n") == 0)
-	{
-		newline = 0;
-		start++;
-		i++;
-	}
+	start = parse_options(ac, av, &newline);
 	i = start;
 	while (i < ac)
 	{

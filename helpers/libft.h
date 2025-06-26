@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:42:17 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/26 11:59:27 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/26 14:01:06 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include "../minishell.h"
+
 int		ft_atol(const char *p, long *result);
 int		ft_strchr_sp(char *value, t_token *tkn);
 void	*ft_realloc(void *ptr, size_t old_size, size_t new_size);
