@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 17:29:45 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/26 21:05:22 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 00:53:38 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	append_env_node(t_shell *mini, char *key, char *value)
 	if (!new)
 		return (1);
 	new->key = key;
-	if (value)
-		new->value = ft_strdup(value);
+	if (value == NULL)
+		new->value = NULL;
 	else
-		new->value = ft_strdup("");
-	if (!new->key || !new->value)
+		new->value = ft_strdup(value);
+	if (!new->key || (value != NULL && !new->value))
 		return (perror("minishell: malloc"), 1);
 	new->next_pt = NULL;
 	if (!mini->env)
