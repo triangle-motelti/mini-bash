@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/25 15:00:40 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/27 14:50:53 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,23 @@ t_bool	check_ambiguous_redirect(t_shell *mini)
 static int	handle_empty_or_invalid_input(t_shell *mini, char *input)
 {
 	if (*input == '\0')
-	{
-		free(input);
-		return (1);
-	}
+		return (free(input), 1);
 	add_history(input);
 	if (!tokenizer(mini, input, 0, ft_strlen(input))
 		|| !parsing_and_expanding(mini, input))
+		return (free(input), clear_tokens(&mini->tokens), 1);
+	if (mini->tokens->value && ft_strcmp(mini->tokens->value, "") == 0)
 	{
-		free(input);
-		clear_tokens(&mini->tokens);
-		return (1);
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
+		ft_putstr_fd(mini->tokens->value, STDERR_FILENO);
+		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		mini->exit_status = 127;
+		return (free(input), clear_tokens(&mini->tokens), 1);
 	}
 	if (check_ambiguous_redirect(mini))
 	{
 		mini->exit_status = 1;
-		free(input);
-		clear_tokens(&mini->tokens);
-		return (1);
+		return (free(input), clear_tokens(&mini->tokens), 1);
 	}
 	return (0);
 }

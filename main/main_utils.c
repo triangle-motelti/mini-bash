@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/26 14:01:27 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 14:29:38 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ t_bool	parsing_and_expanding(t_shell *mini, char *input)
 		mini->exit_status = 1;
 		return (FALSE);
 	}
+	remove_empty_tokens(&mini->tokens);
 	return (TRUE);
 }
 
