@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/27 15:10:48 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 16:29:43 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ static int	handle_empty_or_invalid_input(t_shell *mini, char *input)
 	if (!tokenizer(mini, input, 0, ft_strlen(input))
 		|| !parsing_and_expanding(mini, input))
 		return (free(input), clear_tokens(&mini->tokens), 1);
-	if (mini->tokens->value && ft_strcmp(mini->tokens->value, "") == 0)
+	if (mini->tokens && mini->tokens->value
+		&& ft_strcmp(mini->tokens->value, "") == 0)
 	{
 		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		ft_putstr_fd(mini->tokens->value, STDERR_FILENO);
