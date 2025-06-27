@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 14:18:53 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/23 02:30:48 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:21:18 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	execute_pipeline(t_shell *shell, t_command *cmds)
 	if (count < 1)
 		return ;
 	preprocess_heredocs(shell, cmds);
+	if (shell->exit_status == 130)
+		return ;
 	init_pipeline_info(&info, count);
 	if (open_pipes(&info))
 		return ;

@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/22 23:40:15 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/23 22:28:58 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:39:18 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,28 @@ void	fork_suces(char *input, int pipe_fd[2], t_redir *redir, t_shell *shell)
 
 void	fork_fails(pid_t pid, int pipe_fd[2], t_redir *redir, t_shell *shell)
 {
-	int	status;
+	int					status;
+	struct sigaction	sa_ignore;
+	struct sigaction	sa_old;
 
+	sa_ignore.sa_handler = SIG_IGN;
+	sigemptyset(&sa_ignore.sa_mask);
+	sa_ignore.sa_flags = 0;
+	sigaction(SIGINT, &sa_ignore, &sa_old);
 	waitpid(pid, &status, 0);
+	sigaction(SIGINT, &sa_old, NULL);
 	close(pipe_fd[1]);
-	if (WIFEXITED(status) && WEXITSTATUS(status) == 130)
+	if (WIFEXITED(status))
 	{
-		shell->exit_status = 130;
-		redir->heredoc_fd = -1;
-		close(pipe_fd[0]);
+		if (WEXITSTATUS(status) == 130)
+		{
+			ctrlc_check(shell, redir, pipe_fd);
+			return ;
+		}
+	}
+	else if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	{
+		ctrlc_check(shell, redir, pipe_fd);
 		return ;
 	}
 	redir->heredoc_fd = pipe_fd[0];

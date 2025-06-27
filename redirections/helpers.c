@@ -6,11 +6,18 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 22:29:34 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/24 10:52:16 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:39:02 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "redirection.h"
+
+void	ctrlc_check(t_shell *shell, t_redir *redir, int pipe_fd[2])
+{
+	shell->exit_status = 130;
+	redir->heredoc_fd = -1;
+	close(pipe_fd[0]);
+}
 
 void	signal_setup(struct sigaction sa_heredoc, struct sigaction sa_old)
 {
