@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:56:16 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 00:45:47 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 12:45:47 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int	env_count(t_env *env)
 	return (count);
 }
 
-void set_key_value(char **arr, t_env *env, int i)
+void	set_key_value(char **arr, t_env *env, int i)
 {
-    ft_strcpy(arr[i], env->key);
-    if (env->value != NULL)
-    {
-        ft_strcat(arr[i], "=");
-        ft_strcat(arr[i], env->value);
-    }
+	ft_strcpy(arr[i], env->key);
+	if (env->value != NULL)
+	{
+		ft_strcat(arr[i], "=");
+		ft_strcat(arr[i], env->value);
+	}
 }
 
 char	**copy_env_list(t_shell *shell, t_env *env)

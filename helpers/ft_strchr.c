@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
+/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 14:42:11 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/27 11:03:33 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/27 12:46:48 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ int	ft_strchr_sp(char *value, t_token *tkn)
 		}
 		else if (value[i] == ' ')
 			tkn->spaces++;
-		else if (value[i] != ' ' && (value[i + 1] == '"' || value[i + 1] == '\''))
+		else if (value[i] != ' ' && (value[i + 1] == '"'
+				|| value[i + 1] == '\''))
 			tkn->spaces = 0;
 		if (value[i])
 			i++;

@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:59:16 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/26 23:58:09 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 12:45:01 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ int	extract_key_value(char *arg, t_kv *kv)
 
 	eq = ft_strchr(arg, '=');
 	if (eq)
-		return handle_with_equal_sign(arg, eq, kv);
+		return (handle_with_equal_sign(arg, eq, kv));
 	else
-		return without_equal_sign(arg, kv);
+		return (without_equal_sign(arg, kv));
 }
 
 int	update_append_env(t_shell *mini, char *key, char *value, int is_append)

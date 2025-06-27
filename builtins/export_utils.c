@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 21:40:04 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 00:05:27 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 12:43:44 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	update_env_node(t_env *node, char *value)
 	return (0);
 }
 
-
 void	sort(char **env_arr, char *tmp, int *i, int *s)
 {
 	if (ft_strcmp(env_arr[*i], env_arr[*i + 1]) > 0)
@@ -68,16 +67,16 @@ void	export_ac(t_shell *shell, char **arr, int i)
 	sort_env(arr);
 	while (arr[i])
 	{
-    	eq = ft_strchr(arr[i], '=');
-    	if (eq)
-    	{
-        	key_len = eq - arr[i];
-        	printf("declare -x %.*s=\"%s\"\n", (int)key_len, arr[i], eq + 1);
-   		}
-    	else
-        	printf("declare -x %s\n", arr[i]);
-    	free(arr[i]);
-    	i++;
+		eq = ft_strchr(arr[i], '=');
+		if (eq)
+		{
+			key_len = eq - arr[i];
+			printf("declare -x %.*s=\"%s\"\n", (int)key_len, arr[i], eq + 1);
+		}
+		else
+			printf("declare -x %s\n", arr[i]);
+		free(arr[i]);
+		i++;
 	}
 	free(arr);
 	shell->exit_status = 0;
