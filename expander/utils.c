@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/26 14:02:18 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 10:49:45 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,11 @@ char	*get_env_value(char *value, t_shell *mini)
 	while (tmp_env)
 	{
 		if (ft_strcmp(value, tmp_env->key) == 0)
-			return (ft_strdup(tmp_env->value));
+		{
+			if (tmp_env->value)
+				return (ft_strdup(tmp_env->value));
+			return (NULL);
+		}
 		tmp_env = tmp_env->next_pt;
 	}
 	return (NULL);
