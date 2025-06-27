@@ -6,45 +6,11 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:10:03 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/16 18:30:57 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 22:50:02 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "builtins.h"
-
-static char	*get_parent_dir(char *current_pwd)
-{
-	char	*last_slash;
-	size_t	len;
-	char	*new_pwd;
-
-	last_slash = ft_strrchr(current_pwd, '/');
-	if (!last_slash)
-		return (ft_strdup(current_pwd));
-	if (last_slash == current_pwd)
-		return (ft_strdup("/"));
-	len = last_slash - current_pwd;
-	new_pwd = ft_strndup(current_pwd, len);
-	return (new_pwd);
-}
-
-char	*construct_pwd_path(t_shell *shell, char *path)
-{
-	t_env	*pwd_node;
-	char	*current_pwd;
-	char	*new_pwd;
-
-	pwd_node = find_env_node(shell->env, "PWD");
-	if (!pwd_node || !pwd_node->value)
-		return (ft_strdup(path));
-	current_pwd = pwd_node->value;
-	if (path[0] == '/')
-		return (ft_strdup(path));
-	if (ft_strcmp(path, "..") == 0)
-		return (get_parent_dir(current_pwd));
-	new_pwd = ft_strjoin_sep(current_pwd, path, "/");
-	return (new_pwd);
-}
 
 void	env_pwd(t_shell *shell, char *path)
 {
@@ -72,24 +38,50 @@ void	env_pwd(t_shell *shell, char *path)
 	}
 }
 
-int	cd(t_shell *shell, int ac, char **args)
+static int	cd_home(t_shell *shell, t_env *home_env)
 {
-	if (ac != 2)
+	if (home_env == NULL)
 	{
-		ft_putstr_fd("minishell: cd: missing path argument\n", STDERR_FILENO);
-		shell->exit_status = 1;
-		return (-1);
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		return (shell->exit_status = 1, -1);
 	}
-	if (chdir(args[1]) != 0)
+	if (chdir(home_env->value) != 0)
 	{
 		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
-		ft_putstr_fd(args[1], STDERR_FILENO);
+		ft_putstr_fd(home_env->value, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
-		perror("");
-		shell->exit_status = 1;
-		return (-1);
+		return (perror(""), shell->exit_status = 1, -1);
 	}
-	env_pwd(shell, args[1]);
-	shell->exit_status = 0;
+	env_pwd(shell, home_env->value);
 	return (0);
+}
+
+static int	cd_path(t_shell *shell, char *path)
+{
+	if (chdir(path) != 0)
+	{
+		ft_putstr_fd("minishell: cd: ", STDERR_FILENO);
+		ft_putstr_fd(path, STDERR_FILENO);
+		ft_putstr_fd(": ", STDERR_FILENO);
+		return (perror(""), shell->exit_status = 1, -1);
+	}
+	env_pwd(shell, path);
+	return (0);
+}
+
+int	cd(t_shell *shell, int ac, char **args)
+{
+	t_env	*home_env;
+
+	home_env = find_env_node(shell->env, "HOME");
+	if (ac == 1)
+		return (cd_home(shell, home_env));
+	else if (ac != 2)
+	{
+		ft_putstr_fd("minishell: cd: missing path argument\n", 2);
+		return (shell->exit_status = 1, -1);
+	}
+	else
+		return (cd_path(shell, args[1]));
+	return (shell->exit_status = 0, 0);
 }

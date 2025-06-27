@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:11:14 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 14:49:47 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 22:49:43 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,38 @@ int	is_builtin(char *cmd)
 		|| ft_strcmp(cmd, "pwd") == 0 || ft_strcmp(cmd, "export") == 0
 		|| ft_strcmp(cmd, "unset") == 0 || ft_strcmp(cmd, "exit") == 0
 		|| ft_strcmp(cmd, "env") == 0);
+}
+
+char	*get_parent_dir(char *current_pwd)
+{
+	char	*last_slash;
+	size_t	len;
+	char	*new_pwd;
+
+	last_slash = ft_strrchr(current_pwd, '/');
+	if (!last_slash)
+		return (ft_strdup(current_pwd));
+	if (last_slash == current_pwd)
+		return (ft_strdup("/"));
+	len = last_slash - current_pwd;
+	new_pwd = ft_strndup(current_pwd, len);
+	return (new_pwd);
+}
+
+char	*construct_pwd_path(t_shell *shell, char *path)
+{
+	t_env	*pwd_node;
+	char	*current_pwd;
+	char	*new_pwd;
+
+	pwd_node = find_env_node(shell->env, "PWD");
+	if (!pwd_node || !pwd_node->value)
+		return (ft_strdup(path));
+	current_pwd = pwd_node->value;
+	if (path[0] == '/')
+		return (ft_strdup(path));
+	if (ft_strcmp(path, "..") == 0)
+		return (get_parent_dir(current_pwd));
+	new_pwd = ft_strjoin_sep(current_pwd, path, "/");
+	return (new_pwd);
 }

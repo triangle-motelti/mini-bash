@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 14:48:11 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 14:31:12 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 22:49:21 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int		extract_key_value(char *arg, t_kv *kv);
 int		update_append_env(t_shell *mini, char *key, char *value, int is_append);
 
 void	remove_empty_tokens(t_token **tokens);
+char	*get_parent_dir(char *current_pwd);
+char	*construct_pwd_path(t_shell *shell, char *path);
 
 #endif

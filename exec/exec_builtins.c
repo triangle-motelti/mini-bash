@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:44:01 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 14:37:51 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 22:37:09 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,7 @@ void	exec_builtins(char **args, int ac, int exit_ac, t_shell *mini)
 	if (ft_strncmp(args[0], "pwd", 3) == 0)
 		pwd(mini, ac);
 	else if (ft_strncmp(args[0], "cd", 2) == 0)
-	{
-		if (args[1])
-			cd(mini, ac, args);
-	}
+		cd(mini, ac, args);
 	else if (ft_strncmp(args[0], "echo", 4) == 0)
 		echo(ac, args, mini);
 	else if (ft_strncmp(args[0], "env", 3) == 0)
