@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:28:09 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/05/28 12:16:49 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 19:36:19 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,9 @@ char	*path_cmd(char *cmd, char *const *envp);
 void	path_check(t_shell *shell, char **envp, char **args);
 void	path_execv(t_command *cmd, char **envp, char *path);
 void	execute_single_command(t_shell *shell, t_command *cmd);
+
+char	**find_path(char *const *envp);
+
+void	free_split(char **split);
 
 #endif

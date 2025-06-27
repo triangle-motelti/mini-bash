@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 17:13:23 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/02 19:19:01 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/27 19:38:42 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,19 +84,28 @@ void	check_ifdir(char **args, char **envp)
 
 void	path_check(t_shell *shell, char **envp, char **args)
 {
+	char	**paths;
+
 	(void)shell;
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(args[0], STDERR_FILENO);
 	if (ft_strchr(args[0], '/'))
 	{
 		check_ifdir(args, envp);
-		ft_putstr_fd(": Noo such file or directory\n", STDERR_FILENO);
+		ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
 		free_args(envp);
 		exit(127);
 	}
 	else
 	{
-		ft_putstr_fd(": command not found\n", STDERR_FILENO);
+		paths = find_path(envp);
+		if (!paths)
+			ft_putstr_fd(": No such file or directory\n", STDERR_FILENO);
+		else
+		{
+			ft_putstr_fd(": command not found\n", STDERR_FILENO);
+			free_split(paths);
+		}
 		free_args(envp);
 		exit(127);
 	}
