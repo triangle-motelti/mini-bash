@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+         #
+#    By: motelti <motelti@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 20:38:41 by motelti           #+#    #+#              #
-#    Updated: 2025/06/26 12:06:30 by aamraouy         ###   ########.fr        #
+#    Updated: 2025/06/28 17:12:06 by aamraouy         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC		= cc
-CFLAGS	= -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -fsanitize=address
 RM		= @rm -f
 
 
@@ -68,7 +68,7 @@ OBJ		= $(SRC:.c=.o)
 
 
 
-all: $(NAME) clean
+all: $(NAME)
 
 
 %.o: %.c $(HEADER)
@@ -79,7 +79,7 @@ $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -lreadline -o $(NAME)
 
 clean:
-	$(RM) $(OBJ) $(BONUS_OBJ) $(OBJ:.o=.d)
+	$(RM) $(OBJ) $(OBJ:.o=.d)
 
 fclean: clean
 	$(RM) $(NAME)

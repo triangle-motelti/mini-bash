@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   more_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/15 09:35:32 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/13 19:12:20 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/28 19:46:29 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,13 @@ t_bool	dollar_expansion(char *token, t_shell *mini, char **new, int cap)
 		(mini->i)++;
 		return (TRUE);
 	}
-	if (token[(mini->i) + 1] != '_'
-		&& !ft_isalnum(token[(mini->i) + 1])
-		&& token[(mini->i) + 1] != '?')
-	{
-		append_character(new, &(mini->j), token[(mini->i)++]);
-		return (TRUE);
-	}
+	// if (token[(mini->i) + 1] != '_'
+	// 	&& !ft_isalnum(token[(mini->i) + 1])
+	// 	&& token[(mini->i) + 1] != '?')
+	// {
+	// 	append_character(new, &(mini->j), token[(mini->i)++]);
+	// 	return (TRUE);
+	// }
 	*new = handle_dollar(*new, token, mini);
 	if ((token[mini->i]) && !(*new) && mini->i == cap)
 		return (FALSE);

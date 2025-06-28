@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:31:30 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 14:29:38 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/28 18:40:25 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ t_bool	parsing_and_expanding(t_shell *mini, char *input)
 	if (!parser(mini))
 	{
 		clear_tokens(&mini->tokens);
-		mini->exit_status = 2;
 		return (FALSE);
 	}
 	if (ft_strcmp(mini->tokens->value, "export") == 0)

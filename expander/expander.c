@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/27 11:27:21 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/28 20:51:19 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ char	*handle_dollar(char *new, char *value, t_shell *mini)
 	rep_value = NULL;
 	(mini->i)++;
 	extracted_value = norm_for_dollar_hand(value, mini);
+	//printf("extracted value is %s \n", extracted_value);
 	rep_value = get_env_value(extracted_value, mini);
 	if (!rep_value)
 	{
