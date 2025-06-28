@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 11:57:45 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/28 20:51:19 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/28 22:11:51 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*handle_dollar(char *new, char *value, t_shell *mini)
 	rep_value = NULL;
 	(mini->i)++;
 	extracted_value = norm_for_dollar_hand(value, mini);
-	//printf("extracted value is %s \n", extracted_value);
 	rep_value = get_env_value(extracted_value, mini);
 	if (!rep_value)
 	{
@@ -59,8 +58,9 @@ char	*handle_dquote(char *new, char *value, t_shell *mini)
 	{
 		if (value[mini->i] == '$')
 		{
-			if (value[(mini->i) + 1] == '_' || value[(mini->i) + 1] == '?'
-				|| ft_isalnum(value[(mini->i) + 1]))
+			if (value[(mini->i) + 1] == '$')
+				mini->i += 2;
+			else if (value[(mini->i) + 1] && (value[(mini->i) + 1] != '"'))
 				new = handle_dollar(new, value, mini);
 			else
 				append_character(&new, &(mini->j), value[(mini->i)++]);
@@ -90,7 +90,9 @@ char	*expand_each_token(char *token, int i, int j, t_shell *mini)
 			new = handle_dquote(new, token, mini);
 		else if (token[mini->i] == '$')
 		{
-			if (!dollar_expansion(token, mini, &new, capacity))
+			if (!token[(mini->i) + 1])
+				append_character(&new, &(mini->j), token[(mini->i)++]);
+			else if (!dollar_expansion(token, mini, &new, capacity))
 				return (NULL);
 		}
 		else

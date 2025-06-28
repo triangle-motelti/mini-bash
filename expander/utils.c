@@ -6,7 +6,7 @@
 /*   By: aamraouy <aamraouy@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 18:52:52 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/28 20:09:55 by aamraouy         ###   ########.fr       */
+/*   Updated: 2025/06/28 22:11:58 by aamraouy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,12 @@ char	*get_env_value(char *value, t_shell *mini)
 
 t_bool	is_limiter_expanders(char *value, int i)
 {
-	// if (value[i] == '$')
-	// 	return (TRUE);
-	// if (i >= 1 && value[i] == '$' && value[i - 1] == '$')
-	// 	return (FALSE);
 	if (i >= 1 && value[i] && !ft_isalpha((unsigned int)value[i])
-	&& value[i] != '_' && value[i] != '?' && value[i - 1] == '$' && value[i] != '$')
+		&& value[i] != '_' && value[i] != '?'
+		&& value[i - 1] == '$' && value[i] != '$')
 		return (TRUE);
 	if (i >= 1 && value[i] && !ft_isalpha((unsigned int)value[i - 1])
-	&& value[i - 1] != '_' && value[i - 1] != '?' && value[i - 1] != '$')
+		&& value[i - 1] != '_' && value[i - 1] != '?' && value[i - 1] != '$')
 		return (FALSE);
 	if (i >= 1 && value[i] == '?' && value[i - 1] == '$')
 		return (TRUE);
