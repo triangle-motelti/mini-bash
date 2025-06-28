@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:10:03 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 22:50:02 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/28 10:11:41 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ void	env_pwd(t_shell *shell, char *path)
 	}
 	new_pwd = getcwd(NULL, 0);
 	if (!new_pwd)
+	{
+		perror("minishell: cd: error retrieving current directory");
 		new_pwd = construct_pwd_path(shell, path);
+	}
 	if (new_pwd)
 	{
 		if (pwd_node)
