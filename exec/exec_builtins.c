@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/21 16:44:01 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/27 22:37:09 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/28 15:29:52 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,30 +48,38 @@ void	exec_builtins(char **args, int ac, int exit_ac, t_shell *mini)
 		unset(mini, ac, args);
 }
 
-void	exec_child(t_shell *shell, t_command *cmd)
+void	exec_path_cmd(t_command *cmd, t_shell *shell)
 {
 	char	**envp;
 	char	*path;
 
+	envp = copy_env_list(shell, shell->env);
+	path = path_cmd(cmd->args[0], envp);
+	if (!path)
+	{
+		path_check(shell, envp, &cmd->args[0]);
+		free_args(envp);
+		exit(127);
+	}
+	path_execv(cmd, envp, path);
+}
+
+void	exec_child(t_shell *shell, t_command *cmd)
+{
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	setup_redirections(cmd->redirs);
+	if (cmd->args && cmd->args[0] && ft_strcmp(cmd->args[0], "") == 0)
+	{
+		ft_putstr_fd("minishell: Command '' not found\n", STDERR_FILENO);
+		exit(127);
+	}
 	if (cmd->args && cmd->args[0] && is_builtin(cmd->args[0]))
 	{
 		exec_builtin(shell, cmd->args);
 		exit(shell->exit_status);
 	}
 	if (cmd->args && cmd->args[0])
-	{
-		envp = copy_env_list(shell, shell->env);
-		path = path_cmd(cmd->args[0], envp);
-		if (!path)
-		{
-			path_check(shell, envp, &cmd->args[0]);
-			free_args(envp);
-			exit(127);
-		}
-		path_execv(cmd, envp, path);
-	}
+		exec_path_cmd(cmd, shell);
 	exit(0);
 }
