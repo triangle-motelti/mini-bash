@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 11:32:24 by motelti           #+#    #+#             */
-/*   Updated: 2025/06/15 15:00:45 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/28 16:48:41 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ int	finalize_args(t_command *cmd, char **args, int count)
 
 int	handl_word(t_token *tok, char ***args, int *count)
 {
-	if (tok->value && tok->value[0] == '\0')
-		return (0);
 	if (add_arg(args, count, tok->value))
 		return (free_args(*args), *args = NULL, 1);
 	return (0);

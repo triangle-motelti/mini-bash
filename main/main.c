@@ -6,7 +6,7 @@
 /*   By: motelti <motelti@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 21:33:44 by aamraouy          #+#    #+#             */
-/*   Updated: 2025/06/28 15:30:27 by motelti          ###   ########.fr       */
+/*   Updated: 2025/06/28 16:48:29 by motelti          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,6 @@ static int	handle_empty_or_invalid_input(t_shell *mini, char *input)
 	if (!tokenizer(mini, input, 0, ft_strlen(input))
 		|| !parsing_and_expanding(mini, input))
 		return (free(input), clear_tokens(&mini->tokens), 1);
-	if (mini->tokens && mini->tokens->value
-		&& ft_strcmp(mini->tokens->value, "") == 0)
-	{
-		ft_putstr_fd("minishell: Command '' not found\n", STDERR_FILENO);
-		mini->exit_status = 127;
-		if (mini->tokens->next && mini->tokens->next->flag == PIPE)
-			return (0);
-		return (free(input), clear_tokens(&mini->tokens), 1);
-	}
 	if (check_ambiguous_redirect(mini))
 	{
 		mini->exit_status = 1;
