@@ -2,6 +2,8 @@
 
 mini-bash is a simple Unix shell designed as a learning and educational project. It supports a variety of basic shell functionalities including command execution, redirections, pipes, built-in commands, environment variable handling, and signal management. This project is primarily written in C, with a small portion of Makefile code for building the project.
 
+![Alt text](mini-bash.png)
+
 ## Features
 
 - **Command Execution:** mini-bash can execute built-in commands as well as external binaries available on the system.
